@@ -1,0 +1,160 @@
+{
+  "artifacts": {
+    "TRAVSCOPE_CURRENT_V25_02_DESTINATION_LOCATION_UPGRADE_FULL.zip": {
+      "bytes": 7887520,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_CURRENT_V25_02_DESTINATION_LOCATION_UPGRADE_FULL.zip",
+      "sha256": "39feb5324ac2b2fce629511df7e656e363301e86e048d43c094a79f86cbedf62"
+    },
+    "TRAVSCOPE_V25_02_DESTINATION_LOCATION_UPGRADE_PATCH.zip": {
+      "bytes": 293393,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_V25_02_DESTINATION_LOCATION_UPGRADE_PATCH.zip",
+      "sha256": "b7a501446ee78b054ff90068c86535ed34b7931011c16dfe91af36dfb0a783e6"
+    }
+  },
+  "baseline_full_archive": {
+    "name": "TRAVSCOPE_CURRENT_V25_02_LIVE_LOGO_FIX_V3_FULL.zip",
+    "sha256": "31eadc9571a9954ae53f8cb7e4e5c4463465ffa394fe6fbbd89f702aec33d25d"
+  },
+  "original_full_archive": {
+    "name": "TRAVSCOPE_CURRENT_V25_02_EXPANDABLE_CREDENTIAL_LIBRARY_FULL.zip",
+    "sha256": "871dc808e5af6714d3ff224f40be061e25aa94b603c481c2129b2e65ca1df924"
+  },
+  "patch_directories": {
+    "assets/": "0755"
+  },
+  "product_files": {
+    "admin-crm.php": {
+      "bytes": 748433,
+      "mode": "0644",
+      "sha256": "974a3ef5cd4c503e547b7c1243877fed77cd27be6f468182d747af19c0564254"
+    },
+    "admin-destination-locations.php": {
+      "bytes": 33033,
+      "mode": "0644",
+      "sha256": "f590beabf54ad655a2dacee8d9738228859d99970ecaa371a3228ad55736ca12"
+    },
+    "admin-destinations.php": {
+      "bytes": 291238,
+      "mode": "0644",
+      "sha256": "53fb11771dcf69e81cc327570892de07a4b55302ee58ba739a43152c7a6261a8"
+    },
+    "assets/credentials-v2501.css": {
+      "bytes": 2891,
+      "mode": "0644",
+      "sha256": "b66c6b90aa1068fe618e8349df74fe49725c4a46ab65c98dbd6a9acbe0baa501"
+    },
+    "assets/crm-itinerary-studio-v2497.css": {
+      "bytes": 10856,
+      "mode": "0644",
+      "sha256": "f3d80f3ec90e750e562f63083dbd618c12cd09a48b7694e37bce98ac6ab1958c"
+    },
+    "assets/crm-itinerary-studio-v2497.js": {
+      "bytes": 21369,
+      "mode": "0644",
+      "sha256": "45a6ec83ca26b39cee5c7496dc47aa7ab8783c9cab25f36ac23ab10065b78ff5"
+    },
+    "assets/crm-laptop-workspaces-v2498.css": {
+      "bytes": 9528,
+      "mode": "0644",
+      "sha256": "ca4018c7de581e6556b2e488c90209404a52d658c4cd7ffb2bdf55223a2e3618"
+    },
+    "assets/crm-laptop-workspaces-v2498.js": {
+      "bytes": 8272,
+      "mode": "0644",
+      "sha256": "ff6647ff2d5f3616a525ab56000cf000cc622d48eedadfa478d50faa8ec5fed3"
+    },
+    "assets/travscope-experience-v2500.css": {
+      "bytes": 4582,
+      "mode": "0644",
+      "sha256": "404f332da949c7b8e781c1b5107dbd8db7a4b402c80705697628e4cf6a7ca94e"
+    },
+    "assets/travscope-experience-v2500.js": {
+      "bytes": 7662,
+      "mode": "0644",
+      "sha256": "8842028f7dd185eb6ffd4a5035e2cfbd918f873cf4878a5575d0741ad1a8fc91"
+    },
+    "assets/travscope-responsive-admin-v2499.css": {
+      "bytes": 8534,
+      "mode": "0644",
+      "sha256": "d2e33801765865aab94c389774a610d08c583f841a4a33a11a1dfde27e5a8d7b"
+    },
+    "assets/travscope-responsive-core-v2499.css": {
+      "bytes": 3441,
+      "mode": "0644",
+      "sha256": "bcf535b14660047ce93ae10643f1b9be9d16b5f08d7cc8392e0d941507dcb330"
+    },
+    "assets/travscope-responsive-public-v2499.css": {
+      "bytes": 2824,
+      "mode": "0644",
+      "sha256": "a278cebee0f2a32abe26cdf6bfad0d654c3b2ee6794d2d89dc767005ef53d84b"
+    },
+    "assets/travscope-responsive-v2499.js": {
+      "bytes": 1549,
+      "mode": "0644",
+      "sha256": "e795c9c09cb26c3420d1a28e4b32da8d0eb6304f3d3b38187ede639221a54d2f"
+    },
+    "credential-display.php": {
+      "bytes": 7239,
+      "mode": "0644",
+      "sha256": "0bb52e568fb0e117809d7658c50cc905a0a0c8c7315cd34806a8acbf752fafec"
+    },
+    "location-master-functions.php": {
+      "bytes": 30346,
+      "mode": "0644",
+      "sha256": "4cb6eb8100d1d1b2c5e973662cea7e412a9f7ff10f2a6a83a167026e8fa8faef"
+    },
+    "site-brand-sync.js": {
+      "bytes": 10462,
+      "mode": "0644",
+      "sha256": "c91f2208dffff446bd2c17531225497489bdcea02ab731d9fdcd83f26be64d91"
+    }
+  },
+  "release": "Destination and location administration upgrade",
+  "reviewed_source_sha256": {
+    "admin-destination-locations.php": "f590beabf54ad655a2dacee8d9738228859d99970ecaa371a3228ad55736ca12",
+    "admin-destinations.php": "53fb11771dcf69e81cc327570892de07a4b55302ee58ba739a43152c7a6261a8",
+    "location-master-functions.php": "4cb6eb8100d1d1b2c5e973662cea7e412a9f7ff10f2a6a83a167026e8fa8faef"
+  },
+  "text_patches": {
+    "TRAVSCOPE_V25_02_DESTINATION_LOCATION_UPGRADE_FROM_ORIGINAL.patch": {
+      "changed_files": [
+        "admin-destinations.php",
+        "admin-destination-locations.php",
+        "location-master-functions.php",
+        "admin-crm.php",
+        "credential-display.php"
+      ],
+      "sha256": "df1066aab0e952dbdbbab01bf4a3c99f79cd2c1febdfde18eb3debd850475ec1"
+    },
+    "TRAVSCOPE_V25_02_DESTINATION_LOCATION_UPGRADE_FROM_V3.patch": {
+      "changed_files": [
+        "admin-destinations.php",
+        "admin-destination-locations.php",
+        "location-master-functions.php"
+      ],
+      "sha256": "114b0142d29aa776ce1416f09171b2c67c23fde92c625b6b9fec956b1a542e0a"
+    }
+  },
+  "validation": {
+    "changed_payloads_from_original": [
+      "admin-crm.php",
+      "admin-destination-locations.php",
+      "admin-destinations.php",
+      "credential-display.php",
+      "location-master-functions.php"
+    ],
+    "changed_payloads_from_v3": [
+      "admin-destination-locations.php",
+      "admin-destinations.php",
+      "location-master-functions.php"
+    ],
+    "full_browser_functional_validation": "reported separately by root agent",
+    "full_entry_count": 219,
+    "php_syntax": "passed for reconstructed five original-baseline files and three V3-baseline files",
+    "targeted_product_file_count": 17,
+    "text_patches_apply_and_reconstruct": "passed for both baselines",
+    "unchanged_v3_payload_and_metadata_count": 216,
+    "zip_crc": "passed"
+  },
+  "version": "V25.02"
+}
