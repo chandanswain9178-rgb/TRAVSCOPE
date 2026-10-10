@@ -1,0 +1,15 @@
+Live public inspection — 2026-10-10
+https://travscope.com/
+
+Observed through the configured HTTPS proxy, using public GETs only:
+- Homepage: HTTP 200.
+- assets/credentials-v2501.css?v=2502: HTTP 403 Forbidden.
+- Responsive core/public and experience CSS: HTTP 403 Forbidden.
+- Original external credential CSS link remains in homepage/customer quotation HTML; V1 embedded credential CSS and V2 inline image limits are absent.
+- All five loaded logos: desktop width 1440px; mobile width 390px; computed max-width:none. The generic img width:100% rule stretches the unbounded logos.
+- Browser-only simulation restoring the original credential CSS response to 200 reduces desktop logos to at most 75px x 42px and mobile logos to at most 55px x 35px. This simulation did not change the live server.
+
+Likely underlying issue:
+The original V25.02/V2 ZIPs store the failed public CSS/JS files with Unix 0600 permissions, while successful static files have readable permissions. Original packaged .htaccess contains no CSS/JS deny rule. Remote permissions/ownership/access rules were not directly inspected, so the exact server-side reason for the 403 needs hosting verification if permission correction does not resolve it.
+
+V3 contains the already-tested V2 PHP renderers and normalizes the affected public asset permissions to 0644. This is a deployment package correction; PHP code bytes are unchanged from V2. Publishing this archive does not deploy travscope.com. Deployment instructions are in README.txt.
