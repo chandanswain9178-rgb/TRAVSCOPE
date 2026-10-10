@@ -10,4 +10,4 @@ Verified: 24 Chromium layout checks with external CSS requests blocked, 5 and 30
 
 For Git application, run git apply --check TRAVSCOPE_V25_02_CREDENTIAL_LOGO_PRINT_FIX.patch and git apply TRAVSCOPE_V25_02_CREDENTIAL_LOGO_PRINT_FIX.patch from a directory containing the original V25.02 credential-display.php.
 
-This patch is prepared locally. It has not been pushed to GitHub or deployed to travscope.com.
+The fixed source and downloadable ZIPs are available on GitHub branch codex/v25-02-logo-print-download. Deploy credential-display.php to the website root to apply the change to travscope.com.
