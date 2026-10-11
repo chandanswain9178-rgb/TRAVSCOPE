@@ -1,0 +1,211 @@
+--- a/admin-destination-locations.php
++++ b/admin-destination-locations.php
+@@ -38,10 +38,20 @@
+    elseif($outcome==='added')$_SESSION['destination_location_success']=$message;
+    else $_SESSION['destination_location_notice']=$message;
+   }elseif($action==='set_status'){
+    $locationId=max(0,(int)($_POST['location_id']??0));$desired=(string)($_POST['desired_status']??'');tsLocationSetStatus($pdo,$destinationId,$locationId,$desired,$adminId);
+    $_SESSION['destination_location_success']=$desired==='active'?'Location activated.':'Location deactivated.';
++  }elseif($action==='delete_location'||$action==='delete_all_locations'){
++   if((string)($_POST['confirm_delete']??'')!=='1')throw new RuntimeException('Confirm the deletion before continuing.');
++   if($action==='delete_location'){
++    $locationId=max(0,(int)($_POST['location_id']??0));if($locationId<=0)throw new RuntimeException('Choose a location to delete.');
++    tsLocationDelete($pdo,$destinationId,$locationId);$_SESSION['destination_location_success']='Location deleted.';
++   }else{
++    $expected=(string)($_POST['expected_count']??'');if(!ctype_digit($expected))throw new RuntimeException('Reload the location list and review the total before deleting all locations.');
++    $deleted=tsLocationDelete($pdo,$destinationId,0,(int)$expected);
++    $_SESSION['destination_location_success']=$deleted>0?'Deleted '.number_format($deleted).' location(s) from '.$postDestination['name'].'.':'No saved locations to delete.';
++   }
+   }else throw new RuntimeException('Choose a valid location action.');
+  }catch(Throwable $e){$_SESSION['destination_location_error']=$e->getMessage();}
+  header('Location: '.BASE_URL.'admin-destination-locations.php?'.http_build_query(['destination_id'=>$destinationId]+$filterState));exit;
+ }
+ $destinations=[];if(tsLocationTableExists($pdo,'destinations'))$destinations=$pdo->query("SELECT id,name,country,status FROM destinations ORDER BY country,name")->fetchAll(PDO::FETCH_ASSOC)?:[];
+@@ -95,10 +105,13 @@
+  .tsloc .loc-btn:hover{background:#eff6ff;border-color:#9ec4f3}.tsloc .loc-btn:focus-visible,.tsloc .loc-input:focus-visible,.tsloc .loc-select:focus-visible{outline:2px solid #3888ef;outline-offset:2px}
+  .tsloc .loc-btn.blue{background:var(--lc-blue);border-color:var(--lc-blue);color:#fff}.tsloc .loc-btn.blue:hover{background:#085fc8}
+  .tsloc .loc-btn.green-btn{background:#0b986c;border-color:#0b986c;color:#fff}.tsloc .loc-btn.green-btn:hover{background:#087a56}
+  .tsloc .loc-btn.warn-btn{background:#fff7ee;border-color:#f0dfc9;color:#a65e17}.tsloc .loc-btn.warn-btn:hover{background:#ffefdc}
+  .tsloc .loc-btn.reactivate{background:#e8f9ef;border-color:#c4e9d3;color:#087a50}
++ .tsloc .loc-btn.danger-btn{background:#fff3f4;border-color:#f1cbd1;color:#b3293e}.tsloc .loc-btn.danger-btn:hover{background:#ffe5e9;border-color:#e5a6b0}
++ .tsloc .loc-row-actions{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.tsloc .loc-row-actions form{margin:0}
++ .tsloc .loc-context-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.tsloc .loc-delete-all{margin:0}
+  .tsloc .loc-msg{border:1px solid;padding:9px 11px;border-radius:8px;margin:0 0 8px;font-size:11px;font-weight:650}
+  .tsloc .loc-msg.ok{color:#08764e;background:#eaf9f2;border-color:#c9eedb}.tsloc .loc-msg.err{color:#a52a40;background:#fff0f3;border-color:#f3ccd5}
+  .tsloc .loc-msg.note{color:#425d78;background:#f1f6fc;border-color:#d4e2f1}
+  .tsloc .loc-btn:disabled,.tsloc .loc-input:disabled{opacity:.55;cursor:not-allowed}
+  .tsloc .loc-help{padding:0;margin:0 0 9px;border:1px solid #d8e7f6;border-radius:8px;background:#f2f8ff;color:#3e637f}
+@@ -194,11 +207,17 @@
+    </form>
+   </div>
+   <?php if($selected>0 && $destination):?>
+    <div class="loc-context" aria-label="Selected destination summary">
+     <div><h3><?=dlE($destination['name'])?></h3><p><?=dlE($destination['country']?:'Country not set')?> · Saved cities &amp; locations<?=$canManage?'':' · Inactive destination'?></p></div>
+-    <div class="loc-selected-metrics" aria-label="Selected destination counts"><span class="loc-metric"><strong id="locSelectedTotal"><?=number_format(count($locations))?></strong> Total</span><span class="loc-metric green"><strong id="locSelectedActive"><?=number_format($selectedActive)?></strong> Active</span><span class="loc-metric orange"><strong id="locSelectedInactive"><?=number_format($selectedInactive)?></strong> Inactive</span></div>
++    <div class="loc-context-actions"><div class="loc-selected-metrics" aria-label="Selected destination counts"><span class="loc-metric"><strong id="locSelectedTotal"><?=number_format(count($locations))?></strong> Total</span><span class="loc-metric green"><strong id="locSelectedActive"><?=number_format($selectedActive)?></strong> Active</span><span class="loc-metric orange"><strong id="locSelectedInactive"><?=number_format($selectedInactive)?></strong> Inactive</span></div>
++     <form method="post" class="loc-delete-all" data-location-delete data-delete-confirm="<?=dlE('Delete all '.number_format(count($locations)).' locations in '.$destination['name'].'? This includes active, inactive and filtered-out locations. Linked locations block the entire deletion. This cannot be undone.')?>">
++      <input type="hidden" name="csrf" value="<?=dlE($csrf)?>"><input type="hidden" name="action" value="delete_all_locations"><input type="hidden" name="destination_id" value="<?=$selected?>"><input type="hidden" name="confirm_delete" value=""><input type="hidden" name="expected_count" value="<?=count($locations)?>">
++      <input type="hidden" name="return_q" value="<?=dlE($filterQ)?>"><input type="hidden" name="return_status" value="<?=dlE($filterStatus)?>"><input type="hidden" name="return_source" value="<?=dlE($filterSource)?>">
++      <button class="loc-btn danger-btn" id="locDeleteAllButton" type="submit" <?=$canManage&&$locations?'':'disabled'?> aria-label="Delete all locations in <?=dlE($destination['name'])?>"><i class="fa-solid fa-trash-can" aria-hidden="true"></i> Delete all locations</button>
++     </form>
++    </div>
+    </div>
+    <?php if(!$canManage):?><div class="loc-msg note">This destination is inactive. <a href="admin-destinations.php">Activate it in Destination Master</a> before adding, syncing or changing locations.</div><?php endif;?>
+    <form method="post" id="locSyncForm"><input type="hidden" name="csrf" value="<?=dlE($csrf)?>"><input type="hidden" name="action" value="sync_geo"><input type="hidden" name="destination_id" value="<?=$selected?>"><input type="hidden" name="return_q" value="<?=dlE($filterQ)?>"><input type="hidden" name="return_status" value="<?=dlE($filterStatus)?>"><input type="hidden" name="return_source" value="<?=dlE($filterSource)?>"></form>
+    <form method="post" id="locAddForm" class="loc-manual" aria-label="Add a child location">
+     <input type="hidden" name="csrf" value="<?=dlE($csrf)?>"><input type="hidden" name="action" value="add_location"><input type="hidden" name="destination_id" value="<?=$selected?>">
+@@ -224,24 +243,31 @@
+      <tr data-location-name="<?=dlE((string)$l['location_name'])?>" data-location-status="<?=$isActive?'active':'inactive'?>" data-location-source="<?=dlE($sourceName)?>" <?=$locationMatches($l)?'':'hidden style="display:none"'?>>
+       <td><div class="loc-name"><span class="loc-place-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span><div><strong><?=dlE($l['location_name'])?></strong><small><?=dlE($destination['name'])?></small></div></div></td>
+       <td><?=dlE(ucwords(str_replace('_',' ',(string)($l['location_type']??'city'))))?></td>
+       <td><span class="loc-tag <?=$sourceName==='manual'?'source-manual':(strpos($sourceName,'supplier')===0?'source-supplier':'')?>" title="<?=dlE($sourceName)?>"><?=dlE($locationSourceLabels[$sourceName]??ucwords(str_replace('_',' ',$sourceName)))?></span></td>
+       <td><span class="loc-status <?=$isActive?'':'inactive'?>"><i class="fa-solid fa-circle" aria-hidden="true"></i> <?=$isActive?'Active':'Inactive'?></span></td>
+-      <td><?php if($canManage):?><form method="post"><input type="hidden" name="csrf" value="<?=dlE($csrf)?>"><input type="hidden" name="action" value="set_status"><input type="hidden" name="desired_status" value="<?=$isActive?'inactive':'active'?>"><input type="hidden" name="destination_id" value="<?=$selected?>"><input type="hidden" name="location_id" value="<?=(int)$l['id']?>"><input type="hidden" name="return_q" value="<?=dlE($filterQ)?>"><input type="hidden" name="return_status" value="<?=dlE($filterStatus)?>"><input type="hidden" name="return_source" value="<?=dlE($filterSource)?>"><button class="loc-btn <?=$isActive?'warn-btn':'reactivate'?>" type="submit" aria-label="<?=$isActive?'Deactivate':'Activate'?> <?=dlE($l['location_name'])?>"><i class="fa-solid <?=$isActive?'fa-circle-pause':'fa-circle-check'?>" aria-hidden="true"></i> <?=$isActive?'Deactivate':'Activate'?></button></form><?php else:?><span class="loc-readonly">Activate destination first</span><?php endif;?></td>
++      <td><?php if($canManage):?><div class="loc-row-actions"><form method="post"><input type="hidden" name="csrf" value="<?=dlE($csrf)?>"><input type="hidden" name="action" value="set_status"><input type="hidden" name="desired_status" value="<?=$isActive?'inactive':'active'?>"><input type="hidden" name="destination_id" value="<?=$selected?>"><input type="hidden" name="location_id" value="<?=(int)$l['id']?>"><input type="hidden" name="return_q" value="<?=dlE($filterQ)?>"><input type="hidden" name="return_status" value="<?=dlE($filterStatus)?>"><input type="hidden" name="return_source" value="<?=dlE($filterSource)?>"><button class="loc-btn <?=$isActive?'warn-btn':'reactivate'?>" type="submit" aria-label="<?=$isActive?'Deactivate':'Activate'?> <?=dlE($l['location_name'])?>"><i class="fa-solid <?=$isActive?'fa-circle-pause':'fa-circle-check'?>" aria-hidden="true"></i> <?=$isActive?'Deactivate':'Activate'?></button></form>
++       <form method="post" data-location-delete data-delete-confirm="<?=dlE('Delete '.$l['location_name'].' from '.$destination['name'].'? This cannot be undone. Linked locations cannot be deleted.')?>"><input type="hidden" name="csrf" value="<?=dlE($csrf)?>"><input type="hidden" name="action" value="delete_location"><input type="hidden" name="destination_id" value="<?=$selected?>"><input type="hidden" name="location_id" value="<?=(int)$l['id']?>"><input type="hidden" name="confirm_delete" value=""><input type="hidden" name="return_q" value="<?=dlE($filterQ)?>"><input type="hidden" name="return_status" value="<?=dlE($filterStatus)?>"><input type="hidden" name="return_source" value="<?=dlE($filterSource)?>"><button class="loc-btn danger-btn" type="submit" aria-label="Delete <?=dlE($l['location_name'])?>"><i class="fa-solid fa-trash-can" aria-hidden="true"></i> Delete</button></form>
++       </div><?php else:?><span class="loc-readonly">Activate destination first</span><?php endif;?></td>
+      </tr><?php endforeach;?>
+     </tbody></table></div>
+     <div id="locNoMatches" class="loc-empty" style="display:<?=$visibleLocations?'none':'block'?>"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><strong>No matching locations</strong><p>Try a different search, source or status filter, or clear the filters.</p><a class="loc-btn" href="admin-destination-locations.php?destination_id=<?=$selected?>">Clear filters</a></div>
+-    <div class="loc-foot"><span>Showing saved locations for <?=dlE($destination['name'])?></span><span>Changes to status are saved individually.</span></div>
++    <div class="loc-foot"><span>Showing saved locations for <?=dlE($destination['name'])?></span><span>Linked locations can be deactivated. Sync Cities can add deleted cities again.</span></div>
+    <?php endif;?>
+   <?php else:?>
+    <div class="loc-empty"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong><?=$selected>0?'Selected destination is unavailable':'Choose a destination to start'?></strong><p>Select a destination above to view its saved cities and locations.</p></div>
+   <?php endif;?>
+  </section>
+ </div></div></main>
+ <script src="assets/travscope-pro-admin.js?v=20260916-v9" defer></script><script src="site-brand-sync.js?v=20261005-v2473" defer></script>
+ <script id="travscope-v2452-location-filter">
+ (function(){'use strict';
++ document.querySelectorAll('form[data-location-delete]').forEach(function(form){form.addEventListener('submit',function(event){
++  var confirmed=form.querySelector('input[name="confirm_delete"]');if(confirmed)confirmed.value='';
++  if(!window.confirm(form.getAttribute('data-delete-confirm')||'Delete this location?')){event.preventDefault();return;}
++  if(confirmed)confirmed.value='1';
++ });});
+  var search=document.getElementById('locSearch'),status=document.getElementById('locStatusFilter'),source=document.getElementById('locSourceFilter'),tbody=document.getElementById('locRows'),count=document.getElementById('locVisibleCount'),none=document.getElementById('locNoMatches');
+  var emptyAdd=document.getElementById('locEmptyAdd'),name=document.getElementById('locName');if(emptyAdd&&name)emptyAdd.addEventListener('click',function(){name.focus();});
+  if(!search||!status||!source)return;
+  var rows=tbody?Array.prototype.slice.call(tbody.querySelectorAll('tr[data-location-name]')):[];
+  function preserveFilters(){var values={q:search.value,status:status.value,source:source.value};
+--- a/location-master-functions.php
++++ b/location-master-functions.php
+@@ -259,10 +259,118 @@
+         if ($current===false) throw new RuntimeException('Location not found in the selected destination.');
+         if ($current===$status) return true;
+         $pdo->prepare("UPDATE destination_locations SET status=?,updated_by_admin_id=?,updated_at=NOW() WHERE id=? AND destination_id=? AND status<>?")
+             ->execute([$status,$adminId?:null,$locationId,$destinationId,$status]);
+         return true;
++    }
++}
++
++if (!function_exists('tsLocationDeleteColumns')) {
++    /** Deletion must fail closed when dependency metadata cannot be read. */
++    function tsLocationDeleteColumns(PDO $pdo): array
++    {
++        $columns=[];
++        try {
++            $rows=$pdo->query('SELECT TABLE_NAME AS table_name,COLUMN_NAME AS column_name FROM information_schema.columns WHERE table_schema=DATABASE()')->fetchAll(PDO::FETCH_ASSOC);
++            foreach($rows as $row) {
++                $table=(string)$row['table_name'];$column=(string)$row['column_name'];
++                if(!preg_match('/^[A-Za-z0-9_]+$/D',$table)||!preg_match('/^[A-Za-z0-9_]+$/D',$column))throw new RuntimeException('Unsupported dependency identifier.');
++                $columns[$table][$column]=true;
++            }
++            if(empty($columns['destination_locations']['id']))throw new RuntimeException('Location metadata unavailable.');
++            return $columns;
++        } catch(Throwable $ignored) {
++            try {
++                foreach($pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN) as $table) {
++                    $table=(string)$table;
++                    if(!preg_match('/^[A-Za-z0-9_]+$/D',$table))throw new RuntimeException('Unsupported dependency identifier.');
++                    foreach($pdo->query('SHOW COLUMNS FROM `'.$table.'`')->fetchAll(PDO::FETCH_ASSOC) as $row) {
++                        $column=(string)$row['Field'];
++                        if(!preg_match('/^[A-Za-z0-9_]+$/D',$column))throw new RuntimeException('Unsupported dependency identifier.');
++                        $columns[$table][$column]=true;
++                    }
++                }
++                if(empty($columns['destination_locations']['id']))throw new RuntimeException('Location metadata unavailable.');
++                return $columns;
++            } catch(Throwable $error) {
++                throw new RuntimeException('Unable to verify linked records. No locations were deleted. Try again or deactivate the location instead.',0,$error);
++            }
++        }
++    }
++}
++
++if (!function_exists('tsLocationHasDeleteReferences')) {
++    function tsLocationHasDeleteReferences(PDO $pdo, int $destinationId, int $locationId, array $locations, array $columns): bool
++    {
++        $names=[];
++        foreach($locations as $row)$names[mb_strtolower(tsLocationNormalize((string)$row['location_name']),'UTF-8')]=true;
++        $matches=static function(string $sql,array $params)use($pdo,$names):bool {
++            $st=$pdo->prepare($sql.' FOR UPDATE');$st->execute($params);
++            while($row=$st->fetch(PDO::FETCH_NUM))foreach($row as $value) {
++                if(isset($names[mb_strtolower(tsLocationNormalize((string)$value),'UTF-8')]))return true;
++            }
++            return false;
++        };
++        foreach($columns as $table=>$fields) {
++            if($table==='destination_locations')continue;
++            // An ID link remains a dependency even when its parent ID is wrong.
++            if(isset($fields['location_id'])) {
++                $sql='SELECT 1 FROM `'.$table.'` r JOIN destination_locations dl ON dl.id=r.location_id WHERE dl.destination_id=?';
++                $params=[$destinationId];
++                if($locationId>0){$sql.=' AND dl.id=?';$params[]=$locationId;}
++                $st=$pdo->prepare($sql.' LIMIT 1 FOR UPDATE');$st->execute($params);
++                if($st->fetchColumn()!==false)return true;
++            }
++            // Legacy names can seed locations again even without an ID link.
++            if(isset($fields['destination_id'])) {
++                $textFields=array_values(array_intersect(['city','location_city','geo_city','destination_name'],array_keys($fields)));
++                if($textFields&&$matches('SELECT `'.implode('`,`',$textFields).'` FROM `'.$table.'` WHERE destination_id=?',[$destinationId]))return true;
++            }
++        }
++        $indirect=[
++            [ ['supplier_contract_day_itineraries'=>['overnight_city','itinerary_id'],'supplier_contract_itineraries'=>['id','destination_id']],
++              'SELECT d.overnight_city FROM supplier_contract_day_itineraries d JOIN supplier_contract_itineraries i ON i.id=d.itinerary_id WHERE i.destination_id=?'],
++            [ ['supplier_contract_activities'=>['location_text','contract_version_id'],'supplier_contract_versions'=>['id','supplier_document_id'],'supplier_documents'=>['id','destination_id']],
++              'SELECT a.location_text FROM supplier_contract_activities a JOIN supplier_contract_versions v ON v.id=a.contract_version_id JOIN supplier_documents d ON d.id=v.supplier_document_id WHERE d.destination_id=?'],
++            [ ['supplier_hotel_aliases'=>['city','hotel_id'],'hotels'=>['id','destination_id']],
++              'SELECT a.city FROM supplier_hotel_aliases a JOIN hotels h ON h.id=a.hotel_id WHERE h.destination_id=?'],
++        ];
++        foreach($indirect as [$required,$sql]) {
++            $available=true;
++            foreach($required as $table=>$fields)foreach($fields as $field)if(empty($columns[$table][$field]))$available=false;
++            if($available&&$matches($sql,[$destinationId]))return true;
++        }
++        return false;
++    }
++}
++
++if (!function_exists('tsLocationDelete')) {
++    /** Delete one child, or the complete reviewed destination list, atomically. */
++    function tsLocationDelete(PDO $pdo, int $destinationId, int $locationId, ?int $expectedCount=null): int
++    {
++        if($destinationId<=0||$locationId<0||($locationId===0&&($expectedCount===null||$expectedCount<0)))throw new RuntimeException('Reload the location list and confirm the deletion.');
++        // Current reads and repeatable-read predicate locks protect this check
++        // from a concurrently committed reference or an in-flight insert.
++        if($pdo->inTransaction())throw new RuntimeException('Finish the current operation before deleting locations.');
++        $pdo->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
++        $pdo->beginTransaction();
++        try {
++            $parent=$pdo->prepare('SELECT status FROM destinations WHERE id=? FOR UPDATE');$parent->execute([$destinationId]);
++            if($parent->fetchColumn()!=='active')throw new RuntimeException('Select an active destination before deleting its locations.');
++            $where='destination_id=?';$params=[$destinationId];
++            if($locationId>0){$where.=' AND id=?';$params[]=$locationId;}
++            $st=$pdo->prepare('SELECT id,location_name FROM destination_locations WHERE '.$where.' ORDER BY id FOR UPDATE');$st->execute($params);$locations=$st->fetchAll(PDO::FETCH_ASSOC);
++            if($locationId>0&&!$locations)throw new RuntimeException('Location does not belong to the selected destination or has already been deleted.');
++            if($locationId===0&&count($locations)!==$expectedCount)throw new RuntimeException('The location list changed. Reload it and review the total before deleting all locations.');
++            if($locations&&tsLocationHasDeleteReferences($pdo,$destinationId,$locationId,$locations,tsLocationDeleteColumns($pdo)))throw new RuntimeException('One or more locations are linked to other records and cannot be deleted. No locations were deleted. Deactivate linked locations instead.');
++            $delete=$pdo->prepare('DELETE FROM destination_locations WHERE '.$where);$delete->execute($params);$count=$delete->rowCount();
++            if($count!==count($locations))throw new RuntimeException('The location list changed. No locations were deleted; reload and try again.');
++            $pdo->commit();return $count;
++        } catch(Throwable $error) {
++            if($pdo->inTransaction())$pdo->rollBack();
++            throw $error;
++        }
+     }
+ }
+ 
+ if (!function_exists('tsLocationDestination')) {
+     function tsLocationDestination(PDO $pdo, int $destinationId): ?array
