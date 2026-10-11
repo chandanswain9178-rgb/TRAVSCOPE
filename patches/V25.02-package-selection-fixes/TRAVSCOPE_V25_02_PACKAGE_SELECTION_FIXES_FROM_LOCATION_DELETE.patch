@@ -1,0 +1,793 @@
+--- a/admin-packages.php
++++ b/admin-packages.php
+@@ -7,10 +7,11 @@
+ | PEXELS + ITINERARY + DATE-WISE PRICING + CHILD PRICING + INTELLIGENT PDF AUTO BUILDER VERSION: 2026-09-13-R18
+ |--------------------------------------------------------------------------
+ */
+ 
+ require_once __DIR__ . '/config.php';
++require_once __DIR__ . '/package-delete-functions.php';
+ $pexelsHttpFunctionsFile = __DIR__ . '/pexels-http-functions.php';
+ if (is_file($pexelsHttpFunctionsFile)) require_once $pexelsHttpFunctionsFile;
+ $unsplashPhotoFunctionsFile = __DIR__ . '/unsplash-photo-functions.php';
+ if (is_file($unsplashPhotoFunctionsFile)) require_once $unsplashPhotoFunctionsFile;
+ $packageSupplierFunctionsFile = __DIR__ . '/package-supplier-functions.php';
+@@ -6579,193 +6580,38 @@
+         |--------------------------------------------------------------------------
+         | DELETE PACKAGE
+         |--------------------------------------------------------------------------
+         */
+ 
+-        elseif ($action === 'delete') {
+-
+-            $packageId =
+-                (int)(
+-                    $_POST['package_id']
+-                    ?? 0
+-                );
+-
+-            if ($packageId <= 0) {
+-
+-                $error =
+-                    'Invalid package.';
+-
+-            } else {
+-
+-                try {
+-
+-                    /*
+-                    |--------------------------------------------------------------------------
+-                    | DO NOT DELETE PACKAGE WITH BOOKINGS
+-                    |--------------------------------------------------------------------------
+-                    */
+-
+-                    $stmt = $pdo->prepare("
+-                        SELECT COUNT(*)
+-                        FROM bookings
+-                        WHERE package_id = ?
+-                    ");
+-
+-                    $stmt->execute([
+-                        $packageId
+-                    ]);
+-
+-                    $bookingCount =
+-                        (int)$stmt->fetchColumn();
+-
+-                    if ($bookingCount > 0) {
+-
+-                        throw new RuntimeException(
+-                            'This package has booking records and cannot be deleted. Set it to inactive instead.'
+-                        );
+-                    }
+-
+-
+-                    $stmt = $pdo->prepare("
+-                        SELECT main_image
+-                        FROM packages
+-                        WHERE id = ?
+-                        LIMIT 1
+-                    ");
+-
+-                    $stmt->execute([
+-                        $packageId
+-                    ]);
+-
+-                    $package =
+-                        $stmt->fetch();
+-
+-                    if (!$package) {
+-                        throw new RuntimeException(
+-                            'Package not found.'
+-                        );
+-                    }
+-
+-
+-                    $pdo->beginTransaction();
+-
+-
+-                    /*
+-                    | Remove wishlist records.
+-                    */
+-
+-                    $stmt = $pdo->prepare("
+-                        DELETE FROM wishlists
+-                        WHERE package_id = ?
+-                    ");
+-
+-                    $stmt->execute([
+-                        $packageId
+-                    ]);
+-
+-
+-                    /*
+-                    | Remove gallery records.
+-                    */
+-
+-                    $stmt = $pdo->prepare("
+-                        SELECT image
+-                        FROM package_images
+-                        WHERE package_id = ?
+-                    ");
+-
+-                    $stmt->execute([
+-                        $packageId
+-                    ]);
+-
+-                    $galleryImages =
+-                        $stmt->fetchAll();
+-
+-
+-                    $stmt = $pdo->prepare("
+-                        DELETE FROM package_images
+-                        WHERE package_id = ?
+-                    ");
+-
+-                    $stmt->execute([
+-                        $packageId
+-                    ]);
+-
+-
+-                    /*
+-                    | Delete package.
+-                    */
+-
+-                    $stmt = $pdo->prepare("
+-                        DELETE FROM packages
+-                        WHERE id = ?
+-                        LIMIT 1
+-                    ");
+-
+-                    $stmt->execute([
+-                        $packageId
+-                    ]);
+-
+-
+-                    $pdo->commit();
+-
+-
+-                    /*
+-                    | Remove files only after successful DB transaction.
+-                    */
+-
+-                    deletePackageImageFile(
+-                        $package['main_image']
+-                        ?? ''
+-                    );
+-
+-                    foreach (
+-                        $galleryImages
+-                        as $gallery
+-                    ) {
+-
+-                        deletePackageImageFile(
+-                            $gallery['image']
+-                            ?? ''
+-                        );
+-                    }
+-
+-
+-                    $_SESSION['admin_package_success'] =
+-                        'Package deleted successfully.';
+-
+-                    redirect(
+-                        BASE_URL
+-                        . 'admin-packages.php'
+-                    );
+-
+-
+-                } catch (RuntimeException $e) {
+-
+-                    if ($pdo->inTransaction()) {
+-                        $pdo->rollBack();
+-                    }
+-
+-                    $error =
+-                        $e->getMessage();
+-
+-                } catch (Throwable $e) {
+-
+-                    if ($pdo->inTransaction()) {
+-                        $pdo->rollBack();
+-                    }
+-
+-                    error_log(
+-                        'Package delete error: '
+-                        . $e->getMessage()
+-                    );
+-
+-                    $error =
+-                        'Unable to delete this package.';
++        elseif ($action === 'delete' || $action === 'delete_selected') {
++            try {
++                $selected = $action === 'delete_selected'
++                    ? ($_POST['package_ids'] ?? []) : [$_POST['package_id'] ?? ''];
++                if ($action === 'delete_selected' && ($_POST['confirm_delete'] ?? '') !== '1') {
++                    throw new RuntimeException('Confirm the selected package deletion before continuing.');
+                 }
++                if (!is_array($selected)) throw new RuntimeException('Invalid package selection.');
++                $scope = [];
++                foreach (['q','status','type','destination'] as $key) {
++                    if (isset($_GET[$key]) && !is_scalar($_GET[$key])) throw new RuntimeException('Invalid package filter.');
++                    if (isset($_GET[$key]) && (string)$_GET[$key] !== '') $scope[$key] = (string)$_GET[$key];
++                }
++                $result = tsPackageDeleteSelected($pdo, $selected, $scope);
++                foreach ($result['images'] as $image) {
++                    deletePackageImageFile($image);
++                    deleteItineraryImage($image);
++                }
++                $_SESSION['admin_package_success'] = $result['deleted'].' package'.($result['deleted'] === 1 ? '' : 's').' deleted successfully.';
++                redirect(BASE_URL.'admin-packages.php'.($scope ? '?'.http_build_query($scope) : ''));
++            } catch (RuntimeException $exception) {
++                $error = $exception->getMessage();
++            } catch (Throwable $exception) {
++                error_log('Package delete error: '.$exception->getMessage());
++                $error = 'Unable to delete the selected packages. No packages were deleted.';
+             }
+         }
++
+     }
+ }
+ 
+ 
+ /*
+@@ -13112,10 +12958,18 @@
+ /* V24.50 – package listing only: merged KPIs and filter/table directory.
+    All table action forms, POST names, filters, price/readiness logic are untouched. */
+ body:not(.package-editor-mode) .main{
+     padding-top:12px !important;
+ }
++.package-bulk{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-bottom:1px solid #dce6f2;background:#fff;flex-wrap:wrap}
++.package-bulk-selection{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:#24415f}
++.package-bulk-selection label{display:inline-flex;align-items:center;gap:7px;cursor:pointer}
++.package-select,#packageSelectAll{width:17px;height:17px;flex:0 0 17px;accent-color:#0879fa;cursor:pointer}
++.package-list-row.is-selected{background:#eaf3ff!important}
++.package-bulk .package-bulk-delete{background:#fff2f3;color:#bd2436;border-color:#ffd1d8}
++.package-bulk button:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
++@media(max-width:640px){.package-bulk{align-items:flex-start}.package-bulk-selection{gap:9px}.package-bulk .package-bulk-delete{min-height:38px}}
+ .package-master-head{
+     display:flex !important;
+     align-items:center !important;
+     justify-content:space-between !important;
+     gap:14px !important;
+@@ -13444,14 +13298,10 @@
+ 
+ <div class="page-head-actions">
+ <a href="<?= e(BASE_URL . 'admin-hotels.php'); ?>" class="pdf-import-btn" style="text-decoration:none;background:#eefbf5;color:#087c59;border-color:#cfeedd;">
+     <i class="fa-solid fa-hotel"></i> Hotel Master
+ </a>
+-<button type="button" class="pdf-import-btn" id="openPdfImport">
+-    <i class="fa-solid fa-file-pdf"></i>
+-    Browse Packages PDF
+-</button>
+ <a
+     href="<?= e(BASE_URL . 'admin-packages.php?new=1#package-form'); ?>"
+     class="add-btn"
+ >
+     <i class="fa-solid fa-plus"></i>
+@@ -13697,10 +13547,24 @@
+ </form>
+     </div>
+ 
+ <?php if ($packages): ?>
+ 
++<form method="post" id="packageBulkDeleteForm" class="package-bulk">
++    <input type="hidden" name="csrf_token" value="<?= e($csrfToken); ?>">
++    <input type="hidden" name="action" value="delete_selected">
++    <input type="hidden" name="confirm_delete" id="packageDeleteConfirmed" value="">
++    <div class="package-bulk-selection">
++        <label><input type="checkbox" id="packageSelectAll" aria-label="Select all listed packages"> Select all</label>
++        <strong id="packageSelectedCount" aria-live="polite">0 selected</strong>
++        <button type="button" id="packageClearSelection" class="filter-btn" disabled>Clear selection</button>
++    </div>
++    <button type="submit" id="packageDeleteSelected" class="filter-btn package-bulk-delete" disabled>
++        <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete selected
++    </button>
++</form>
++
+ <div class="table-wrap">
+ 
+ <table>
+ 
+ <thead>
+@@ -13739,15 +13603,18 @@
+ 
+ $packageReadiness = packagePublishReadiness($pdo, (int)$package['id']);
+ 
+ ?>
+ 
+-<tr>
++<tr class="package-list-row">
+ 
+ <td>
+ 
+ <div class="package-cell">
++<input type="checkbox" class="package-select" name="package_ids[]" form="packageBulkDeleteForm"
++       value="<?= (int)$package['id']; ?>" aria-label="Select <?= e($package['title']); ?>">
++
+ 
+ <div class="package-thumb">
+ 
+ <?php if ($image !== ''): ?>
+ 
+@@ -17958,7 +17825,41 @@
+ })();
+ </script>
+ 
+ 
+ <script src="assets/travscope-pro-admin.js?v=20260916-v2" defer></script><script src="site-brand-sync.js?v=20261005-v2473" defer></script>
++<script>
++(function(){
++    const form=document.getElementById('packageBulkDeleteForm');
++    if(!form)return;
++    const all=document.getElementById('packageSelectAll');
++    const checks=[...document.querySelectorAll('.package-select')];
++    const count=document.getElementById('packageSelectedCount');
++    const clear=document.getElementById('packageClearSelection');
++    const remove=document.getElementById('packageDeleteSelected');
++    const confirmed=document.getElementById('packageDeleteConfirmed');
++    function sync(){
++        const total=checks.filter(el=>el.checked).length;
++        count.textContent=total+' selected';
++        all.checked=checks.length>0&&total===checks.length;
++        all.indeterminate=total>0&&total<checks.length;
++        clear.disabled=remove.disabled=total===0;
++        confirmed.value='';
++        checks.forEach(el=>el.closest('tr').classList.toggle('is-selected',el.checked));
++    }
++    all.addEventListener('change',()=>{checks.forEach(el=>el.checked=all.checked);sync();});
++    checks.forEach(el=>el.addEventListener('change',sync));
++    clear.addEventListener('click',()=>{checks.forEach(el=>el.checked=false);sync();});
++    form.addEventListener('submit',event=>{
++        const total=checks.filter(el=>el.checked).length;
++        confirmed.value='';
++        if(!total||!window.confirm('Permanently delete '+total+' selected package'+(total===1?'':'s')+'? Packages with linked history will block the entire selection.')){
++            event.preventDefault();return;
++        }
++        confirmed.value='1';
++    });
++    sync();
++})();
++</script>
++
+ </body>
+ </html>
+\ No newline at end of file
+--- /dev/null
++++ b/package-delete-functions.php
+@@ -0,0 +1,113 @@
++<?php
++declare(strict_types=1);
++
++/** Parse the entire selection before touching records; never coerce bad IDs. */
++function tsPackageDeleteIds($selection): array
++{
++    if (!is_array($selection) || !$selection || count($selection) > 500) {
++        throw new RuntimeException('Select between 1 and 500 packages to delete.');
++    }
++    $ids = [];
++    foreach ($selection as $value) {
++        if ((!is_string($value) && !is_int($value)) || !preg_match('/^[1-9][0-9]*$/D', (string)$value)
++            || strlen((string)$value) > strlen((string)PHP_INT_MAX)
++            || (strlen((string)$value) === strlen((string)PHP_INT_MAX) && strcmp((string)$value, (string)PHP_INT_MAX) > 0)) {
++            throw new RuntimeException('Invalid package selection. Refresh and select the packages again.');
++        }
++        $ids[(int)$value] = (int)$value;
++    }
++    sort($ids, SORT_NUMERIC);
++    return array_values($ids);
++}
++
++/** Metadata errors must never bypass linked-history checks. */
++function tsPackageDeleteColumns(PDO $pdo): array
++{
++    try {
++        $rows = $pdo->query('SELECT table_name,column_name FROM information_schema.columns WHERE table_schema=DATABASE()')->fetchAll(PDO::FETCH_NUM);
++        if (!$rows) throw new RuntimeException('Package schema unavailable.');
++        $columns = [];
++        foreach ($rows as $row) {
++            if (!preg_match('/^[A-Za-z0-9_]+$/D', $row[0]) || !preg_match('/^[A-Za-z0-9_]+$/D', $row[1])) throw new RuntimeException('Unsupported package schema.');
++            $columns[$row[0]][$row[1]] = true;
++        }
++        return $columns;
++    } catch (Throwable $error) {
++        $columns = [];
++        foreach ($pdo->query("SHOW FULL TABLES WHERE Table_type='BASE TABLE'")->fetchAll(PDO::FETCH_NUM) as $row) {
++            if (!preg_match('/^[A-Za-z0-9_]+$/D', $row[0])) throw new RuntimeException('Unsupported package schema.');
++            foreach ($pdo->query('SHOW COLUMNS FROM `'.$row[0].'`')->fetchAll(PDO::FETCH_ASSOC) as $column) $columns[$row[0]][$column['Field']] = true;
++        }
++        if (!$columns) throw new RuntimeException('Unable to verify linked package records.');
++        return $columns;
++    }
++}
++
++/** Atomic batch deletion, including children without package foreign keys. */
++function tsPackageDeleteSelected(PDO $pdo, array $selection, array $scope = []): array
++{
++    $ids = tsPackageDeleteIds($selection);
++    if ($pdo->inTransaction()) throw new RuntimeException('Another package update is in progress.');
++    $owned = ['wishlists','package_images','package_itinerary_days','package_date_prices','package_child_prices',
++              'package_hotels','package_occupancy_prices','package_services','package_supplier_options'];
++    $columns = tsPackageDeleteColumns($pdo);
++    if (!isset($columns['packages']['id'], $columns['bookings']['package_id'])) throw new RuntimeException('Unable to verify package booking records.');
++    $placeholders = implode(',', array_fill(0, count($ids), '?'));
++    $params = $ids;
++    $where = ['p.id IN ('.$placeholders.')'];
++    $search = trim((string)($scope['q'] ?? ''));
++    if ($search !== '') {
++        $where[] = '(p.title LIKE ? OR p.package_code LIKE ? OR p.slug LIKE ? OR d.name LIKE ? OR d.country LIKE ?)';
++        array_push($params, ...array_fill(0, 5, '%'.$search.'%'));
++    }
++    $status = strtolower(trim((string)($scope['status'] ?? '')));
++    if (in_array($status, ['active','inactive','draft'], true)) { $where[]='p.status=?'; $params[]=$status; }
++    $type = strtolower(trim((string)($scope['type'] ?? '')));
++    if ($type !== '') { $where[]='p.package_type=?'; $params[]=$type; }
++    if ((int)($scope['destination'] ?? 0) > 0) { $where[]='p.destination_id=?'; $params[]=(int)$scope['destination']; }
++    $pdo->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
++    $pdo->beginTransaction();
++    try {
++        $statement = $pdo->prepare('SELECT p.id,p.title,p.main_image FROM packages p LEFT JOIN destinations d ON d.id=p.destination_id WHERE '.implode(' AND ', $where).' ORDER BY p.id FOR UPDATE');
++        $statement->execute($params);
++        $packages = $statement->fetchAll(PDO::FETCH_ASSOC);
++        if (count($packages) !== count($ids)) throw new RuntimeException('A selected package is missing or no longer matches this list. Refresh and select again. No packages were deleted.');
++        foreach ($columns as $table => $fields) {
++            if (!isset($fields['package_id']) || in_array($table, $owned, true)) continue;
++            $check = $pdo->prepare('SELECT package_id FROM `'.$table.'` WHERE package_id IN ('.$placeholders.') LIMIT 1 FOR UPDATE');
++            $check->execute($ids);
++            if ($check->fetchColumn() !== false) throw new RuntimeException('A selected package has linked booking, quotation, enquiry or other history. Set it to inactive instead. No packages were deleted.');
++        }
++        if (isset($columns['trip_service_requirements']['source_package_service_id'], $columns['package_services']['package_id'])) {
++            $check = $pdo->prepare('SELECT r.id FROM trip_service_requirements r JOIN package_services s ON s.id=r.source_package_service_id WHERE s.package_id IN ('.$placeholders.') LIMIT 1 FOR UPDATE');
++            $check->execute($ids);
++            if ($check->fetchColumn() !== false) throw new RuntimeException('A selected package is used in trip service history. No packages were deleted.');
++        }
++        if (isset($columns['package_services']['source_package_hotel_id'], $columns['package_hotels']['package_id'])) {
++            $check = $pdo->prepare('SELECT s.id FROM package_services s JOIN package_hotels h ON h.id=s.source_package_hotel_id WHERE h.package_id IN ('.$placeholders.') AND s.package_id NOT IN ('.$placeholders.') LIMIT 1 FOR UPDATE');
++            $check->execute(array_merge($ids, $ids));
++            if ($check->fetchColumn() !== false) throw new RuntimeException('A selected hotel assignment is used by another package. No packages were deleted.');
++        }
++        $images = array_column($packages, 'main_image');
++        foreach (['package_images','package_itinerary_days'] as $table) {
++            if (!isset($columns[$table]['image'], $columns[$table]['package_id'])) continue;
++            $statement = $pdo->prepare('SELECT image FROM `'.$table.'` WHERE package_id IN ('.$placeholders.') FOR UPDATE');
++            $statement->execute($ids);
++            $images = array_merge($images, $statement->fetchAll(PDO::FETCH_COLUMN));
++        }
++        // Services refer to hotel assignments on installations without FKs.
++        foreach (['package_supplier_options','package_services','package_hotels','package_occupancy_prices','package_child_prices',
++                  'package_date_prices','package_itinerary_days','package_images','wishlists'] as $table) {
++            if (!isset($columns[$table]['package_id'])) continue;
++            $pdo->prepare('DELETE FROM `'.$table.'` WHERE package_id IN ('.$placeholders.')')->execute($ids);
++        }
++        $statement = $pdo->prepare('DELETE FROM packages WHERE id IN ('.$placeholders.')');
++        $statement->execute($ids);
++        if ($statement->rowCount() !== count($ids)) throw new RuntimeException('Package selection changed. No packages were deleted.');
++        $pdo->commit();
++        return ['deleted'=>count($ids), 'images'=>array_values(array_unique(array_filter($images, 'is_string')))];
++    } catch (Throwable $error) {
++        if ($pdo->inTransaction()) $pdo->rollBack();
++        throw $error;
++    }
++}
+--- a/admin-supplier-packages.php
++++ b/admin-supplier-packages.php
+@@ -4,10 +4,15 @@
+ require_once __DIR__.'/supplier-manual-package-functions.php';
+ require_once __DIR__.'/package-supplier-functions.php';
+ if(is_file(__DIR__.'/supplier-hotel-option-functions.php'))require_once __DIR__.'/supplier-hotel-option-functions.php';
+ if(is_file(__DIR__.'/supplier-vehicle-option-functions.php'))require_once __DIR__.'/supplier-vehicle-option-functions.php';
+ if(function_exists('requireAdmin'))requireAdmin();elseif(empty($_SESSION['admin_id'])){header('Location: '.(defined('BASE_URL')?BASE_URL:'').'login.php');exit;}
++$adminCheck=$pdo->prepare('SELECT id,status FROM admins WHERE id=? LIMIT 1');
++$adminCheck->execute([(int)($_SESSION['admin_id']??0)]);$currentAdmin=$adminCheck->fetch(PDO::FETCH_ASSOC);
++if(!$currentAdmin||($currentAdmin['status']??'')!=='active'){
++    unset($_SESSION['admin_id']);header('Location: '.(defined('BASE_URL')?BASE_URL:'').'admin-login.php');exit;
++}
+ function sppE($v):string{return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+ if(empty($_SESSION['supplier_packages_csrf']))$_SESSION['supplier_packages_csrf']=bin2hex(random_bytes(32));
+ $csrf=(string)$_SESSION['supplier_packages_csrf'];
+ $flashSuccess=(string)($_SESSION['supplier_packages_success']??'');unset($_SESSION['supplier_packages_success']);
+ $flashError=(string)($_SESSION['supplier_packages_error']??'');unset($_SESSION['supplier_packages_error']);
+@@ -102,71 +107,74 @@
+         if(str_contains(strtolower($e->getMessage()),'foreign key constraint'))throw new RuntimeException('Delete is blocked by another linked record: '.$e->getMessage());
+         throw $e;
+     }
+ }
+ /**
+- * V24.90 - Resolve one active supplier itinerary for bulk Package Master creation.
+- * The selection mirrors the normal "Create Package From Supplier" workflow:
+- * active package + active rate-book version + active itinerary + at least one
+- * active exact-PAX rate. The strongest/latest active version wins.
++ * Resolve saved supplier content for an editable Package Master draft.
++ * Prefer an active season/itinerary, then eligible review content. Pricing
++ * readiness is checked separately by the supplier quotation workflow.
+  */
+ function sppPackageMasterBulkCandidate(PDO $pdo,int $contractId):array{
+     if($contractId<=0)return [];
+     $sql="SELECT i.id itinerary_id,i.contract_id,i.supplier_id,i.supplier_package_code,i.title,
+                  v.id contract_version_id,v.rate_priority,v.valid_from,v.valid_to,v.version_no,
+-                 c.contract_name,c.status contract_status,i.status itinerary_status,v.status version_status,
+-                 (SELECT COUNT(*) FROM supplier_contract_pax_rates pr
+-                    WHERE pr.status='active' AND (pr.itinerary_id=i.id OR pr.contract_version_id=v.id)) active_pax_rows
++                 c.contract_name,c.status contract_status,i.status itinerary_status,v.status version_status
+           FROM supplier_contract_itineraries i
+           JOIN supplier_contracts c ON c.id=i.contract_id
+-          JOIN supplier_contract_versions v ON v.id=i.contract_version_id
++          JOIN suppliers s ON s.id=c.supplier_id AND s.id=i.supplier_id
++          JOIN supplier_contract_versions v ON v.id=i.contract_version_id AND v.contract_id=c.id
+           WHERE i.contract_id=? AND c.record_type='package'
+-            AND c.status='active' AND i.status='active' AND v.status='active'
+-          ORDER BY v.rate_priority DESC,v.valid_from DESC,v.version_no DESC,i.id DESC
++            AND s.status='active' AND c.status IN ('active','draft')
++            AND i.status IN ('active','review') AND v.status IN ('active','review')
++          ORDER BY (v.status='active' AND i.status='active') DESC,
++                   v.rate_priority DESC,v.valid_from DESC,v.version_no DESC,i.id DESC
+           LIMIT 1";
+     $st=$pdo->prepare($sql);$st->execute([$contractId]);
+     return $st->fetch(PDO::FETCH_ASSOC)?:[];
+ }
+ 
+ /** Return the existing Package Master id when this supplier contract is already linked. */
+ function sppExistingPackageMasterForContract(PDO $pdo,int $contractId):int{
+     if($contractId<=0)return 0;
+-    try{
+-        if(tsPSOTableExists($pdo,'package_supplier_options')&&tsPSOColumnExists($pdo,'package_supplier_options','contract_id')){
+-            $st=$pdo->prepare("SELECT package_id FROM package_supplier_options WHERE contract_id=? AND status='active' ORDER BY is_primary DESC,id LIMIT 1");
+-            $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
+-        }
+-    }catch(Throwable $ignored){}
+-    try{
+-        if(tsPSOTableExists($pdo,'packages')&&tsPSOColumnExists($pdo,'packages','source_itinerary_id')){
+-            $st=$pdo->prepare("SELECT p.id FROM packages p JOIN supplier_contract_itineraries i ON i.id=p.source_itinerary_id WHERE i.contract_id=? ORDER BY p.id LIMIT 1");
+-            $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
+-        }
+-    }catch(Throwable $ignored){}
++    if(tsPSOTableExists($pdo,'package_supplier_options')&&tsPSOColumnExists($pdo,'package_supplier_options','contract_id')){
++        $st=$pdo->prepare("SELECT o.package_id FROM package_supplier_options o JOIN packages p ON p.id=o.package_id WHERE o.contract_id=? ORDER BY o.is_primary DESC,o.id LIMIT 1");
++        $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
++    }
++    if(tsPSOTableExists($pdo,'packages')&&tsPSOColumnExists($pdo,'packages','source_itinerary_id')){
++        $st=$pdo->prepare("SELECT p.id FROM packages p JOIN supplier_contract_itineraries i ON i.id=p.source_itinerary_id WHERE i.contract_id=? ORDER BY p.id LIMIT 1");
++        $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
++    }
+     return 0;
+ }
+ 
+-function sppBulkAddToPackageMaster(PDO $pdo,array $contractIds,int $adminId):array{
++function sppBulkAddToPackageMaster(PDO $pdo,array $contractIds,int $adminId,int $supplierId=0):array{
+     if(!tsPSOReady($pdo))throw new RuntimeException('Package Master supplier-linking tables are not ready.');
+-    $contractIds=array_values(array_unique(array_filter(array_map('intval',$contractIds),fn($v)=>$v>0)));
++    foreach($contractIds as $id){
++        if((!is_int($id)&&(!is_string($id)||!ctype_digit($id)))||(int)$id<=0)throw new RuntimeException('The supplier package selection is invalid. Refresh the page and try again.');
++    }
++    $contractIds=array_values(array_unique(array_map('intval',$contractIds)));
+     if(!$contractIds)throw new RuntimeException('Select at least one supplier package to add to Package Master.');
++    if($pdo->inTransaction())throw new RuntimeException('Bulk Package Master creation requires its own transaction.');
+     $result=['created'=>0,'already_linked'=>0,'not_ready'=>0,'failed'=>0,'package_ids'=>[],'messages'=>[]];
+     foreach($contractIds as $contractId){
+         try{
++            $pdo->beginTransaction();
++            // Lock before reading existing links so simultaneous submissions
++            // see the first completed import and safely skip it.
++            $lock=$pdo->prepare("SELECT id,supplier_id FROM supplier_contracts WHERE id=? AND record_type='package' FOR UPDATE");
++            $lock->execute([$contractId]);$contract=$lock->fetch(PDO::FETCH_ASSOC);
++            if(!$contract)throw new RuntimeException('Supplier package was not found.');
++            if($supplierId>0&&(int)$contract['supplier_id']!==$supplierId)throw new RuntimeException('Supplier package does not belong to the selected supplier.');
+             $existing=sppExistingPackageMasterForContract($pdo,$contractId);
+-            if($existing>0){$result['already_linked']++;continue;}
++            if($existing>0){$pdo->commit();$result['already_linked']++;continue;}
+             $candidate=sppPackageMasterBulkCandidate($pdo,$contractId);
+-            if(!$candidate){$result['not_ready']++;$result['messages'][]='Contract #'.$contractId.' has no active package/version.';continue;}
+-            if((int)($candidate['active_pax_rows']??0)<=0){
+-                $result['not_ready']++;
+-                $label=trim((string)($candidate['supplier_package_code']??''))?:trim((string)($candidate['title']??''))?:('Contract #'.$contractId);
+-                $result['messages'][]=$label.' skipped: no active exact-PAX rate.';
+-                continue;
+-            }
+-            $packageId=tsPSOCreatePackageFromSupplier($pdo,(int)$candidate['itinerary_id'],$adminId);
++            if(!$candidate){$pdo->commit();$result['not_ready']++;$result['messages'][]='Contract #'.$contractId.' skipped: no eligible active or review supplier content.';continue;}
++            $packageId=tsPSOCreatePackageFromSupplier($pdo,(int)$candidate['itinerary_id'],$adminId,true);
++            $pdo->commit();
+             $result['created']++;$result['package_ids'][]=$packageId;
+         }catch(Throwable $e){
++            if($pdo->inTransaction())$pdo->rollBack();
+             $result['failed']++;
+             $result['messages'][]='Contract #'.$contractId.': '.$e->getMessage();
+         }
+     }
+     return $result;
+@@ -176,18 +184,18 @@
+     $returnSupplier=max(0,(int)($_POST['supplier_id']??0));$returnQ=trim((string)($_POST['q']??''));
+     try{
+         if(!hash_equals($csrf,(string)($_POST['csrf']??'')))throw new RuntimeException('Security verification failed. Refresh the page and try again.');
+         $ids=[];
+         if(isset($_POST['add_selected_master'])){
+-            $ids=array_values(array_unique(array_filter(array_map('intval',(array)($_POST['selected']??[])),fn($v)=>$v>0)));
+-            $bulk=sppBulkAddToPackageMaster($pdo,$ids,(int)($_SESSION['admin_id']??0));
++            $ids=(array)($_POST['selected']??[]);
++            $bulk=sppBulkAddToPackageMaster($pdo,$ids,(int)($_SESSION['admin_id']??0),$returnSupplier);
+             $parts=[];
+             if($bulk['created']>0)$parts[]=$bulk['created'].' Draft Package Master package'.($bulk['created']===1?'':'s').' created';
+             if($bulk['already_linked']>0)$parts[]=$bulk['already_linked'].' already linked (skipped)';
+             if($bulk['not_ready']>0)$parts[]=$bulk['not_ready'].' not ready (skipped)';
+             if($bulk['failed']>0)$parts[]=$bulk['failed'].' failed';
+-            $_SESSION['supplier_packages_success']=($parts?implode(' · ',$parts):'No Package Master drafts were created.').'. Existing Package Master records were not duplicated or overwritten.';
++            if($bulk['created']>0||$bulk['already_linked']>0)$_SESSION['supplier_packages_success']=implode(' · ',$parts).'. Existing Package Master records were not duplicated or overwritten.';
+             if($bulk['messages'])$_SESSION['supplier_packages_error']=implode(' | ',array_slice($bulk['messages'],0,8)).(count($bulk['messages'])>8?' | +'.(count($bulk['messages'])-8).' more warning(s).':'');
+         }else{
+             if(isset($_POST['delete_single']))$ids=[max(0,(int)$_POST['delete_single'])];
+             elseif(isset($_POST['delete_selected']))$ids=array_values(array_unique(array_filter(array_map('intval',(array)($_POST['selected']??[])),fn($v)=>$v>0)));
+             else throw new RuntimeException('No bulk action was selected.');
+@@ -197,11 +205,11 @@
+             if($deleted>0)$_SESSION['supplier_packages_success']=$deleted.' supplier package'.($deleted===1?'':'s').' permanently deleted.';
+             if($blocked)$_SESSION['supplier_packages_error']=implode(' | ',$blocked);
+         }
+     }catch(Throwable $e){$_SESSION['supplier_packages_error']=$e->getMessage();}
+     $qs=[];if($returnSupplier>0)$qs['supplier_id']=$returnSupplier;if($returnQ!=='')$qs['q']=$returnQ;
+-    header('Location: admin-supplier-packages.php'.($qs?'?'.http_build_query($qs):''));exit;
++    header('Location: admin-supplier-packages.php'.($qs?'?'.http_build_query($qs):'').'#supplier-package-directory');exit;
+ }
+ $ready=tsMSReady($pdo);$supplierId=max(0,(int)($_GET['supplier_id']??0));$q=trim((string)($_GET['q']??''));
+ $suppliers=[];try{$suppliers=$pdo->query("SELECT id,company_name,supplier_code,priority,status FROM suppliers WHERE status='active' ORDER BY CASE priority WHEN 'preferred' THEN 1 WHEN 'regular' THEN 2 ELSE 3 END,company_name")->fetchAll(PDO::FETCH_ASSOC)?:[];}catch(Throwable $e){}if($supplierId<=0&&count($suppliers)===1)$supplierId=(int)$suppliers[0]['id'];$supplier=$supplierId>0?tsMSSupplier($pdo,$supplierId):null;
+ $rows=[];$stats=['packages'=>0,'active'=>0,'seasons'=>0,'rates'=>0,'ready'=>0];
+ if($ready){$sql="SELECT c.*,s.company_name,s.supplier_code,d.name destination_name,
+@@ -402,12 +410,12 @@
+         <span class="spp-head-metric purple"><i class="fa-solid fa-users" aria-hidden="true"></i><b><?=$stats['rates']?></b><small>Exact PAX rows</small></span>
+         <span class="spp-head-metric teal"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i><b><?=$stats['ready']?></b><small>Quotation ready</small></span>
+     </div>
+ </header>
+ 
+-<?php if($flashSuccess!==''):?><div class="spp-alert ok" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?=sppE($flashSuccess)?></div><?php endif;?>
+-<?php if($flashError!==''):?><div class="spp-alert err" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <?=sppE($flashError)?></div><?php endif;?>
++<?php if(!$ready&&$flashSuccess!==''):?><div class="spp-alert ok" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?=sppE($flashSuccess)?></div><?php endif;?>
++<?php if(!$ready&&$flashError!==''):?><div class="spp-alert err" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <?=sppE($flashError)?></div><?php endif;?>
+ 
+ <?php if(!$ready):?>
+ <div class="spp-alert warn">Supplier Package tables are not ready. Import the Manual Supplier Package SQL used by V20.1/V21 first.</div>
+ <?php else:?>
+ 
+@@ -461,15 +469,17 @@
+         <a class="spp-btn" href="admin-supplier-details.php?id=<?=$supplierId?>"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Supplier 360</a>
+     </div>
+ </section>
+ <?php endif;?>
+ 
+-<section class="spp-card" aria-label="Supplier package directory">
++<section class="spp-card" id="supplier-package-directory" aria-label="Supplier package directory">
+     <div class="spp-card-header">
+         <div><p class="spp-kicker">Inventory overview</p><h2>Supplier Package Directory</h2><p>Review coverage, seasonal pricing and Package Master links. Every row is a complete supplier package.</p></div>
+         <div class="spp-header-tools"><span class="spp-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <?=count($rows)?> packages</span></div>
+     </div>
++    <?php if($flashSuccess!==''):?><div class="spp-alert ok" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?=sppE($flashSuccess)?></div><?php endif;?>
++    <?php if($flashError!==''):?><div class="spp-alert err" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <?=sppE($flashError)?></div><?php endif;?>
+     <?php if(!$rows):?>
+         <div class="spp-empty"><i class="fa-solid fa-box-open" aria-hidden="true"></i><h3>No supplier packages found</h3><p>Try clearing the search, adding a package or importing your Excel/CSV rate matrix.</p></div>
+     <?php else:?>
+     <form method="post" id="supplierPackageDeleteForm">
+         <input type="hidden" name="csrf" value="<?=sppE($csrf)?>">
+@@ -485,11 +495,11 @@
+         </div>
+         <div class="spp-bulk">
+             <div class="spp-bulk-selection">
+                 <input type="checkbox" class="row-check" id="selectAllPackages" aria-label="Select all visible supplier packages">
+                 <strong id="selectedPackageCount">0 selected</strong>
+-                <span>Select all visible rows to create every supplier package in Package Master at once. Existing links are skipped safely.</span>
++                <span>Create editable drafts from selected supplier packages. Rates can be completed later; existing links are skipped.</span>
+             </div>
+             <div class="spp-bulk-actions">
+                 <button type="submit" name="add_selected_master" value="1" class="spp-btn master" id="bulkPackageMasterBtn" disabled><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Add Selected to Package Master</button>
+                 <button type="submit" name="delete_selected" value="1" class="spp-btn danger" id="massDeleteBtn" disabled><i class="fa-solid fa-trash-can" aria-hidden="true"></i> Delete Selected</button>
+             </div>
+--- a/package-supplier-functions.php
++++ b/package-supplier-functions.php
+@@ -373,11 +373,12 @@
+     return trim(implode("\n\n",$sections));
+ }
+ 
+ function tsPSOImportPayload(PDO $pdo, int $itineraryId): array
+ {
+-    $s=$pdo->prepare("SELECT i.*,s.company_name,s.supplier_code,s.supplier_type,c.contract_code,c.contract_name,
++    $s=$pdo->prepare("SELECT i.*,s.company_name,s.supplier_code,s.supplier_type,s.status supplier_status,
++                             c.contract_code,c.contract_name,c.status contract_status,c.record_type,
+                              c.payment_terms contract_payment_terms,c.cancellation_terms contract_cancellation_terms,
+                              v.id version_id,v.version_no,v.version_label,v.season_name,v.season_type,v.rate_priority,v.valid_from version_valid_from,v.valid_to version_valid_to,v.status version_status,
+                              v.payment_terms version_payment_terms,v.cancellation_terms version_cancellation_terms,v.transport_terms version_transport_terms,
+                              d.name destination_name,d.country destination_country
+                       FROM supplier_contract_itineraries i
+@@ -441,14 +442,22 @@
+                 COALESCE(g.tax_percent,0) AS tax_percent,
+                 pr.pax_min,
+                 pr.pax_max,
+                 pr.rate_per_person
+             FROM supplier_contract_versions v
++            JOIN supplier_contracts c ON c.id=v.contract_id AND c.status='active'
++            JOIN suppliers s ON s.id=c.supplier_id AND s.status='active'
+             JOIN supplier_contract_rate_groups g
+               ON g.contract_version_id=v.id
+              AND g.contract_id=v.contract_id
+              AND g.status='active'
++            JOIN supplier_contract_itineraries i
++              ON i.id=g.itinerary_id
++             AND i.contract_id=c.id
++             AND i.contract_version_id=v.id
++             AND i.supplier_id=s.id
++             AND i.status='active'
+             JOIN supplier_contract_pax_rates pr
+               ON pr.rate_group_id=g.id
+              AND pr.contract_version_id=v.id
+              AND pr.status='active'
+             WHERE v.contract_id=?
+@@ -594,29 +603,36 @@
+         $ins->execute([$packageId,$r['valid_from'],$r['valid_to'],$r['price_3_star'],$r['price_4_star'],$r['price_5_star'],$sort++]);
+     }
+     return count($rows);
+ }
+ 
+-function tsPSOCreatePackageFromSupplier(PDO $pdo, int $itineraryId, int $adminId): int
++function tsPSOCreatePackageFromSupplier(PDO $pdo, int $itineraryId, int $adminId, bool $allowDraftSource=false): int
+ {
+     if(!tsPSOReady($pdo))throw new RuntimeException('Install the V20 Package Supplier SQL first.');
+     $data=tsPSOImportPayload($pdo,$itineraryId);$it=$data['itinerary'];
+-    if((string)($it['status']??'')!=='active' || (string)($it['version_status']??'')!=='active') throw new RuntimeException('Only an ACTIVE supplier package from an ACTIVE Rate Book can be imported.');
++    $sourceActive=(string)($it['status']??'')==='active'&&(string)($it['version_status']??'')==='active'&&(string)($it['contract_status']??'')==='active';
++    if((string)($it['supplier_status']??'')!=='active')throw new RuntimeException('Only packages from an active supplier can be imported.');
++    if($allowDraftSource){
++        if((string)($it['record_type']??'')!=='package'||!in_array((string)($it['contract_status']??''),['active','draft'],true)||!in_array((string)($it['status']??''),['active','review'],true)||!in_array((string)($it['version_status']??''),['active','review'],true))throw new RuntimeException('Only active or review supplier package content can be copied into a draft.');
++    }elseif(!$sourceActive)throw new RuntimeException('Only an ACTIVE supplier package from an ACTIVE Rate Book can be imported.');
+     $title=trim((string)$it['title']);if($title==='')$title=trim((string)$it['supplier_package_code']);if($title==='')$title='Imported Travel Package';
+     $code=tsPSONextPackageCode($pdo);$slug=tsPSOUniqueSlug($pdo,tsPSOSlug($title));
+     $currency=strtoupper(trim((string)$it['currency']))?:'INR';
+     $inclusions=implode("\n",tsPSOUniqueCustomerItems(array_merge([(string)($it['inclusions']??'')],$data['policy']['inclusions'])));
+     $exclusions=implode("\n",tsPSOUniqueCustomerItems(array_merge([(string)($it['exclusions']??'')],$data['policy']['exclusions'])));
+     $customerContent=tsPSOBuildCustomerContent($data);
+-    $shortDescription=trim((string)$customerContent['short_description']);
++    // The supplied Package Master schema stores this summary in VARCHAR(255).
++    // Keep the complete supplier narrative in description.
++    $shortDescription=tsPSOTrimCustomerText((string)$customerContent['short_description'],255);
+     $fullDescription=trim((string)$customerContent['description']);
+     $tourHighlights=trim((string)$customerContent['tour_highlights']);
+     $terms=tsPSOBuildPackageTerms($data);
+     $legacyIt=[];foreach($data['days'] as $d){$legacyIt[]='Day '.(int)$d['day_number'].': '.tsPSOCustomerText((string)$d['day_title'])."\n".tsPSOCustomerText((string)$d['day_description']);}
+     $packageType='holiday';
+     try{$q=$pdo->query("SELECT slug FROM package_types WHERE status='active' ORDER BY sort_order,id LIMIT 1");$candidate=trim((string)($q->fetchColumn()?:''));if($candidate!=='')$packageType=$candidate;}catch(Throwable $ignored){}
+-    $pdo->beginTransaction();
++    $ownsTransaction=!$pdo->inTransaction();
++    if($ownsTransaction)$pdo->beginTransaction();
+     try{
+         $sql="INSERT INTO packages(destination_id,title,slug,package_code,short_description,description,duration_days,duration_nights,child_age_min,child_age_max,child_price,regular_price,sale_price,currency,package_type,source_type,source_supplier_id,source_contract_version_id,source_itinerary_id,source_supplier_package_code,main_image,inclusions,exclusions,itinerary,terms,tour_highlights,featured,bestseller,status,views)
+               VALUES(?,?,?,?,?,?,?, ?,0,0,NULL,NULL,0,?,?,?,?,?,?,?,NULL,?,?,?,?,?,0,0,'draft',0)";
+         $pdo->prepare($sql)->execute([
+             (int)$it['destination_id']>0?(int)$it['destination_id']:null,$title,$slug,$code,
+@@ -631,15 +647,16 @@
+         if($autoCover!=='')$pdo->prepare("UPDATE packages SET main_image=? WHERE id=? AND (main_image IS NULL OR TRIM(main_image)='')")->execute([$autoCover,$packageId]);
+         if($data['days']){
+             $ins=$pdo->prepare("INSERT INTO package_itinerary_days(package_id,day_number,title,description,image,sort_order) VALUES(?,?,?,?,NULL,?)");
+             foreach($data['days'] as $d){$n=max(1,(int)$d['day_number']);$dayTitle=tsPSOCustomerText((string)$d['day_title']);$dayDescription=tsPSOCustomerText((string)$d['day_description']);$ins->execute([$packageId,$n,$dayTitle!==''?$dayTitle:null,$dayDescription!==''?$dayDescription:null,$n]);}
+         }
+-        tsPSOInsertPackageMasterReferencePrices($pdo,$packageId,(int)$it['contract_id']);
+-        tsPSOLink($pdo,$packageId,$itineraryId,'primary_dmc',true,$adminId,'Imported from supplier Rate Book.');
+-        $pdo->commit();
++        if($sourceActive)tsPSOInsertPackageMasterReferencePrices($pdo,$packageId,(int)$it['contract_id']);
++        $optionId=tsPSOLink($pdo,$packageId,$itineraryId,'primary_dmc',true,$adminId,'Imported from supplier Rate Book.');
++        if(!$sourceActive)$pdo->prepare('UPDATE package_supplier_options SET enabled_for_quotation=0 WHERE id=? AND package_id=?')->execute([$optionId,$packageId]);
++        if($ownsTransaction)$pdo->commit();
+         return $packageId;
+-    }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
++    }catch(Throwable $e){if($ownsTransaction&&$pdo->inTransaction())$pdo->rollBack();throw $e;}
+ }
+ 
+ /**
+  * V24.12 - Rebuild customer-facing content for an existing supplier-imported
+  * Package Master record from its linked supplier package. This intentionally
+@@ -665,11 +682,11 @@
+ 
+     $pdo->beginTransaction();
+     try{
+         $pdo->prepare("UPDATE packages SET short_description=?,description=?,duration_days=?,duration_nights=?,inclusions=?,exclusions=?,itinerary=?,terms=?,tour_highlights=? WHERE id=?")
+             ->execute([
+-                trim((string)$content['short_description'])?:null,
++                tsPSOTrimCustomerText((string)$content['short_description'],255)?:null,
+                 trim((string)$content['description'])?:null,
+                 (int)($it['duration_days']??$package['duration_days']??0),
+                 (int)($it['duration_nights']??$package['duration_nights']??0),
+                 $inclusions!==''?$inclusions:null,
+                 $exclusions!==''?$exclusions:null,

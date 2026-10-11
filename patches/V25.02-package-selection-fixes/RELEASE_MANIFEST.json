@@ -1,0 +1,323 @@
+{
+  "artifacts": {
+    "TRAVSCOPE_CURRENT_V25_02_PACKAGE_SELECTION_FIXES_FULL.zip": {
+      "bytes": 7895250,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_CURRENT_V25_02_PACKAGE_SELECTION_FIXES_FULL.zip",
+      "sha256": "4525d645603736bca315926b01ff48c256385f72802dcb0e052b70fd6fed6310"
+    },
+    "TRAVSCOPE_V25_02_PACKAGE_SELECTION_FIXES_PATCH.zip": {
+      "bytes": 440125,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_V25_02_PACKAGE_SELECTION_FIXES_PATCH.zip",
+      "sha256": "a3839f7335a296690ec7c09205f09b30bce57f157e5d2cff48594cf2af1e54d3"
+    }
+  },
+  "baseline_full_archive": {
+    "name": "TRAVSCOPE_CURRENT_V25_02_LOCATION_DELETE_CONTROLS_FULL.zip",
+    "sha256": "786f554201a186a1d914e74dc50e0213d47d96b22c8adb2a2f097b20f1e61d7e"
+  },
+  "baseline_targeted_patch": {
+    "name": "TRAVSCOPE_V25_02_LOCATION_DELETE_CONTROLS_PATCH.zip",
+    "sha256": "8f2b359a51ad119bb013df9258c632166924e0bd9cda243bae856350f54685a5"
+  },
+  "final_behavior_report": {
+    "failed": 0,
+    "fixture_cleanup": "passed",
+    "passed": 41,
+    "sha256": "296f8e219e59b748b838c4466ea4ca1d4785474d212f1aed45fcbd7592526070",
+    "source_unchanged_during_run": true
+  },
+  "focused_behavior_reports": {
+    "review-results.json": {
+      "checks": [
+        {
+          "name": "review.unknown_package_id_history_blocks_whole_batch",
+          "passed": true
+        },
+        {
+          "name": "review.forced_child_failure_rolls_back_prior_child_deletion",
+          "passed": true
+        },
+        {
+          "name": "review.metadata_denial_fails_closed",
+          "passed": true
+        },
+        {
+          "name": "review.metadata_fallback_still_protects_unknown_history",
+          "passed": true
+        },
+        {
+          "name": "review.current_dependency_read_sees_second_connection_commit",
+          "passed": true
+        },
+        {
+          "name": "review.cross_package_hotel_source_protects_surviving_service",
+          "passed": true
+        },
+        {
+          "name": "review.otp_destructive_classifier_and_array_hash",
+          "passed": true
+        },
+        {
+          "name": "review.approved_otp_replay_consumes_token_preserves_array",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "fixture_cleanup": "passed",
+      "passed": 8,
+      "sha256": "62e6d89b596d71a7ef77a30805dd4a09df8d6525467165495a341d3a8f36fb6e",
+      "source_unchanged_during_run": true
+    },
+    "supplier-focused-results.json": {
+      "checks": [
+        {
+          "name": "legacy_three_argument_import_rejects_review_without_writes",
+          "passed": true
+        },
+        {
+          "name": "explicit_review_import_preserves_source_disables_quote_and_invents_no_rates",
+          "passed": true
+        },
+        {
+          "name": "unicode_short_description_fits_schema_and_full_description_survives",
+          "passed": true
+        },
+        {
+          "name": "caller_transaction_remains_owned_and_rolls_back_all_import_children",
+          "passed": true
+        },
+        {
+          "name": "failed_child_write_preserves_caller_transaction_and_owned_call_rolls_back",
+          "passed": true
+        },
+        {
+          "name": "active_without_rates_imports_draft_without_fabricated_prices",
+          "passed": true
+        },
+        {
+          "name": "active_exact_pax_reference_prices_copy_under_strict_sql_mode",
+          "passed": true
+        },
+        {
+          "name": "reference_price_rebuild_excludes_draft_contract_review_itinerary_inactive_supplier",
+          "passed": true
+        },
+        {
+          "name": "reference_prices_exclude_non_exact_pax_and_zero_rates",
+          "passed": true
+        },
+        {
+          "name": "candidate_prefers_active_content_over_higher_priority_review",
+          "passed": true
+        },
+        {
+          "name": "bulk_validates_supplier_scope_and_rejects_malformed_selection",
+          "passed": true
+        },
+        {
+          "name": "repeated_bulk_import_and_inactive_existing_link_do_not_duplicate",
+          "passed": true
+        },
+        {
+          "name": "two_bulk_connections_wait_for_contract_then_create_once",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "fixture_cleanup": "passed",
+      "passed": 13,
+      "sha256": "6903f5a97a3fee85009bdb943053b8346d6a970848d7c5148eb3c09674963bfc",
+      "source_unchanged_during_run": true
+    }
+  },
+  "original_full_archive": {
+    "name": "TRAVSCOPE_CURRENT_V25_02_EXPANDABLE_CREDENTIAL_LIBRARY_FULL.zip",
+    "sha256": "871dc808e5af6714d3ff224f40be061e25aa94b603c481c2129b2e65ca1df924"
+  },
+  "patch_directories": {
+    "assets/": "0755"
+  },
+  "preserved_previous_php_sha256": {
+    "admin-crm.php": "974a3ef5cd4c503e547b7c1243877fed77cd27be6f468182d747af19c0564254",
+    "admin-destination-locations.php": "d83fb40f5c02ba8f8b27ea67676a5fa88d3dbae652fca3976e103abc90ad26ed",
+    "admin-destinations.php": "d7fbf45ef1ba4cdc2e4d3529331b1ee57aebbbf3b80ff490c682b79af704e00a",
+    "credential-display.php": "0bb52e568fb0e117809d7658c50cc905a0a0c8c7315cd34806a8acbf752fafec",
+    "location-master-functions.php": "de2d8863092b809264f83238821c4e699010695263ba099a3e3ba1d8cd0bf956"
+  },
+  "preserved_prior_final_source_sha256": {
+    "admin-destination-locations.php": "d83fb40f5c02ba8f8b27ea67676a5fa88d3dbae652fca3976e103abc90ad26ed",
+    "admin-destinations.php": "d7fbf45ef1ba4cdc2e4d3529331b1ee57aebbbf3b80ff490c682b79af704e00a",
+    "location-master-functions.php": "de2d8863092b809264f83238821c4e699010695263ba099a3e3ba1d8cd0bf956"
+  },
+  "product_files": {
+    "admin-crm.php": {
+      "bytes": 748433,
+      "mode": "0644",
+      "sha256": "974a3ef5cd4c503e547b7c1243877fed77cd27be6f468182d747af19c0564254"
+    },
+    "admin-destination-locations.php": {
+      "bytes": 36912,
+      "mode": "0644",
+      "sha256": "d83fb40f5c02ba8f8b27ea67676a5fa88d3dbae652fca3976e103abc90ad26ed"
+    },
+    "admin-destinations.php": {
+      "bytes": 300342,
+      "mode": "0644",
+      "sha256": "d7fbf45ef1ba4cdc2e4d3529331b1ee57aebbbf3b80ff490c682b79af704e00a"
+    },
+    "admin-packages.php": {
+      "bytes": 525925,
+      "mode": "0644",
+      "sha256": "7b18786056e4ac3903ee2f1bfdadea4c912bde8304be9b81b7667ca8877197f3"
+    },
+    "admin-supplier-packages.php": {
+      "bytes": 57688,
+      "mode": "0644",
+      "sha256": "da08988d011e9e2b0675314cc54bdd0a59f783fbc1e09205c803474be7d37cd2"
+    },
+    "assets/credentials-v2501.css": {
+      "bytes": 2891,
+      "mode": "0644",
+      "sha256": "b66c6b90aa1068fe618e8349df74fe49725c4a46ab65c98dbd6a9acbe0baa501"
+    },
+    "assets/crm-itinerary-studio-v2497.css": {
+      "bytes": 10856,
+      "mode": "0644",
+      "sha256": "f3d80f3ec90e750e562f63083dbd618c12cd09a48b7694e37bce98ac6ab1958c"
+    },
+    "assets/crm-itinerary-studio-v2497.js": {
+      "bytes": 21369,
+      "mode": "0644",
+      "sha256": "45a6ec83ca26b39cee5c7496dc47aa7ab8783c9cab25f36ac23ab10065b78ff5"
+    },
+    "assets/crm-laptop-workspaces-v2498.css": {
+      "bytes": 9528,
+      "mode": "0644",
+      "sha256": "ca4018c7de581e6556b2e488c90209404a52d658c4cd7ffb2bdf55223a2e3618"
+    },
+    "assets/crm-laptop-workspaces-v2498.js": {
+      "bytes": 8272,
+      "mode": "0644",
+      "sha256": "ff6647ff2d5f3616a525ab56000cf000cc622d48eedadfa478d50faa8ec5fed3"
+    },
+    "assets/travscope-experience-v2500.css": {
+      "bytes": 4582,
+      "mode": "0644",
+      "sha256": "404f332da949c7b8e781c1b5107dbd8db7a4b402c80705697628e4cf6a7ca94e"
+    },
+    "assets/travscope-experience-v2500.js": {
+      "bytes": 7662,
+      "mode": "0644",
+      "sha256": "8842028f7dd185eb6ffd4a5035e2cfbd918f873cf4878a5575d0741ad1a8fc91"
+    },
+    "assets/travscope-responsive-admin-v2499.css": {
+      "bytes": 8534,
+      "mode": "0644",
+      "sha256": "d2e33801765865aab94c389774a610d08c583f841a4a33a11a1dfde27e5a8d7b"
+    },
+    "assets/travscope-responsive-core-v2499.css": {
+      "bytes": 3441,
+      "mode": "0644",
+      "sha256": "bcf535b14660047ce93ae10643f1b9be9d16b5f08d7cc8392e0d941507dcb330"
+    },
+    "assets/travscope-responsive-public-v2499.css": {
+      "bytes": 2824,
+      "mode": "0644",
+      "sha256": "a278cebee0f2a32abe26cdf6bfad0d654c3b2ee6794d2d89dc767005ef53d84b"
+    },
+    "assets/travscope-responsive-v2499.js": {
+      "bytes": 1549,
+      "mode": "0644",
+      "sha256": "e795c9c09cb26c3420d1a28e4b32da8d0eb6304f3d3b38187ede639221a54d2f"
+    },
+    "credential-display.php": {
+      "bytes": 7239,
+      "mode": "0644",
+      "sha256": "0bb52e568fb0e117809d7658c50cc905a0a0c8c7315cd34806a8acbf752fafec"
+    },
+    "location-master-functions.php": {
+      "bytes": 38014,
+      "mode": "0644",
+      "sha256": "de2d8863092b809264f83238821c4e699010695263ba099a3e3ba1d8cd0bf956"
+    },
+    "package-delete-functions.php": {
+      "bytes": 7456,
+      "mode": "0644",
+      "sha256": "afabdc6af94afb2962455b1ad194742fa49b54677d55863d0a333a7f6d10c555"
+    },
+    "package-supplier-functions.php": {
+      "bytes": 50087,
+      "mode": "0644",
+      "sha256": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+    },
+    "site-brand-sync.js": {
+      "bytes": 10462,
+      "mode": "0644",
+      "sha256": "c91f2208dffff446bd2c17531225497489bdcea02ab731d9fdcd83f26be64d91"
+    }
+  },
+  "release": "Package Selection Fixes",
+  "reviewed_source_sha256": {
+    "admin-packages.php": "7b18786056e4ac3903ee2f1bfdadea4c912bde8304be9b81b7667ca8877197f3",
+    "admin-supplier-packages.php": "da08988d011e9e2b0675314cc54bdd0a59f783fbc1e09205c803474be7d37cd2",
+    "package-delete-functions.php": "afabdc6af94afb2962455b1ad194742fa49b54677d55863d0a333a7f6d10c555",
+    "package-supplier-functions.php": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+  },
+  "text_patches": {
+    "TRAVSCOPE_V25_02_PACKAGE_SELECTION_FIXES_FROM_LOCATION_DELETE.patch": {
+      "changed_files": [
+        "admin-packages.php",
+        "package-delete-functions.php",
+        "admin-supplier-packages.php",
+        "package-supplier-functions.php"
+      ],
+      "sha256": "0d06a2094e123ca85987bb8c6c093610cc7114512de2e07f035390f999451865"
+    },
+    "TRAVSCOPE_V25_02_PACKAGE_SELECTION_FIXES_FROM_ORIGINAL.patch": {
+      "changed_files": [
+        "admin-destinations.php",
+        "admin-destination-locations.php",
+        "location-master-functions.php",
+        "admin-crm.php",
+        "credential-display.php",
+        "admin-packages.php",
+        "package-delete-functions.php",
+        "admin-supplier-packages.php",
+        "package-supplier-functions.php"
+      ],
+      "sha256": "8b44c261580a0dbc82ced1dd4d6c248f6df58c8dc286c233cdef7825966d9d54"
+    }
+  },
+  "validation": {
+    "changed_payloads_from_location_delete": [
+      "admin-packages.php",
+      "admin-supplier-packages.php",
+      "package-supplier-functions.php",
+      "package-delete-functions.php"
+    ],
+    "changed_payloads_from_original": [
+      "admin-crm.php",
+      "admin-destination-locations.php",
+      "admin-destinations.php",
+      "admin-packages.php",
+      "admin-supplier-packages.php",
+      "credential-display.php",
+      "location-master-functions.php",
+      "package-supplier-functions.php",
+      "package-delete-functions.php"
+    ],
+    "final_behavior_failed": 0,
+    "final_behavior_passed": 41,
+    "focused_behavior_checks_passed": 21,
+    "focused_behavior_report_count": 2,
+    "full_entry_count": 220,
+    "php_syntax": "passed for nine reconstructed original-baseline files and four location-delete-baseline files",
+    "preserved_previous_asset_file_count": 12,
+    "preserved_previous_php_file_count": 5,
+    "targeted_product_file_count": 21,
+    "text_patches_apply_and_reconstruct": "passed for both baselines, including /dev/null new helper",
+    "unchanged_location_delete_payload_and_metadata_count": 216,
+    "zip_crc": "passed"
+  },
+  "version": "V25.02"
+}
