@@ -1,0 +1,687 @@
+{
+  "artifacts": {
+    "TRAVSCOPE_CURRENT_V25_11_SUPPLIER_BULK_FIX_FULL.zip": {
+      "bytes": 23976722,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_CURRENT_V25_11_SUPPLIER_BULK_FIX_FULL.zip",
+      "sha256": "620977fe1589d7b091fb02c28ed19816044300d2e02b474d5f5f45f2e2de1777"
+    },
+    "TRAVSCOPE_V25_11_SUPPLIER_BULK_FIX_PATCH.zip": {
+      "bytes": 54313,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_V25_11_SUPPLIER_BULK_FIX_PATCH.zip",
+      "sha256": "bf3a485df3e81645c0e82aa4d20e1a3421222df9cc8d42e6656ce6f8f5d80ec8"
+    }
+  },
+  "embedded_current_archive": {
+    "bytes": 7925962,
+    "entry_count": 231,
+    "name": "TRAVSCOPE_CURRENT_V25_11_CRM_PIPELINE_DELETE_ALL_FULL.zip",
+    "sha256": "6cfee76c1fa219aca66453adf111ca532041974c7d0b26b021aefbb7e733b75f"
+  },
+  "final_behavior_report": {
+    "checks": [
+      {
+        "name": "http.actual_uploaded_six_draft_bulk_import",
+        "passed": true
+      },
+      {
+        "name": "http.repeated_import_is_idempotent",
+        "passed": true
+      },
+      {
+        "name": "http.actual_uploaded_bulk_delete",
+        "passed": true
+      },
+      {
+        "name": "http.supplier_delete_preserves_linked_master",
+        "passed": true
+      },
+      {
+        "name": "http.hidden_action_fallback_preserves_selected_ids",
+        "passed": true
+      },
+      {
+        "name": "http.hidden_delete_requires_confirmation",
+        "passed": true
+      },
+      {
+        "name": "http.both_actions_reject_invalid_csrf",
+        "passed": true
+      },
+      {
+        "name": "http.anonymous_bulk_actions_rejected",
+        "passed": true
+      },
+      {
+        "name": "http.enabled_delete_otp_replays_exact_hidden_selection_once",
+        "passed": true
+      },
+      {
+        "name": "http.enabled_delete_otp_rejects_altered_selection",
+        "passed": true
+      },
+      {
+        "name": "browser.add_button_1875",
+        "passed": true
+      },
+      {
+        "name": "browser.delete_button_1875",
+        "passed": true
+      },
+      {
+        "name": "browser.add_works_with_native_popup_suppressed_1875",
+        "passed": true
+      },
+      {
+        "name": "browser.delete_works_with_native_popup_suppressed_1875",
+        "passed": true
+      },
+      {
+        "name": "browser.cancel_and_escape_preserve_data_and_restore_focus_1875",
+        "passed": true
+      },
+      {
+        "name": "browser.confirmation_accessible_and_fits_1875",
+        "passed": true
+      },
+      {
+        "name": "browser.add_button_390",
+        "passed": true
+      },
+      {
+        "name": "browser.delete_button_390",
+        "passed": true
+      },
+      {
+        "name": "browser.add_works_with_native_popup_suppressed_390",
+        "passed": true
+      },
+      {
+        "name": "browser.delete_works_with_native_popup_suppressed_390",
+        "passed": true
+      },
+      {
+        "name": "browser.cancel_and_escape_preserve_data_and_restore_focus_390",
+        "passed": true
+      },
+      {
+        "name": "browser.confirmation_accessible_and_fits_390",
+        "passed": true
+      }
+    ],
+    "cleanup": {
+      "database_dropped": true,
+      "prelude_removed": true,
+      "sessions_removed": true
+    },
+    "cloned_tables": 152,
+    "failed": 0,
+    "passed": 22,
+    "sha256": "1e3cc9945809de39aef39c1ed104cef24b64ac878915b3dccbd417200cad1cc5",
+    "source_rows_copied": 0,
+    "source_sha256": {
+      "admin-supplier-packages.php": "7ace12be0b0b92d640e7a230d510c1a8ec756ef25029e08a85850e775fd34c0f",
+      "package-supplier-functions.php": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+    },
+    "source_unchanged_during_run": true,
+    "verification_type": "synthetic_fixture_behavior"
+  },
+  "focused_behavior_reports": {
+    "supplier-focused-current.json": {
+      "checks": [
+        {
+          "name": "legacy_three_argument_import_rejects_review_without_writes",
+          "passed": true
+        },
+        {
+          "name": "explicit_review_import_preserves_source_disables_quote_and_invents_no_rates",
+          "passed": true
+        },
+        {
+          "name": "unicode_short_description_fits_schema_and_full_description_survives",
+          "passed": true
+        },
+        {
+          "name": "caller_transaction_remains_owned_and_rolls_back_all_import_children",
+          "passed": true
+        },
+        {
+          "name": "failed_child_write_preserves_caller_transaction_and_owned_call_rolls_back",
+          "passed": true
+        },
+        {
+          "name": "active_without_rates_imports_draft_without_fabricated_prices",
+          "passed": true
+        },
+        {
+          "name": "active_exact_pax_reference_prices_copy_under_strict_sql_mode",
+          "passed": true
+        },
+        {
+          "name": "reference_price_rebuild_excludes_draft_contract_review_itinerary_inactive_supplier",
+          "passed": true
+        },
+        {
+          "name": "reference_prices_exclude_non_exact_pax_and_zero_rates",
+          "passed": true
+        },
+        {
+          "name": "candidate_prefers_active_content_over_higher_priority_review",
+          "passed": true
+        },
+        {
+          "name": "bulk_validates_supplier_scope_and_rejects_malformed_selection",
+          "passed": true
+        },
+        {
+          "name": "repeated_bulk_import_and_inactive_existing_link_do_not_duplicate",
+          "passed": true
+        },
+        {
+          "name": "two_bulk_connections_wait_for_contract_then_create_once",
+          "passed": true
+        }
+      ],
+      "cleanup": {
+        "database_dropped": true,
+        "prelude_removed": true,
+        "sessions_removed": true
+      },
+      "cloned_tables": 152,
+      "failed": 0,
+      "passed": 13,
+      "sha256": "aeeb913423533c861875f1a746dddee4c954b89b35e58289b2be80fe1a08109a",
+      "source_rows_copied": 0,
+      "source_sha256": {
+        "admin-supplier-packages.php": "7ace12be0b0b92d640e7a230d510c1a8ec756ef25029e08a85850e775fd34c0f",
+        "package-supplier-functions.php": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+      },
+      "source_unchanged_during_run": true,
+      "verification_type": "synthetic_fixture_behavior"
+    },
+    "supplier-security-current.json": {
+      "checks": [
+        {
+          "name": "php_syntax_admin-supplier-packages.php",
+          "passed": true
+        },
+        {
+          "name": "php_syntax_package-supplier-functions.php",
+          "passed": true
+        },
+        {
+          "name": "actual_otp_classifier_hidden_delete",
+          "passed": true
+        },
+        {
+          "name": "actual_otp_classifier_legacy_selected_delete",
+          "passed": true
+        },
+        {
+          "name": "actual_otp_classifier_legacy_single_delete",
+          "passed": true
+        },
+        {
+          "name": "actual_otp_classifier_draft_add",
+          "passed": true
+        },
+        {
+          "name": "actual_otp_classifier_blank_hidden_action",
+          "passed": true
+        },
+        {
+          "name": "otp_hash_binds_selected_ids_and_ignores_only_approval_token",
+          "passed": true
+        },
+        {
+          "name": "preserved_uploaded_admin-crm.php",
+          "passed": true
+        },
+        {
+          "name": "preserved_uploaded_admin-packages.php",
+          "passed": true
+        },
+        {
+          "name": "preserved_uploaded_config.php",
+          "passed": true
+        },
+        {
+          "name": "preserved_uploaded_admin-delete-otp-functions.php",
+          "passed": true
+        },
+        {
+          "name": "preserved_uploaded_admin-delete-otp.php",
+          "passed": true
+        },
+        {
+          "name": "active_admin_and_csrf_required",
+          "passed": true
+        },
+        {
+          "name": "whitelisted_hidden_action_and_confirmed_hidden_delete",
+          "passed": true
+        },
+        {
+          "name": "named_submitters_and_selection_preserved",
+          "passed": true
+        },
+        {
+          "name": "draft_import_status_and_no_fabricated_prices",
+          "passed": true
+        },
+        {
+          "name": "active_reference_price_source_constraints",
+          "passed": true
+        },
+        {
+          "name": "bulk_scope_dedup_and_transaction_ownership",
+          "passed": true
+        },
+        {
+          "name": "deletion_history_and_master_preservation_unchanged",
+          "passed": true
+        },
+        {
+          "name": "popup_independent_accessible_confirmation",
+          "passed": true
+        },
+        {
+          "name": "cancel_does_not_submit_or_retain_confirmation",
+          "passed": true
+        },
+        {
+          "name": "progress_and_result_near_buttons",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "passed": 23,
+      "sha256": "b954bafef07e05d19d785e687a731d5aa616c26782075fcde270128c6e3f4e4d",
+      "source_sha256": {
+        "admin-supplier-packages.php": "7ace12be0b0b92d640e7a230d510c1a8ec756ef25029e08a85850e775fd34c0f",
+        "package-supplier-functions.php": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+      },
+      "source_unchanged_during_run": true,
+      "verification_type": "read_only_security_review"
+    }
+  },
+  "full_added_root_files": {
+    "assets/credentials-manager-v2502.js": {
+      "bytes": 3203,
+      "mode": "0644",
+      "sha256": "4f91b6a90e4e0883cbcd6210958e98476d0582c193948fde3392366f3b062905"
+    },
+    "assets/credentials-v2501.css": {
+      "bytes": 2891,
+      "mode": "0644",
+      "sha256": "b66c6b90aa1068fe618e8349df74fe49725c4a46ab65c98dbd6a9acbe0baa501"
+    },
+    "assets/crm-itinerary-studio-v2497.css": {
+      "bytes": 10856,
+      "mode": "0644",
+      "sha256": "f3d80f3ec90e750e562f63083dbd618c12cd09a48b7694e37bce98ac6ab1958c"
+    },
+    "assets/crm-itinerary-studio-v2497.js": {
+      "bytes": 21369,
+      "mode": "0644",
+      "sha256": "45a6ec83ca26b39cee5c7496dc47aa7ab8783c9cab25f36ac23ab10065b78ff5"
+    },
+    "assets/crm-laptop-workspaces-v2498.css": {
+      "bytes": 9528,
+      "mode": "0644",
+      "sha256": "ca4018c7de581e6556b2e488c90209404a52d658c4cd7ffb2bdf55223a2e3618"
+    },
+    "assets/crm-laptop-workspaces-v2498.js": {
+      "bytes": 8272,
+      "mode": "0644",
+      "sha256": "ff6647ff2d5f3616a525ab56000cf000cc622d48eedadfa478d50faa8ec5fed3"
+    },
+    "assets/customer-version-removal-v2510.js": {
+      "bytes": 4266,
+      "mode": "0644",
+      "sha256": "30a8977cf9aa48c7dcef46ba01a6a0f22c451b288d8c9438e6a07a3def857527"
+    },
+    "assets/travscope-dashboard-hero.svg": {
+      "bytes": 1912,
+      "mode": "0644",
+      "sha256": "f1a88da5a483db2407586edb153586dc15df0ecbf5e3e32a457aced3bede61dd"
+    },
+    "assets/travscope-document-logo-wide.jpg": {
+      "bytes": 66126,
+      "mode": "0644",
+      "sha256": "f7fbd0885e3ffb74dd5090c81b9905db94aa8677c519fa7891d256445c5060f7"
+    },
+    "assets/travscope-document-logo-wide.png": {
+      "bytes": 70710,
+      "mode": "0644",
+      "sha256": "401a3c24245200736c5b6652738a2b21ff0b7ad4580e013e34dd3c1306444736"
+    },
+    "assets/travscope-experience-v2500.css": {
+      "bytes": 4582,
+      "mode": "0644",
+      "sha256": "404f332da949c7b8e781c1b5107dbd8db7a4b402c80705697628e4cf6a7ca94e"
+    },
+    "assets/travscope-experience-v2500.js": {
+      "bytes": 7662,
+      "mode": "0644",
+      "sha256": "8842028f7dd185eb6ffd4a5035e2cfbd918f873cf4878a5575d0741ad1a8fc91"
+    },
+    "assets/travscope-responsive-admin-v2499.css": {
+      "bytes": 8534,
+      "mode": "0644",
+      "sha256": "d2e33801765865aab94c389774a610d08c583f841a4a33a11a1dfde27e5a8d7b"
+    },
+    "assets/travscope-responsive-core-v2499.css": {
+      "bytes": 3441,
+      "mode": "0644",
+      "sha256": "bcf535b14660047ce93ae10643f1b9be9d16b5f08d7cc8392e0d941507dcb330"
+    },
+    "assets/travscope-responsive-public-v2499.css": {
+      "bytes": 2824,
+      "mode": "0644",
+      "sha256": "a278cebee0f2a32abe26cdf6bfad0d654c3b2ee6794d2d89dc767005ef53d84b"
+    },
+    "assets/travscope-responsive-v2499.js": {
+      "bytes": 1549,
+      "mode": "0644",
+      "sha256": "e795c9c09cb26c3420d1a28e4b32da8d0eb6304f3d3b38187ede639221a54d2f"
+    },
+    "templates/TRAVSCOPE_Unified_Supplier_Package_Hotel_Import_Template.xlsx": {
+      "bytes": 18473,
+      "mode": "0644",
+      "sha256": "52bdfac6793b814ee673dde59195785f1799f79f43c7cb65df496e70d6a8e8b6"
+    }
+  },
+  "preserved_current_source_sha256": {
+    "admin-crm.php": "f5b79b526d21d4d2fba9812b8da57d0125821f7a6601a7f3f9c46626fda39a2a",
+    "admin-packages.php": "ab544e300c96a71ad9a949e9a5468698abcadd1016682f10cdd8d269c96591a7"
+  },
+  "preserved_embedded_archive_sha256": {
+    "TRAVSCOPE_CURRENT_V25_11_CRM_PIPELINE_DELETE_ALL_FULL.zip": "6cfee76c1fa219aca66453adf111ca532041974c7d0b26b021aefbb7e733b75f",
+    "assets_2026-09-30_17:12:26.zip": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a"
+  },
+  "preserved_uploaded_payload_sha256": {
+    ".htaccess": "f4976365491261ec8524be37f593549d641213439078226479102189d3932ea4",
+    "QA_V25_00.md": "24311797bc635e01bf80f7072b6c07bd10087f9834cad68a1296463b84a595e9",
+    "QA_V25_08.md": "d1e81c21a7760acc61d19a1d3c81b892cff34e4c74a7b937e589b5845e7e3862",
+    "README_V24_10_INSTANT_DELETE.txt": "b7398c7aac53fe38ee6e5e2a85ed6f0ddd86587f1bfa1e58c68bf0403cf72e0c",
+    "README_V24_11_ADMIN_DELETE_OTP.txt": "80c4905238fba058eab1b9605f27bdd43ddaadefd9a427854b43a81117088b6e",
+    "README_V24_12_DELETE_OTP_TOGGLE.txt": "4d8c8909cc6fb5dff3f8705ebcb4bdf669466db5fa5f99a1346b0843c0bad900",
+    "README_V24_1_CLEAR_ENQUIRY_QUOTATION_WORKSPACE.txt": "354c070f65c6c7f2a9e86fffb3b881f95b3c27e89b24642154c54a3fbee5413c",
+    "README_V24_8.txt": "331e0b0ee7b2df0dcfe8f7f8eb9cba2b665774ab7fff1677e0d9fbd7829a2bda",
+    "README_V24_86_SUPPLIER_PAYABLES.txt": "2c173001f4bb3abf3203e341aae646e5e9368e42c21f4584074cd8a435d2f877",
+    "README_V24_89_INTELLECTUAL_CONTENT_STANDARD.txt": "b7cad0132153ff531c0a9d2d18e8802961741e6425a2ea172b47e9f2f8723120",
+    "README_V24_90_BULK_PACKAGE_MASTER.txt": "2c73cba66dd4a680d9419f55b1bfb2446574ed6771139d46b206e08490f92160",
+    "README_V24_91_UNIFIED_SUPPLIER_IMPORT.txt": "2a2168f34649acafd33dfd99ed9c0165de234500f8d8cfd80064ba85748ba687",
+    "README_V24_92_PROFESSIONAL_DAYWISE_ITINERARY.txt": "f3ef7287f98897cf9432b1a6499b144c7c4257a2bb2dc43e361be4c4e03c2d68",
+    "README_V24_93_INTERNATIONAL_ITINERARY_SPACING.txt": "049e50ae7d9ebe35806ee21a5bff84bd32c3b506f6eee9343997521346e55588",
+    "README_V24_94_EDITORIAL_ITINERARY_QUOTATION_PDF.txt": "7f3a73a21be8d609792bf7536c89e4e6913bf387fa32337f507c19b51750b501",
+    "README_V24_95_PREMIUM_CONTENT_PRESENTATION.txt": "38c024e65c9be7811e9bd0a4ff74781f691d685f238f694077e65278465440d8",
+    "README_V24_96_INTERNATIONAL_QUOTATION_PRINT_GALLERY.txt": "f4e65950bee31dc2285b37012e237c4c142560032a90c42bd41872472b3dd750",
+    "README_V24_97_ITINERARY_STUDIO.txt": "78d140ac1163594c7e070fb056bb9479f279f4a5465be7b70927af1f4e9db855",
+    "README_V24_98_LAPTOP_FIRST_CRM_WORKSPACES.txt": "4e84b5059640428b496298a394060edce1b2763c07d2b8f57c0a532a998206e4",
+    "README_V24_99_RESPONSIVE_TYPOGRAPHY.txt": "806cbfbdffd705fb548f9da4d535b849f07c2cc1d2276a53bdd1811338894114",
+    "README_V25_00_EXPERIENCE_PRODUCTIVITY.txt": "b90da6e6a15943aca4daf3b816858987c8354af91b76bb428022f91ae4501b1d",
+    "README_V25_01_CREDENTIAL_LOGOS.md": "13f139a2fd4826cd08a7af39dd7b3dc73d50b4441e0af6d7227c4802a5440b1b",
+    "README_V25_02_EXPANDABLE_CREDENTIAL_LIBRARY.md": "7685de69adf48e4986435256b59686d7f945917dce33cb845388d3f845001e38",
+    "README_V25_06_BOOKING_DELETE.md": "2e245c5882372830aac5ea6d993da59673c187ba156fe5ce9c72927aabf095ff",
+    "README_V25_07_BOOKING_DELETE_FIX.txt": "7318bf9586a738e3b07d64cb4836c3767fd2204806108f17145629e716acecd8",
+    "README_V25_08_BOOKING_REMOVE_ALL_STATUSES.md": "32f292353a8d7b1264ce9d42da532f6d6ed7f7b450a8c490b0699249a76dc80e",
+    "README_V25_09_ENQUIRY_TRIP_ARCHIVE.md": "5a03c8a2b3b4f868988df293b154c2b4ea6b9ff15c7316771ff6abf77b702c50",
+    "README_V25_10_CUSTOMER_PACKAGE_QUOTATION_DELETE.md": "d37b452a10f02da56c7a6d3794800271fc84cbb336380a7ddeed95e032965f8b",
+    "README_V25_11_PIPELINE_DELETE.md": "a11ca8396c6f39c6be7e75f174ac7149df5ad88fd17a508966892b19c8933cc4",
+    "TRAVSCOPE_CURRENT_V25_11_CRM_PIPELINE_DELETE_ALL_FULL.zip": "6cfee76c1fa219aca66453adf111ca532041974c7d0b26b021aefbb7e733b75f",
+    "access-control-functions.php": "11fb68c0ca70cc42d02124f9e90fbb2035faff473b5e3456ee5003675c15d5b5",
+    "admin-access-control.php": "5204f5b551dabd1a19e631ecddef11fc08044d4afab900a83e00c7aff4dcb5a9",
+    "admin-blogs.php": "c8c877adcb93c89e917e68297457b56946f09f66dc46d9f0af29b8486c21529e",
+    "admin-booking-communications.php": "a6395cfaf47806c6a7da7370c56a4ab56fe727f6a37766ef5ba7c20139c750fd",
+    "admin-booking-details.php": "2c67278180b0a6a4d4f2aabc248182e10ff3b3de0ebc06b3b40e1236c0d9eeeb",
+    "admin-booking-documents.php": "4492fa871af08b7e435e73e093e642a928f16707ac00656fa86d712a8ee70314",
+    "admin-bookings.php": "0120305c77300dec83d6dcc332f31e6361e20a962e7b4000ac424c1f47954064",
+    "admin-business-analytics.php": "2bd1246c4ba18de4a40eed0c6c2ca4873458a736a730b6f909df77c6f4abaefe",
+    "admin-cancellations.php": "249d8ea6b6ca0884d922b37cd807d71f781cbf9da2205c1d69ecfb99d8dc267c",
+    "admin-communication-attachment.php": "1edf19eeef933e280650191353ed041eccbb444b54609fc9826de8311488931a",
+    "admin-communications.php": "ca8757a9289d2c4dd05da00421e03116a605c723ee7a3a544aa631fc14eaa372",
+    "admin-coupons.php": "b3492dc0234cabc1f48d712d4acd2b456a8d07d60ed2e9606721f921e3572aa0",
+    "admin-crm-archive.php": "c9606902f87201883e45b7f5c03b29f4fc8cf538fc31823b6d0394e8c29520d4",
+    "admin-crm-pipeline-actions.php": "455a7d9b7c71c1a8f699ab3f79fa81688b614df61cd7e0986215f13fe0f60953",
+    "admin-crm.php": "f5b79b526d21d4d2fba9812b8da57d0125821f7a6601a7f3f9c46626fda39a2a",
+    "admin-crm.php.bak": "66a53c2b6481c1142dc951c952518d9e1dc39e4961b05bb55fc74f4b79e0cf2f",
+    "admin-customer-geo.php": "86c4d47ee935a585587a37788194d4bfff5f6879b239c6ec6eb22043ad4c0b4b",
+    "admin-customer-packages.php": "a393469528a40002e4178a6d8d4f0a319d9dce7f1ff31db2e76344eb06d96266",
+    "admin-customer-quotations.php": "b81bde7d8dbede2eb9f8845e8f1d8e5edc2c460a3a3a28f314cd813bc58b9e59",
+    "admin-customers.php": "1fc035b893459f6ef21c155905e39c61524418af710c4d3d65cebc40355bfeca",
+    "admin-dashboard.php": "a34719a6948f14e1c3c8ac565413ce1a5fa0a3ec80834c0e4cfbe13dfbb05401",
+    "admin-data-import.php": "92a87c9545c2d332d96d5fa0b207c83c697532edc16defc49d40923aae612962",
+    "admin-delete-otp-functions.php": "266b3305de327b03dcd477d767c837558efb6ffede4eb84b3c83638d8229aaaf",
+    "admin-delete-otp.php": "fb554e28ff2ad9a7b68fef01c598103004683642d6a3615d1f0bf84cddf807e8",
+    "admin-deployment-safety.php": "7fb08924467a92535c1e730078b364480ca54c86c561f4a6c7f04f87efc36d3a",
+    "admin-destination-locations.php": "d83fb40f5c02ba8f8b27ea67676a5fa88d3dbae652fca3976e103abc90ad26ed",
+    "admin-destinations.php": "d7fbf45ef1ba4cdc2e4d3529331b1ee57aebbbf3b80ff490c682b79af704e00a",
+    "admin-enquiries.php": "4a2b1d69fe850994453bb7542b3023cccd308d9f4ec4eedcd59c1cbf73466a28",
+    "admin-enquiry-details.php": "77bafefec29d4e2749a049255dde1f5f7d4c97de7b1d621ec4d3599c758f3b15",
+    "admin-finance.php": "9efd990fec2d4c4f272292e03df7c8077bcbe7caa790ce6b332ce75f8b34078e",
+    "admin-hotels.php": "1674031bb7123e4997c0ea531ca6acd22d2f5b030226895d6ddb6f96437f07b5",
+    "admin-master-data.php": "53d98c9c45d53868735f68fb3cec715ae714de268d956c8e6665ee879cfc70e9",
+    "admin-mis-reports.php": "b7c972c4270725d43459c6d1525065482841a0b9f42c37b2d349639eae5ce38d",
+    "admin-notifications.php": "0911568ecdfe0bc6dec42d2c033ab5c6c8d8ce980d9d7e202ef9294d40d6dada",
+    "admin-operational-settings.php": "6b59da823d911c0f037abed711347a84739126a8fc6c71f7594cfe8c0f7a87c3",
+    "admin-package-images.php": "a7818eef674eefbfddc3dd4c63ac1eb3a8bd2bdb040704a1422d6081c86a287d",
+    "admin-package-import-supplier.php": "0a7438571e7d123dc348fe3ba05ea8929aec7a0170156242e13bd368f02eb406",
+    "admin-package-occupancy.php": "fa3e052eaf4711171603070af0e075613df036dfb982402102cdbb62380a0f21",
+    "admin-package-services.php": "71e275debde455bdd219367c0920c1ad6ae35c93ddfd711cd9537df315fe5a07",
+    "admin-package-suppliers.php": "0cfc1d78a4e06700e3479cda6e08557cbe2b0fa621e4e3df30f76d2b4c98f737",
+    "admin-packages.php": "ab544e300c96a71ad9a949e9a5468698abcadd1016682f10cdd8d269c96591a7",
+    "admin-pages.php": "23dfaac4d92e16fac10cd2ba0773c5eab0a9fc36d0859af8fec165a51f1c8a8f",
+    "admin-payment-details.php": "076f0b4632a375a3c38e99bb110767aadb0b7573cf4663a3cd4a178287c19ceb",
+    "admin-payments.php": "5d292d9df04c0504c345c5c261c99afd35ae6076cf9dc56515adba73a9c426b1",
+    "admin-reviews.php": "6b7a2538e7fc134835a7b599c89e50d81fe5333094f47f00162533fbbf6e418b",
+    "admin-settings.php": "4d34dca549d3f7e38527052fc30b8dceaef9201d42f702f8f39be9dbce772627",
+    "admin-supplier-compare.php": "155484fb4ec3d6870d0b1a0950b1342d8b33bf33c1a097c2245eb4f5cb7f74ff",
+    "admin-supplier-contract-inventory.php": "118129292dfe36dfaedbeeb38ecec95e2a46c1792a14e969499dfff7ede21d97",
+    "admin-supplier-contract-rates.php": "fc27006f571ff7bd67ae7d65e52b3b8e4a04efce3329d11ddbafde961b17001a",
+    "admin-supplier-details.php": "fab1041e0bb1bd877628ed760e14b0ad78505c3754de3790c788f5925fadff3e",
+    "admin-supplier-document.php": "d34eeff6a8fcec50d38009de8b046b7aa4e5d3d72f3ce3b3b8211e5e48738bfc",
+    "admin-supplier-documents.php": "6cd238d6a7474f3227848b052eca8ecdf186d6f516e7d2ea32b51458c21b5556",
+    "admin-supplier-hotel-import.php": "23f679c55c6043ce7df6571b356eb808fbbe7d69b337afb136a4050bd49764ef",
+    "admin-supplier-hotels.php": "c11fc329cdb7d3ec28f074beb5ff75f73600ac5f4d94108d943e9a039b923a2e",
+    "admin-supplier-package-import.php": "7d3ecbfea8ba53d237969080ba3a0b06ff470f9f58623120782d735d061f0f91",
+    "admin-supplier-package-manual-expanded.txt": "66add3a026db87f56efeea4260f02f0d1c32e528f7a4b3718511f40d13d5c363",
+    "admin-supplier-package-manual.php": "be4ee403ec6a128415f66bff21549e07acd1f11b27fc4f5bcd96d7a88f9fdb2a",
+    "admin-supplier-rate-book.php": "63163aca6ca0a8ae02dbdb6ae1832ab3ead21d79064d26ee4a69f0df5b7c76aa",
+    "admin-supplier-rate-books.php": "13837a0caf02ecd1d5ccb8d2e327a42aa7d2c8bc2487efc1ab10c21465c95dd6",
+    "admin-supplier-request-details.php": "dbd70de2df3b6178e0bc9c4defe2de5c0a63c5825e6a5d4a5398801b883b30c6",
+    "admin-supplier-requests.php": "5d09c9e5263d8f2597d1b5fbd343cc327dc3e17290c8fe5049e157b732c85c11",
+    "admin-supplier-vehicle-import.php": "4e3bc751240445f8eac28ef604cc1e6bf97c6e4a2f2d42b50f408050cc4c6ed1",
+    "admin-supplier-vehicles.php": "7a74d3e045fd4dac22d38807cab5b66452f84bd02e86361b7960abd0b8feccec",
+    "admin-suppliers.php": "913680ade3b2207dc2f42660124fa2a3e9216c2f7ba79138f0a9022bab089d41",
+    "admin-system-health.php": "dc0b39b18addaae8adec726a3d5759de54509a4629d939c2380c4bef26313579",
+    "admin-system-jobs.php": "81f11a0a2d242858ee319225a1995b234c27049c64b6e16dde878d676ca9c154",
+    "admin-tax-invoice.php": "6f8b02d55025d79c177bd6f768ba102a03d644b75a5c02e89acf32bf2c95bbc2",
+    "admin-transport.php": "309265d2fa336c489df95d3294d394f674c3d7840104482a26f8dbdc23fa6902",
+    "admin-travel-suggestions.php": "14824df5e06b42669dd6ec63662d1a0c0fa99678c10d0c544bc6a35ac384e511",
+    "admin-trip-commercial-hub.php": "4daf362ec045f83c7fb76f3c3c8e8bb12036e5ff152dc2e943ed0a950807ac3a",
+    "admin-trip-contract-rates.php": "ddd83af51406543b26637d0e49b9b62ec10aec7fb7446707196d1a098597a813",
+    "admin-trip-hotel-allocations.php": "20d923f66643603e49219b6116ea94358b62400ab2f98ec243bad3a05b495075",
+    "admin-trip-transport-allocations.php": "755f75c9ff796f9f09a68bee1203d276aa70ed70a3dc79f718a1a1ce5083a5c7",
+    "admin-web-gallery.php": "51e50a1613dc14df5404a6487d493954d09be857d3cb0d6b7ccf722604ddac12",
+    "amendment-functions.php": "857b87d2a7ff402fd1e2dbb183d2dafce07ed6876972a3dcd5936a5c5914c60c",
+    "analytics-functions.php": "d82c43eba81d9bec438e8ca4ee4d9b9d1988bf7f295605dac0c774cd21c95411",
+    "assets_2026-09-30_17:12:26.zip": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+    "billing-functions.php": "4fe6f59fc5edfa5cd895105d6ec6cce439a1e9b37fff7f9e7d49123c0cb32128",
+    "blog-details.php": "e26d7bccac706ba2f254b6e6012397df2e6d773448ab5b282bd1999f76601379",
+    "blog.php": "407322e17788d56636f9dfe656990d735920b4b084b904b815fc68a1551951c4",
+    "book-package.php": "93c3f1d2dac9fa714c21ddcd5b9ff12d24d7c724320354298667698d9ed75a4d",
+    "booking-communications.php": "70e02cb61a2f13e81ce4839aabec74dfdcf8a4c704b45d9285b3d679c0074317",
+    "booking-details.php": "32ba23ce2f76cdb187210ae6ff6d418e46c6caae5d5d092836767c63d8a2503c",
+    "booking-document-file.php": "bd7b02b85f4771b1f0e57d9a0a9bd7703e3dbe7692b50b49bcfe6e526b1c7285",
+    "booking-document-pack-download.php": "b3ef9046be21c1284ae5ef387f89269d551bb5830b23ba86494372b0854243c5",
+    "booking-document-pack.php": "0f12eed28747a520aa2f36547d26e49d03586dc9ae1bb4cb973e652315ffb6c6",
+    "booking-documents.php": "46d0e843ef3f107512ef2894ad2b4360f634f392b7bcf62f8319c83b8d5c5a88",
+    "booking-invoice.php": "aa82521d01093a567e9dbc90b513e553b2bac5510f275fb64632c673c16f9643",
+    "booking-statement.php": "bd3b303a1951e2f553872d675fb465662d9d11c5c7aa5f1648b3f9adc5b8802f",
+    "booking-success.php": "b7c2ba79d9376d8bf17123acd99d93e43a10f45558ac017b13406b545da859da",
+    "booking-voucher.php": "eb0fad78e54b51d357c8829678b1823c7c4f9a3519317e408e09c6a48c5597df",
+    "build_v202.py": "0501fdecd6181d0ef19bd2e116f2fb2cc80b48210be7c0f59ade28ca2c308809",
+    "cancel-booking.php": "1870290665d9980e4d8885d1b2be74dd3f5390cff5a3041ae87fe661c6fe243b",
+    "cancellation-costing-functions.php": "0bab766428e2207586539a4a33a89c98cf74a3ea513f21cf06d4e67410c9bc1f",
+    "cancellation-mail-functions.php": "aee222caaf31aec8ed3579e2c2853bce21df400985919ba55cacf44c9dcff223",
+    "cancellation-workflow-functions.php": "65a1390099b2a69b7cab7e5d34013978ae868a77af09e6b11bd135584b22aa31",
+    "change-password.php": "81cf1f3901b7acf134a7f6aa01dbd6dd182b50ba3d775fd43265ccff6053f349",
+    "commercial-workflow-functions.php": "919ae15aa2d8e0b75e5d649c7dbb8e5763d380dc084843d573dddc8c54a6fda3",
+    "communication-center-functions.php": "39e6545c7f5622c44daea1d83f5e1fe4aed34b4ecb2dfe1eff9401ef61eabe29",
+    "communication-cron.php": "81f419a3ebed5e1c8c50511bbf4743f8acee5d2c5bb4c2f2358c69690950b521",
+    "communication-email-view.php": "859a4e3000ca659eb110458d016981f7fda82af42ea3eed9f9d4ae36c5f30e9c",
+    "communication-functions.php": "854b6530c7096ca7f0ca34ec673268f744affb886a692731848c9711734e739e",
+    "communication-inbox-cron.php": "71e305f7df0aa90abc448e62d54194a98a1e4d0e0a1b02905af6595336d4fa5c",
+    "config.php": "246ace7cb7800053bbc623417979fcaf92e2cf242463a24cde6695a020697772",
+    "contact.php": "f4f5fcabcf847e2db12ae2f4fc43c971a75c6f74f3d5fb5bddf9ff555fe32d89",
+    "credential-display.php": "0bb52e568fb0e117809d7658c50cc905a0a0c8c7315cd34806a8acbf752fafec",
+    "crm-archive-functions.php": "e7db5e53cced411d47895068b78f236b649c5118f37c25264f2b4e505d12d801",
+    "crm-functions.php": "b66801ff0dc57fd39dbd3fd85c90b9b60f3ee812e59d0cf281f16084a1857028",
+    "customer-location-directory.json": "1841362b27fd65e4e222abbdd5fb235269e564442a4196d84a3f762a98cc90aa",
+    "customer-version-directory-removal.php": "d87f96d9bce300f9f9a653c09b014171cc80ae3ffa8c9f5a37aef1e82d59cc8b",
+    "dashboard.php": "df2af92a8b23c0641ad403acd8907a321ade6a1520c16729035b728d6e9d4cae",
+    "deployment-backup-download.php": "0b4f98921793a0d197697520e1e8fc3f3cbdbfda1b6b46e6d0f103066e223dc4",
+    "deployment-functions.php": "544b06f133e95c98238b48bff778d6416fd0efaf1ce0832a79eca8b76eacb7eb",
+    "destinations.php": "7787ef92cffe49098716377c1a7b02aca8a59ae291d4c28aedbc01c3649e2016",
+    "document-functions.php": "be755d067c763e8ac731a885bd4b9a768cce72c60e3219ccf3d902deea9e7f58",
+    "execution-functions.php": "1892315a43bd161be38c637414f6098b9ad19c8c5d4dc1e7b67e29c7a6ef48e2",
+    "finance-functions.php": "f29f4110a51b941fdf01817f11c877e91ae768a053751f007b324a839ca6b9b1",
+    "forgot-password.php": "8dc92c17fc79a9caae11aa6fbb16b77bee2db1b597f055ae2e4c1389c95adb43",
+    "google-auth.php": "fa8cd7775ad5578b3d7dbce77119d01bd57562a1c7f10e34515012c1d524afd4",
+    "health-cron.php": "c183dc8eb7e805d21112128408a6538979c4ecdbde10dd710b17fc4ec2c1806d",
+    "health-functions.php": "a27e42dc0b7bddd307ac1b077e03962ffd2ec47aeca5df04651c1bd5ee7fbe35",
+    "hotel-allocation-functions.php": "d704c83e9d87d1af45b08d4de78724a48c0f75facc7342cfe3c9c1b67510d826",
+    "hotel-google-places-functions.php": "7bfad9e3291dd0455b6709eb3d7181674d96c768050ca2191f1d296a678041e0",
+    "hotel-master-api.php": "361d5d6944ad36f2221182ede1bb5cc3ad1f55bb8036a6dea9026f52d8c2749a",
+    "hotel-place-photo.php": "e1007c423a7a0fd18521e3964d7c6c2140d19b678184ea65176df7839bcf2cab",
+    "hotel-search-api.php": "faa5a9c20085f839470975f555924a94e585fb7078c5fe8a0ff841b4827a7807",
+    "import-functions.php": "cffa73402396968dfd420d03231c9049e2e70338604dab2b30ea1592378addae",
+    "index.php": "e17064005e77c32f2b28e6d0655d24dad7a541cfd5a9e3890a19181206729e9d",
+    "job-functions.php": "f880307879aedf53e54aea2b7df7e4534412940bbb68a34d10c23f2c8ca1c12b",
+    "location-master-functions.php": "de2d8863092b809264f83238821c4e699010695263ba099a3e3ba1d8cd0bf956",
+    "login.php": "4a5e940853384ae7149e1fc7ef5714714f3e607c16068c25ad7deb2bb79e893d",
+    "logout.php": "d5269b231722a142fb31755353860862c22b8bfc1a5d7e8d4ebc77c6803b82ab",
+    "manager.php": "949f7b06b45f7c4a8b78a663cc610471f48e1aebe2d239087acb312e5b842000",
+    "master-data-functions.php": "665e3a894060eb3a602486d8d47eab0599cb83a299381f75161e94531d5bf47b",
+    "mis-functions.php": "989ce36dc170f13bc3d7b59564d675868182ecf19bd125805ef3bd4efd57d32e",
+    "my-bookings.php": "0d50466549b984f0bb66bd0ed87a3d356796ff03c61543c3d0e0c8845f7e4b1d",
+    "my-enquiries.php": "e58ed13bf9bc89f89a0cbfa1215b4c3ea263048d090c845f067131fb8bef83db",
+    "notification-cron.php": "09fe1a1784aaed8d928c80a4bce13644e3bec36b514f115890d269660e7b9578",
+    "notification-functions.php": "0d390f5bab64c2c65d5c9eb2e6b1ac5ddc543044568acd2bf472028848af7b3f",
+    "operations-functions.php": "95da4e77a052bd2e55e4b175a6a8ee300321afd9ce9f8b58375a8a5efc126925",
+    "package-details.php": "e3aa8a65d91a35033e6f61d16df5ca5234c76b5f67223556a5e12363204306a8",
+    "package-hotels-api.php": "236a9b3f1525752c7dbf9d0175397d76c98a721b77fee1c6f97f67bda0d0331d",
+    "package-services-functions.php": "95fe209a80a98de653d931da7d605a66fd8936576249ab4c16eb19a46edaf06c",
+    "packages.php": "fc1bf75a8c830f5a6d9565c82877aa5c250ea6ad8c202d947779b70863eedcc2",
+    "pages.php": "81394d39f40919586fc029c05eae279f0255c8fed980a238587712b345b4376f",
+    "payment-pending.php": "dabddc84a306ce4dd5de82704e643c996c310b303710197fd05c8161720e7efb",
+    "payment-receipt.php": "7653c9751d6ed383a314cefd21a5f08b4b7ac1aed237fb0a6fb3960d823af1cc",
+    "payment.php": "174ce7afeb875fd3d7d63eee04598cec6d19b190b8a49fe657155d72588bde9d",
+    "pexels-http-functions.php": "aefc15071a5c854120795b741a803009c35d86370f34343ede79c84339cfcecc",
+    "profile.php": "4ee41c8d417a01341c2db292caa6cb005a077f6bef3ed7d5c357f5ec1e454070",
+    "quotation-customer-functions.php": "c5bd52d6104bde3da2e17ec1d62749616c80139de9326ec66e18e596b566d0f7",
+    "quotation.php": "01d0d87641f6d50dd29acc92daff6e3f88c5002b0b88e4377174d6a83e93909b",
+    "railradar-suggestion-functions.php": "2af390365244919c62007f6e690bddabfbf386bccc20c9a5bc8aea80226c3e0d",
+    "receipt-pdf-functions.php": "654dfe82eced65b5915f6ae7c88063d4669d7edcf543f9c95e8d3ecf9062f455",
+    "register.php": "29ba8048dcf7d07cac10f99998fb8a1c636a270a5a59da1111ff6a784444a0c9",
+    "reminder-functions.php": "fb19021bf9fbaab3389ddc193464910cb817b64f9a185c47bda48516a65d755b",
+    "request-booking-change.php": "27ef4f006be78e85b214fceefc68707d9cd28e569fab2f0b177dbc64b44655f0",
+    "reset-password.php": "e6f9ad078682a4b08210e8f17ad6e81948dec9ca11346a37141bed76cc8bd4fa",
+    "reviews.php": "e7df9a368a81c6beb5e225e5456fdeb67515e95d594a91e535701382528d8bd9",
+    "site-brand-config.php": "84478bfd780465995613a7126df119900a59f6c089ae6f47dcf3ef808f9a9944",
+    "site-brand-sync.js": "c91f2208dffff446bd2c17531225497489bdcea02ab731d9fdcd83f26be64d91",
+    "staff.php": "960af9fdad6f5ae69e62d8988b61589f6d22a2ddf7a030161d1afb7dd99e4780",
+    "supplier-booking-response.php": "3b84056f4ceeff5fe0f4aec9b986dfbe8737fa525d7c77370bef98b7d66016a7",
+    "supplier-contract-inventory-functions.php": "19c48ebb7fc264fdf6fc6f5ac4005d4bbf388be014b783bd532316920fc0abcc",
+    "supplier-contract-rate-functions.php": "a1438ed722785c816977e4e200821bee72d68c11602a4510dc9f2332fc3c6803",
+    "supplier-document-functions.php": "4ea1d22f91ce4630b9190d33dffceade9342327478890fffa27cc043cfc314a1",
+    "supplier-functions.php": "bc5cdf6c40cf6edddeb6198e6516a3ed01437f8f46a4d00e97b7a91a0fc4c8a3",
+    "supplier-hotel-import-functions.php": "90394d00d08f801e79ab939a320cfd22f1bad2f63bba689e7f0102bd3ee0438d",
+    "supplier-hotel-option-functions.php": "dbae2c587dc4741ca1a5568197fa471ede7468cf055c74381dac4fac9416d828",
+    "supplier-manual-package-functions.php": "97e37299831e27bff3a0d7099546984cd4acf832b8c1fb04e2425e168926c54b",
+    "supplier-package-import-functions.php": "487a8c48ec5605edda696ec662e64acc07247934730eb16a62792dc4e6864aad",
+    "supplier-payables-functions.php": "9b9de67266761be07c400923ad76ddd90296da65fb0f6fea4c40e3903eb7507b",
+    "supplier-payment-voucher.php": "f2b34d703a6b6a8be0ca85dbe6c6216e189f1b4bbd6848374b2b5efec20db606",
+    "supplier-rate-book-functions.php": "d7517d5756a1d841cc4521e9055b6187c3b3ecf91d73c92952e06b0889590e29",
+    "supplier-response.php": "ef59205df9a4738a272fa054a955d8382b2d9a4b51ca73df5dd837a31de7818e",
+    "supplier-vehicle-import-functions.php": "ab354a369189f86bf91d78da7936405846b79ec4ac34455b4c1688ead0b4cd67",
+    "supplier-vehicle-option-functions.php": "f598d80295aa0e60ff701062ac352e9b855c0fd48e668a396f06204c9ef8e960",
+    "system-settings-functions.php": "f4e1331ecf5dddd372d06b18a829b726f5bc228489c1f33253c9f48c853fdb6b",
+    "transport-allocation-functions.php": "516f90b52a26c6174af1292594eca3d336a8390e92ad1fe787ecfe6a69b45d8e",
+    "travel-suggestion-functions.php": "8bc62e8da9f8cc932bbee438a614b34806ae1660ca9554746778e448aabcd974",
+    "unsplash-photo-functions.php": "fea83038c66154d2090bccc8edc140ef06298cd7a417c1be79d73dc6050f5ee9",
+    "verify-email.php": "553240bb861ff08c502eebe87c95e87084b424a7febbd46bfbc248a7855defea",
+    "wishlist.php": "f855f5396d91e9e7b04cb56441bd71e0139769235952bc354db872cf6ec746ff"
+  },
+  "product_files": {
+    "admin-supplier-packages.php": {
+      "bytes": 64791,
+      "mode": "0644",
+      "sha256": "7ace12be0b0b92d640e7a230d510c1a8ec756ef25029e08a85850e775fd34c0f"
+    },
+    "package-supplier-functions.php": {
+      "bytes": 50087,
+      "mode": "0644",
+      "sha256": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+    }
+  },
+  "release": "Current website supplier bulk button fix",
+  "reviewed_source_sha256": {
+    "admin-supplier-packages.php": "7ace12be0b0b92d640e7a230d510c1a8ec756ef25029e08a85850e775fd34c0f",
+    "package-supplier-functions.php": "e77f2301fd65f3b4e053064a8ccbb5687b8e34ff23411629954bf23105eb230a"
+  },
+  "text_patches": {
+    "TRAVSCOPE_V25_11_SUPPLIER_BULK_FIX_FROM_CURRENT_WEBSITE.patch": {
+      "changed_files": [
+        "admin-supplier-packages.php",
+        "package-supplier-functions.php"
+      ],
+      "sha256": "8f9ff8b32fc1c700bfbab52e89153bf0a0b1fef0b84d418e7b3b3f352baf27aa"
+    }
+  },
+  "uploaded_baseline_archive": {
+    "bytes": 23876451,
+    "entry_count": 215,
+    "name": "bulk-download.zip",
+    "sha256": "a6eb8b97348290d5e92c0b11e7ee9017383d2616fc9dbe1ca35d403308500614"
+  },
+  "validation": {
+    "changed_uploaded_root_files": [
+      "admin-supplier-packages.php",
+      "package-supplier-functions.php"
+    ],
+    "final_behavior_failed": 0,
+    "final_behavior_passed": 22,
+    "focused_behavior_report_count": 2,
+    "full_entry_count": 232,
+    "nested_archive_bytes_preserved": true,
+    "nested_only_root_files_added": [
+      "assets/credentials-manager-v2502.js",
+      "assets/credentials-v2501.css",
+      "assets/crm-itinerary-studio-v2497.css",
+      "assets/crm-itinerary-studio-v2497.js",
+      "assets/crm-laptop-workspaces-v2498.css",
+      "assets/crm-laptop-workspaces-v2498.js",
+      "assets/customer-version-removal-v2510.js",
+      "assets/travscope-dashboard-hero.svg",
+      "assets/travscope-document-logo-wide.jpg",
+      "assets/travscope-document-logo-wide.png",
+      "assets/travscope-experience-v2500.css",
+      "assets/travscope-experience-v2500.js",
+      "assets/travscope-responsive-admin-v2499.css",
+      "assets/travscope-responsive-core-v2499.css",
+      "assets/travscope-responsive-public-v2499.css",
+      "assets/travscope-responsive-v2499.js",
+      "templates/TRAVSCOPE_Unified_Supplier_Package_Hotel_Import_Template.xlsx"
+    ],
+    "original_compressed_records_preserved": true,
+    "patch_entry_count": 5,
+    "php_syntax": "passed for both reconstructed PHP files",
+    "targeted_product_file_count": 2,
+    "text_patch_apply_and_exact_reconstruction": "passed",
+    "unchanged_uploaded_payload_and_metadata_count": 213,
+    "zip_crc": "passed"
+  },
+  "version": "V25.11"
+}
