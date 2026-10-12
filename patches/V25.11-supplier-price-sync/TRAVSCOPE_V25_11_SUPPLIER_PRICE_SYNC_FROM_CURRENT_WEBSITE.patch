@@ -1,0 +1,731 @@
+--- a/admin-supplier-packages.php
++++ b/admin-supplier-packages.php
+@@ -4,10 +4,15 @@
+ require_once __DIR__.'/supplier-manual-package-functions.php';
+ require_once __DIR__.'/package-supplier-functions.php';
+ if(is_file(__DIR__.'/supplier-hotel-option-functions.php'))require_once __DIR__.'/supplier-hotel-option-functions.php';
+ if(is_file(__DIR__.'/supplier-vehicle-option-functions.php'))require_once __DIR__.'/supplier-vehicle-option-functions.php';
+ if(function_exists('requireAdmin'))requireAdmin();elseif(empty($_SESSION['admin_id'])){header('Location: '.(defined('BASE_URL')?BASE_URL:'').'login.php');exit;}
++$adminCheck=$pdo->prepare('SELECT id,status FROM admins WHERE id=? LIMIT 1');
++$adminCheck->execute([(int)($_SESSION['admin_id']??0)]);$currentAdmin=$adminCheck->fetch(PDO::FETCH_ASSOC);
++if(!$currentAdmin||($currentAdmin['status']??'')!=='active'){
++    unset($_SESSION['admin_id']);header('Location: '.(defined('BASE_URL')?BASE_URL:'').'admin-login.php');exit;
++}
+ function sppE($v):string{return htmlspecialchars((string)$v,ENT_QUOTES,'UTF-8');}
+ if(empty($_SESSION['supplier_packages_csrf']))$_SESSION['supplier_packages_csrf']=bin2hex(random_bytes(32));
+ $csrf=(string)$_SESSION['supplier_packages_csrf'];
+ $flashSuccess=(string)($_SESSION['supplier_packages_success']??'');unset($_SESSION['supplier_packages_success']);
+ $flashError=(string)($_SESSION['supplier_packages_error']??'');unset($_SESSION['supplier_packages_error']);
+@@ -102,71 +107,74 @@
+         if(str_contains(strtolower($e->getMessage()),'foreign key constraint'))throw new RuntimeException('Delete is blocked by another linked record: '.$e->getMessage());
+         throw $e;
+     }
+ }
+ /**
+- * V24.90 - Resolve one active supplier itinerary for bulk Package Master creation.
+- * The selection mirrors the normal "Create Package From Supplier" workflow:
+- * active package + active rate-book version + active itinerary + at least one
+- * active exact-PAX rate. The strongest/latest active version wins.
++ * Resolve saved supplier content for an editable Package Master draft.
++ * Prefer an active season/itinerary, then eligible review content. Pricing
++ * readiness is checked separately by the supplier quotation workflow.
+  */
+ function sppPackageMasterBulkCandidate(PDO $pdo,int $contractId):array{
+     if($contractId<=0)return [];
+     $sql="SELECT i.id itinerary_id,i.contract_id,i.supplier_id,i.supplier_package_code,i.title,
+                  v.id contract_version_id,v.rate_priority,v.valid_from,v.valid_to,v.version_no,
+-                 c.contract_name,c.status contract_status,i.status itinerary_status,v.status version_status,
+-                 (SELECT COUNT(*) FROM supplier_contract_pax_rates pr
+-                    WHERE pr.status='active' AND (pr.itinerary_id=i.id OR pr.contract_version_id=v.id)) active_pax_rows
++                 c.contract_name,c.status contract_status,i.status itinerary_status,v.status version_status
+           FROM supplier_contract_itineraries i
+           JOIN supplier_contracts c ON c.id=i.contract_id
+-          JOIN supplier_contract_versions v ON v.id=i.contract_version_id
++          JOIN suppliers s ON s.id=c.supplier_id AND s.id=i.supplier_id
++          JOIN supplier_contract_versions v ON v.id=i.contract_version_id AND v.contract_id=c.id
+           WHERE i.contract_id=? AND c.record_type='package'
+-            AND c.status='active' AND i.status='active' AND v.status='active'
+-          ORDER BY v.rate_priority DESC,v.valid_from DESC,v.version_no DESC,i.id DESC
++            AND s.status='active' AND c.status IN ('active','draft')
++            AND i.status IN ('active','review') AND v.status IN ('active','review')
++          ORDER BY (v.status='active' AND i.status='active') DESC,
++                   v.rate_priority DESC,v.valid_from DESC,v.version_no DESC,i.id DESC
+           LIMIT 1";
+     $st=$pdo->prepare($sql);$st->execute([$contractId]);
+     return $st->fetch(PDO::FETCH_ASSOC)?:[];
+ }
+ 
+ /** Return the existing Package Master id when this supplier contract is already linked. */
+ function sppExistingPackageMasterForContract(PDO $pdo,int $contractId):int{
+     if($contractId<=0)return 0;
+-    try{
+-        if(tsPSOTableExists($pdo,'package_supplier_options')&&tsPSOColumnExists($pdo,'package_supplier_options','contract_id')){
+-            $st=$pdo->prepare("SELECT package_id FROM package_supplier_options WHERE contract_id=? AND status='active' ORDER BY is_primary DESC,id LIMIT 1");
+-            $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
+-        }
+-    }catch(Throwable $ignored){}
+-    try{
+-        if(tsPSOTableExists($pdo,'packages')&&tsPSOColumnExists($pdo,'packages','source_itinerary_id')){
+-            $st=$pdo->prepare("SELECT p.id FROM packages p JOIN supplier_contract_itineraries i ON i.id=p.source_itinerary_id WHERE i.contract_id=? ORDER BY p.id LIMIT 1");
+-            $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
+-        }
+-    }catch(Throwable $ignored){}
++    if(tsPSOTableExists($pdo,'package_supplier_options')&&tsPSOColumnExists($pdo,'package_supplier_options','contract_id')){
++        $st=$pdo->prepare("SELECT o.package_id FROM package_supplier_options o JOIN packages p ON p.id=o.package_id WHERE o.contract_id=? ORDER BY o.is_primary DESC,o.id LIMIT 1");
++        $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
++    }
++    if(tsPSOTableExists($pdo,'packages')&&tsPSOColumnExists($pdo,'packages','source_itinerary_id')){
++        $st=$pdo->prepare("SELECT p.id FROM packages p JOIN supplier_contract_itineraries i ON i.id=p.source_itinerary_id WHERE i.contract_id=? ORDER BY p.id LIMIT 1");
++        $st->execute([$contractId]);$id=(int)($st->fetchColumn()?:0);if($id>0)return $id;
++    }
+     return 0;
+ }
+ 
+-function sppBulkAddToPackageMaster(PDO $pdo,array $contractIds,int $adminId):array{
++function sppBulkAddToPackageMaster(PDO $pdo,array $contractIds,int $adminId,int $supplierId=0):array{
+     if(!tsPSOReady($pdo))throw new RuntimeException('Package Master supplier-linking tables are not ready.');
+-    $contractIds=array_values(array_unique(array_filter(array_map('intval',$contractIds),fn($v)=>$v>0)));
++    foreach($contractIds as $id){
++        if((!is_int($id)&&(!is_string($id)||!ctype_digit($id)))||(int)$id<=0)throw new RuntimeException('The supplier package selection is invalid. Refresh the page and try again.');
++    }
++    $contractIds=array_values(array_unique(array_map('intval',$contractIds)));
+     if(!$contractIds)throw new RuntimeException('Select at least one supplier package to add to Package Master.');
++    if($pdo->inTransaction())throw new RuntimeException('Bulk Package Master creation requires its own transaction.');
+     $result=['created'=>0,'already_linked'=>0,'not_ready'=>0,'failed'=>0,'package_ids'=>[],'messages'=>[]];
+     foreach($contractIds as $contractId){
+         try{
++            $pdo->beginTransaction();
++            // Lock before reading existing links so simultaneous submissions
++            // see the first completed import and safely skip it.
++            $lock=$pdo->prepare("SELECT id,supplier_id FROM supplier_contracts WHERE id=? AND record_type='package' FOR UPDATE");
++            $lock->execute([$contractId]);$contract=$lock->fetch(PDO::FETCH_ASSOC);
++            if(!$contract)throw new RuntimeException('Supplier package was not found.');
++            if($supplierId>0&&(int)$contract['supplier_id']!==$supplierId)throw new RuntimeException('Supplier package does not belong to the selected supplier.');
+             $existing=sppExistingPackageMasterForContract($pdo,$contractId);
+-            if($existing>0){$result['already_linked']++;continue;}
++            if($existing>0){$pdo->commit();$result['already_linked']++;continue;}
+             $candidate=sppPackageMasterBulkCandidate($pdo,$contractId);
+-            if(!$candidate){$result['not_ready']++;$result['messages'][]='Contract #'.$contractId.' has no active package/version.';continue;}
+-            if((int)($candidate['active_pax_rows']??0)<=0){
+-                $result['not_ready']++;
+-                $label=trim((string)($candidate['supplier_package_code']??''))?:trim((string)($candidate['title']??''))?:('Contract #'.$contractId);
+-                $result['messages'][]=$label.' skipped: no active exact-PAX rate.';
+-                continue;
+-            }
+-            $packageId=tsPSOCreatePackageFromSupplier($pdo,(int)$candidate['itinerary_id'],$adminId);
++            if(!$candidate){$pdo->commit();$result['not_ready']++;$result['messages'][]='Contract #'.$contractId.' skipped: no eligible active or review supplier content.';continue;}
++            $packageId=tsPSOCreatePackageFromSupplier($pdo,(int)$candidate['itinerary_id'],$adminId,true);
++            $pdo->commit();
+             $result['created']++;$result['package_ids'][]=$packageId;
+         }catch(Throwable $e){
++            if($pdo->inTransaction())$pdo->rollBack();
+             $result['failed']++;
+             $result['messages'][]='Contract #'.$contractId.': '.$e->getMessage();
+         }
+     }
+     return $result;
+@@ -174,34 +182,37 @@
+ 
+ if($_SERVER['REQUEST_METHOD']==='POST'){
+     $returnSupplier=max(0,(int)($_POST['supplier_id']??0));$returnQ=trim((string)($_POST['q']??''));
+     try{
+         if(!hash_equals($csrf,(string)($_POST['csrf']??'')))throw new RuntimeException('Security verification failed. Refresh the page and try again.');
++        $bulkAction=$_POST['bulk_action']??'';
++        if(!is_string($bulkAction)||!in_array($bulkAction,['','add_selected_master','delete_selected'],true))throw new RuntimeException('Invalid bulk action. Refresh the page and try again.');
++        if($bulkAction==='delete_selected'&&($_POST['confirm_bulk']??'')!=='1')throw new RuntimeException('Confirm the selected supplier package deletion before continuing.');
+         $ids=[];
+-        if(isset($_POST['add_selected_master'])){
+-            $ids=array_values(array_unique(array_filter(array_map('intval',(array)($_POST['selected']??[])),fn($v)=>$v>0)));
+-            $bulk=sppBulkAddToPackageMaster($pdo,$ids,(int)($_SESSION['admin_id']??0));
++        if(isset($_POST['add_selected_master'])||$bulkAction==='add_selected_master'){
++            $ids=(array)($_POST['selected']??[]);
++            $bulk=sppBulkAddToPackageMaster($pdo,$ids,(int)($_SESSION['admin_id']??0),$returnSupplier);
+             $parts=[];
+             if($bulk['created']>0)$parts[]=$bulk['created'].' Draft Package Master package'.($bulk['created']===1?'':'s').' created';
+             if($bulk['already_linked']>0)$parts[]=$bulk['already_linked'].' already linked (skipped)';
+             if($bulk['not_ready']>0)$parts[]=$bulk['not_ready'].' not ready (skipped)';
+             if($bulk['failed']>0)$parts[]=$bulk['failed'].' failed';
+-            $_SESSION['supplier_packages_success']=($parts?implode(' · ',$parts):'No Package Master drafts were created.').'. Existing Package Master records were not duplicated or overwritten.';
++            if($bulk['created']>0||$bulk['already_linked']>0)$_SESSION['supplier_packages_success']=implode(' · ',$parts).'. Existing Package Master records were not duplicated or overwritten.';
+             if($bulk['messages'])$_SESSION['supplier_packages_error']=implode(' | ',array_slice($bulk['messages'],0,8)).(count($bulk['messages'])>8?' | +'.(count($bulk['messages'])-8).' more warning(s).':'');
+         }else{
+             if(isset($_POST['delete_single']))$ids=[max(0,(int)$_POST['delete_single'])];
+-            elseif(isset($_POST['delete_selected']))$ids=array_values(array_unique(array_filter(array_map('intval',(array)($_POST['selected']??[])),fn($v)=>$v>0)));
++            elseif(isset($_POST['delete_selected'])||$bulkAction==='delete_selected')$ids=array_values(array_unique(array_filter(array_map('intval',(array)($_POST['selected']??[])),fn($v)=>$v>0)));
+             else throw new RuntimeException('No bulk action was selected.');
+             if(!$ids)throw new RuntimeException('Select at least one supplier package to delete.');
+             $deleted=0;$blocked=[];
+             foreach($ids as $id){try{sppDeleteSupplierPackage($pdo,$id);$deleted++;}catch(Throwable $e){$blocked[]=$e->getMessage();}}
+             if($deleted>0)$_SESSION['supplier_packages_success']=$deleted.' supplier package'.($deleted===1?'':'s').' permanently deleted.';
+             if($blocked)$_SESSION['supplier_packages_error']=implode(' | ',$blocked);
+         }
+     }catch(Throwable $e){$_SESSION['supplier_packages_error']=$e->getMessage();}
+     $qs=[];if($returnSupplier>0)$qs['supplier_id']=$returnSupplier;if($returnQ!=='')$qs['q']=$returnQ;
+-    header('Location: admin-supplier-packages.php'.($qs?'?'.http_build_query($qs):''));exit;
++    header('Location: admin-supplier-packages.php'.($qs?'?'.http_build_query($qs):'').'#supplier-package-directory');exit;
+ }
+ $ready=tsMSReady($pdo);$supplierId=max(0,(int)($_GET['supplier_id']??0));$q=trim((string)($_GET['q']??''));
+ $suppliers=[];try{$suppliers=$pdo->query("SELECT id,company_name,supplier_code,priority,status FROM suppliers WHERE status='active' ORDER BY CASE priority WHEN 'preferred' THEN 1 WHEN 'regular' THEN 2 ELSE 3 END,company_name")->fetchAll(PDO::FETCH_ASSOC)?:[];}catch(Throwable $e){}if($supplierId<=0&&count($suppliers)===1)$supplierId=(int)$suppliers[0]['id'];$supplier=$supplierId>0?tsMSSupplier($pdo,$supplierId):null;
+ $rows=[];$stats=['packages'=>0,'active'=>0,'seasons'=>0,'rates'=>0,'ready'=>0];
+ if($ready){$sql="SELECT c.*,s.company_name,s.supplier_code,d.name destination_name,
+@@ -364,10 +375,23 @@
+ .spp-supplier-actions{display:flex;align-items:center;gap:7px;justify-content:flex-end;flex-wrap:wrap}.spp-resource-link{display:inline-flex;align-items:center;gap:7px;min-width:116px;padding:6px 8px;border-radius:9px;border:1px solid #e2ebf5;background:#f9fcff;color:#234a73}.spp-resource-link>i{width:26px;height:26px;display:grid;place-items:center;border-radius:8px;background:#e8f3ff;color:#1673ef}.spp-resource-link.vehicle>i{background:#e8f9f3;color:#0e9870}.spp-resource-link span{line-height:1.1}.spp-resource-link b{display:block;font-size:9.5px}.spp-resource-link small{display:block;font-size:8.5px;color:#8292a5;margin-top:2px}
+ .spp-card{margin-bottom:10px!important}.spp-card-header{padding:12px 14px!important}.spp-card-header h2{font-size:14px!important}.spp-card-header p{font-size:10px!important;margin-top:2px!important}.spp-card-header .spp-kicker{font-size:8.5px!important}
+ .spp-inventory-bar{padding:8px 12px!important}.spp-bulk{padding:8px 12px!important}.spp-table thead th{padding:9px 10px!important;font-size:9px!important}.spp-table tbody td{padding:10px!important;font-size:11px!important}
+ @media(max-width:1050px){.spp-supplier-strip{grid-template-columns:1fr 1fr}.spp-supplier-actions{grid-column:1/-1;justify-content:flex-start}.spp-commandbar .spp-filter-panel{grid-template-columns:1fr 1fr!important}.spp-commandbar .spp-filter-actions{grid-column:1/-1}}
+ @media(max-width:680px){.spp-head-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.spp-head-metric{min-width:0}.spp-commandbar .spp-filter-panel{grid-template-columns:1fr!important}.spp-commandbar .spp-filter-actions{grid-column:auto}.spp-supplier-strip{grid-template-columns:1fr}.spp-supplier-actions{grid-column:auto;justify-content:flex-start}.spp-coverage-inline{max-height:86px}}
++.spp-bulk-status{margin:0;padding:9px 12px;color:#244c74;background:#f2f7fd;font-size:12px;line-height:1.5}
++.spp-bulk-status:empty{display:none}
++.spp-confirm-overlay{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:20px;background:rgba(15,35,59,.58)}
++.spp-confirm-overlay[hidden]{display:none}
++.spp-confirm-dialog{width:min(100%,460px);max-height:calc(100dvh - 40px);overflow:auto;padding:24px;border-radius:16px;background:#fff;color:#142c4e;box-shadow:0 22px 70px rgba(8,25,48,.3)}
++.spp-confirm-dialog h2{margin:0 0 12px;font-size:20px;line-height:1.3}
++.spp-confirm-dialog p{margin:0 0 16px;font-size:14px;line-height:1.6;color:#526d88}
++.spp-confirm-dialog .spp-confirm-note{padding:10px 12px;border-radius:9px;background:#fff7e7;color:#805313;font-size:12px}
++.spp-confirm-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
++.spp-confirm-actions .spp-btn{min-height:42px;font-size:13px}
++.spp-confirm-dialog :focus-visible{outline:3px solid #1673ef;outline-offset:3px}
++body.spp-confirm-open{overflow:hidden}
++@media(max-width:480px){.spp-confirm-overlay{padding:12px}.spp-confirm-dialog{padding:20px;max-height:calc(100dvh - 24px)}.spp-confirm-actions .spp-btn{flex:1}}
+ </style>
+ 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" media="screen">
+@@ -402,12 +426,12 @@
+         <span class="spp-head-metric purple"><i class="fa-solid fa-users" aria-hidden="true"></i><b><?=$stats['rates']?></b><small>Exact PAX rows</small></span>
+         <span class="spp-head-metric teal"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i><b><?=$stats['ready']?></b><small>Quotation ready</small></span>
+     </div>
+ </header>
+ 
+-<?php if($flashSuccess!==''):?><div class="spp-alert ok" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?=sppE($flashSuccess)?></div><?php endif;?>
+-<?php if($flashError!==''):?><div class="spp-alert err" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <?=sppE($flashError)?></div><?php endif;?>
++<?php if(!$ready&&$flashSuccess!==''):?><div class="spp-alert ok" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?=sppE($flashSuccess)?></div><?php endif;?>
++<?php if(!$ready&&$flashError!==''):?><div class="spp-alert err" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <?=sppE($flashError)?></div><?php endif;?>
+ 
+ <?php if(!$ready):?>
+ <div class="spp-alert warn">Supplier Package tables are not ready. Import the Manual Supplier Package SQL used by V20.1/V21 first.</div>
+ <?php else:?>
+ 
+@@ -461,22 +485,26 @@
+         <a class="spp-btn" href="admin-supplier-details.php?id=<?=$supplierId?>"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Supplier 360</a>
+     </div>
+ </section>
+ <?php endif;?>
+ 
+-<section class="spp-card" aria-label="Supplier package directory">
++<section class="spp-card" id="supplier-package-directory" aria-label="Supplier package directory">
+     <div class="spp-card-header">
+         <div><p class="spp-kicker">Inventory overview</p><h2>Supplier Package Directory</h2><p>Review coverage, seasonal pricing and Package Master links. Every row is a complete supplier package.</p></div>
+         <div class="spp-header-tools"><span class="spp-count"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <?=count($rows)?> packages</span></div>
+     </div>
++    <?php if($flashSuccess!==''):?><div class="spp-alert ok" role="status"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?=sppE($flashSuccess)?></div><?php endif;?>
++    <?php if($flashError!==''):?><div class="spp-alert err" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <?=sppE($flashError)?></div><?php endif;?>
+     <?php if(!$rows):?>
+         <div class="spp-empty"><i class="fa-solid fa-box-open" aria-hidden="true"></i><h3>No supplier packages found</h3><p>Try clearing the search, adding a package or importing your Excel/CSV rate matrix.</p></div>
+     <?php else:?>
+     <form method="post" id="supplierPackageDeleteForm">
+         <input type="hidden" name="csrf" value="<?=sppE($csrf)?>">
+         <input type="hidden" name="supplier_id" value="<?=$supplierId?>">
+         <input type="hidden" name="q" value="<?=sppE($q)?>">
++        <input type="hidden" name="bulk_action" id="supplierBulkAction" value="">
++        <input type="hidden" name="confirm_bulk" id="supplierBulkConfirmed" value="">
+         <div class="spp-inventory-bar">
+             <div class="spp-status-filter" role="group" aria-label="Quotation readiness filter">
+                 <button class="spp-tab is-active" data-filter="all" aria-pressed="true" type="button">All (<?=count($rows)?>)</button>
+                 <button class="spp-tab" data-filter="ready" aria-pressed="false" type="button">Quotation Ready (<?=$stats['ready']?>)</button>
+                 <button class="spp-tab" data-filter="review" aria-pressed="false" type="button">Check Rates (<?=$stats['packages']-$stats['ready']?>)</button>
+@@ -485,17 +513,18 @@
+         </div>
+         <div class="spp-bulk">
+             <div class="spp-bulk-selection">
+                 <input type="checkbox" class="row-check" id="selectAllPackages" aria-label="Select all visible supplier packages">
+                 <strong id="selectedPackageCount">0 selected</strong>
+-                <span>Select all visible rows to create every supplier package in Package Master at once. Existing links are skipped safely.</span>
++                <span>Create editable drafts from selected supplier packages. Rates can be completed later; existing links are skipped.</span>
+             </div>
+             <div class="spp-bulk-actions">
+                 <button type="submit" name="add_selected_master" value="1" class="spp-btn master" id="bulkPackageMasterBtn" disabled><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Add Selected to Package Master</button>
+                 <button type="submit" name="delete_selected" value="1" class="spp-btn danger" id="massDeleteBtn" disabled><i class="fa-solid fa-trash-can" aria-hidden="true"></i> Delete Selected</button>
+             </div>
+         </div>
++        <p class="spp-bulk-status" id="supplierBulkStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+         <div class="spp-table-scroller">
+             <table class="spp-table">
+                 <thead><tr>
+                     <th style="width:40px"><input type="checkbox" class="row-check" id="selectAllPackagesHead" aria-label="Select all visible supplier packages"></th>
+                     <th style="min-width:260px">Supplier Package</th>
+@@ -534,10 +563,21 @@
+     </form>
+     <?php endif;?>
+ </section>
+ <?php endif;?>
+ </div></div></main>
++<div class="spp-confirm-overlay" id="sppActionOverlay" hidden>
++    <section class="spp-confirm-dialog" id="sppActionDialog" role="dialog" aria-modal="true" aria-labelledby="supplierBulkConfirmTitle" aria-describedby="supplierBulkConfirmDescription" tabindex="-1">
++        <h2 id="supplierBulkConfirmTitle">Confirm selected packages</h2>
++        <p id="supplierBulkConfirmDescription"></p>
++        <p class="spp-confirm-note" id="supplierBulkConfirmNote" hidden>Email verification may be required before deletion can continue.</p>
++        <div class="spp-confirm-actions">
++            <button type="button" class="spp-btn" id="sppActionCancel">Cancel</button>
++            <button type="button" class="spp-btn master" id="sppActionConfirm">Confirm</button>
++        </div>
++    </section>
++</div>
+ <script src="assets/travscope-pro-admin.js?v=20260924-v23" defer></script><script src="site-brand-sync.js?v=20261005-v2473" defer></script>
+ <script>
+ (function(){
+     'use strict';
+     const table=document.getElementById('sppPackageRows');
+@@ -576,19 +616,103 @@
+         const filter=tab.dataset.filter||'all';
+         tabs.forEach(other=>{const isActive=other===tab;other.classList.toggle('is-active',isActive);other.setAttribute('aria-pressed',String(isActive));});
+         rows.forEach(row=>{row.hidden=filter!=='all'&&row.dataset.ready!==filter;if(row.hidden){const checkbox=row.querySelector('.package-check');if(checkbox)checkbox.checked=false;}});
+         sync();
+     }));
+-    if(packageMasterButton)packageMasterButton.addEventListener('click',(event)=>{
++    const form=document.getElementById('supplierPackageDeleteForm');
++    const overlay=document.getElementById('sppActionOverlay');
++    const dialog=overlay.querySelector('[role="dialog"]');
++    const title=document.getElementById('supplierBulkConfirmTitle');
++    const description=document.getElementById('supplierBulkConfirmDescription');
++    const note=document.getElementById('supplierBulkConfirmNote');
++    const cancel=document.getElementById('sppActionCancel');
++    const confirm=document.getElementById('sppActionConfirm');
++    const actionInput=document.getElementById('supplierBulkAction');
++    const confirmedInput=document.getElementById('supplierBulkConfirmed');
++    const status=document.getElementById('supplierBulkStatus');
++    const main=document.querySelector('main.main');
++    let pendingSubmitter=null,lastSubmitter=null,allowBulkSubmit=false,submitting=false,mainWasInert=false;
++    function closeConfirmation(restoreFocus){
++        overlay.hidden=true;
++        document.body.classList.remove('spp-confirm-open');
++        if(main)main.inert=mainWasInert;
++        if(restoreFocus&&pendingSubmitter)pendingSubmitter.focus();
++        pendingSubmitter=null;
++    }
++    function cancelConfirmation(){
++        actionInput.value=confirmedInput.value='';
++        allowBulkSubmit=false;
++        status.textContent='Cancelled. No packages were changed.';
++        closeConfirmation(true);
++    }
++    form.addEventListener('click',event=>{
++        const button=event.target.closest('button[type="submit"]');
++        if(button)lastSubmitter=button;
++    });
++    form.addEventListener('submit',event=>{
++        if(allowBulkSubmit){
++            allowBulkSubmit=false;
++            submitting=true;
++            form.setAttribute('aria-busy','true');
++            status.textContent=actionInput.value==='delete_selected'
++                ? 'Submitting deletion. Email verification may be required.'
++                : 'Adding selected packages to Package Master…';
++            return;
++        }
++        if(submitting){event.preventDefault();return;}
++        const submitter=event.submitter||lastSubmitter;
++        if(submitter!==packageMasterButton&&submitter!==deleteButton)return;
++        event.preventDefault();
+         const selected=checks.filter(el=>el.checked).length;
+-        if(selected<1){event.preventDefault();return;}
+-        if(!window.confirm('Create '+selected+' selected supplier package'+(selected===1?'':'s')+' as Drafts in Package Master? Existing linked packages will be skipped and nothing will be overwritten.'))event.preventDefault();
++        if(selected<1){status.textContent='Select at least one supplier package to continue.';return;}
++        pendingSubmitter=submitter;
++        actionInput.value=confirmedInput.value='';
++        const deleting=submitter===deleteButton;
++        title.textContent=deleting?'Delete selected supplier packages?':'Add selected packages to Package Master?';
++        description.textContent=deleting
++            ? 'Permanently delete '+selected+' selected supplier package'+(selected===1?'':'s')+'? Packages with quotation, costing or operations history cannot be deleted. Linked Package Master records will remain.'
++            : 'Create '+selected+' selected supplier package'+(selected===1?'':'s')+' as editable drafts in Package Master? Existing links will be skipped and existing packages will remain unchanged.';
++        note.hidden=!deleting;
++        dialog.setAttribute('aria-describedby','supplierBulkConfirmDescription'+(deleting?' supplierBulkConfirmNote':''));
++        confirm.textContent=deleting?'Confirm deletion':'Confirm and add';
++        confirm.classList.toggle('danger',deleting);
++        confirm.classList.toggle('master',!deleting);
++        status.textContent='Review the confirmation to continue.';
++        overlay.hidden=false;
++        document.body.classList.add('spp-confirm-open');
++        if(main){mainWasInert=main.inert;main.inert=true;}
++        cancel.focus();
+     });
+-    if(deleteButton)deleteButton.addEventListener('click',(event)=>{
+-        const selected=checks.filter(el=>el.checked).length;
+-        if(selected<1){event.preventDefault();return;}
+-        if(!window.confirm('Permanently delete '+selected+' selected supplier package'+(selected===1?'':'s')+'? Protected history cannot be deleted.'))event.preventDefault();
++    cancel.addEventListener('click',cancelConfirmation);
++    confirm.addEventListener('click',()=>{
++        if(!pendingSubmitter||submitting)return;
++        const submitter=pendingSubmitter;
++        if(!checks.some(el=>el.checked)){cancelConfirmation();return;}
++        actionInput.value=submitter.name;
++        confirmedInput.value='1';
++        closeConfirmation(false);
++        allowBulkSubmit=true;
++        if(typeof form.requestSubmit==='function')form.requestSubmit(submitter);
++        else{
++            allowBulkSubmit=false;
++            submitting=true;
++            form.setAttribute('aria-busy','true');
++            status.textContent=actionInput.value==='delete_selected'
++                ? 'Submitting deletion. Email verification may be required.'
++                : 'Adding selected packages to Package Master…';
++            HTMLFormElement.prototype.submit.call(form);
++        }
++    });
++    document.addEventListener('keydown',event=>{
++        if(overlay.hidden)return;
++        if(event.key==='Escape'){event.preventDefault();cancelConfirmation();return;}
++        if(event.key!=='Tab')return;
++        if(event.shiftKey&&document.activeElement===cancel){event.preventDefault();confirm.focus();}
++        else if(!event.shiftKey&&document.activeElement===confirm){event.preventDefault();cancel.focus();}
++    });
++    document.addEventListener('focusin',event=>{
++        if(!overlay.hidden&&!overlay.contains(event.target))cancel.focus();
+     });
+     sync();
+ })();
+ </script>
+ </body>
+--- a/package-supplier-functions.php
++++ b/package-supplier-functions.php
+@@ -373,11 +373,12 @@
+     return trim(implode("\n\n",$sections));
+ }
+ 
+ function tsPSOImportPayload(PDO $pdo, int $itineraryId): array
+ {
+-    $s=$pdo->prepare("SELECT i.*,s.company_name,s.supplier_code,s.supplier_type,c.contract_code,c.contract_name,
++    $s=$pdo->prepare("SELECT i.*,s.company_name,s.supplier_code,s.supplier_type,s.status supplier_status,
++                             c.contract_code,c.contract_name,c.status contract_status,c.record_type,
+                              c.payment_terms contract_payment_terms,c.cancellation_terms contract_cancellation_terms,
+                              v.id version_id,v.version_no,v.version_label,v.season_name,v.season_type,v.rate_priority,v.valid_from version_valid_from,v.valid_to version_valid_to,v.status version_status,
+                              v.payment_terms version_payment_terms,v.cancellation_terms version_cancellation_terms,v.transport_terms version_transport_terms,
+                              d.name destination_name,d.country destination_country
+                       FROM supplier_contract_itineraries i
+@@ -423,11 +424,11 @@
+  * Package Master has no PAX dimension, therefore the conservative reference
+  * is the smallest published exact PAX slab per mapped star category. When
+  * multiple supplier categories map to the same star we keep the higher rate.
+  * Supplier tax is added when the source rate is tax-exclusive.
+  */
+-function tsPSOPackageMasterReferencePriceRows(PDO $pdo, int $contractId): array
++function tsPSOPackageMasterReferencePriceRows(PDO $pdo, int $contractId, int $draftPackageId=0): array
+ {
+     if ($contractId <= 0 || !tsPSOTableExists($pdo, 'package_date_prices')) return [];
+ 
+     $sql = "SELECT
+                 v.id AS version_id,
+@@ -441,14 +442,22 @@
+                 COALESCE(g.tax_percent,0) AS tax_percent,
+                 pr.pax_min,
+                 pr.pax_max,
+                 pr.rate_per_person
+             FROM supplier_contract_versions v
++            JOIN supplier_contracts c ON c.id=v.contract_id AND c.status='active'
++            JOIN suppliers s ON s.id=c.supplier_id AND s.status='active'
+             JOIN supplier_contract_rate_groups g
+               ON g.contract_version_id=v.id
+              AND g.contract_id=v.contract_id
+              AND g.status='active'
++            JOIN supplier_contract_itineraries i
++              ON i.id=g.itinerary_id
++             AND i.contract_id=c.id
++             AND i.contract_version_id=v.id
++             AND i.supplier_id=s.id
++             AND i.status='active'
+             JOIN supplier_contract_pax_rates pr
+               ON pr.rate_group_id=g.id
+              AND pr.contract_version_id=v.id
+              AND pr.status='active'
+             WHERE v.contract_id=?
+@@ -459,12 +468,86 @@
+               AND v.valid_to<>''
+               AND pr.pax_min=pr.pax_max
+               AND pr.pax_min>0
+               AND pr.rate_per_person>0
+             ORDER BY v.rate_priority DESC,v.id DESC,g.id,pr.pax_min ASC,pr.id ASC";
++    $params=[$contractId];
++    if($draftPackageId>0){
++        // Saved review rates can complete an imported editable draft without
++        // approving its supplier source. Scope every row to the draft's actual
++        // source metadata; the default published-rate query above stays strict.
++        $sql="SELECT
++                    v.id AS version_id,v.valid_from,v.valid_to,
++                    COALESCE(v.rate_priority,0) AS rate_priority,
++                    g.id AS group_id,g.mapped_star_category,g.supplier_category,
++                    COALESCE(g.tax_included,0) AS tax_included,
++                    COALESCE(g.tax_percent,0) AS tax_percent,
++                    pr.pax_min,pr.pax_max,pr.rate_per_person
++                FROM packages p
++                JOIN supplier_contract_itineraries anchor
++                  ON anchor.id=p.source_itinerary_id
++                 AND anchor.contract_version_id=p.source_contract_version_id
++                 AND anchor.supplier_id=p.source_supplier_id
++                 AND anchor.status IN ('active','review')
++                JOIN supplier_contract_versions anchor_version
++                  ON anchor_version.id=anchor.contract_version_id
++                 AND anchor_version.contract_id=anchor.contract_id
++                 AND anchor_version.status IN ('active','review')
++                JOIN supplier_contracts c
++                  ON c.id=anchor.contract_id
++                 AND c.supplier_id=anchor.supplier_id
++                 AND c.record_type='package'
++                 AND c.status IN ('active','draft')
++                JOIN suppliers s ON s.id=c.supplier_id AND s.status='active'
++                JOIN supplier_contract_versions v
++                  ON v.contract_id=c.id AND v.status IN ('active','review')
++                JOIN supplier_contract_itineraries i
++                  ON i.contract_id=c.id
++                 AND i.contract_version_id=v.id
++                 AND i.supplier_id=s.id
++                 AND i.status IN ('active','review')
++                JOIN supplier_contract_rate_groups g
++                  ON g.itinerary_id=i.id
++                 AND g.contract_version_id=v.id
++                 AND g.contract_id=c.id
++                 AND g.supplier_id=s.id
++                 AND g.status IN ('active','review')
++                JOIN supplier_contract_pax_rates pr
++                  ON pr.rate_group_id=g.id
++                 AND pr.itinerary_id=i.id
++                 AND pr.contract_version_id=v.id
++                 AND pr.status IN ('active','review')
++                WHERE p.id=? AND c.id=?
++                  AND p.source_type='supplier_imported' AND p.status='draft'
++                  AND TRIM(COALESCE(p.currency,''))<>''
++                  AND UPPER(TRIM(c.currency))=UPPER(TRIM(p.currency))
++                  AND UPPER(TRIM(anchor_version.currency))=UPPER(TRIM(p.currency))
++                  AND UPPER(TRIM(anchor.currency))=UPPER(TRIM(p.currency))
++                  AND UPPER(TRIM(v.currency))=UPPER(TRIM(p.currency))
++                  AND UPPER(TRIM(i.currency))=UPPER(TRIM(p.currency))
++                  AND UPPER(TRIM(g.currency))=UPPER(TRIM(p.currency))
++                  AND p.duration_days=anchor.duration_days
++                  AND p.duration_nights=anchor.duration_nights
++                  AND i.duration_days=anchor.duration_days
++                  AND i.duration_nights=anchor.duration_nights
++                  AND BINARY COALESCE(TRIM(p.source_supplier_package_code),'')=BINARY COALESCE(TRIM(anchor.supplier_package_code),'')
++                  AND (
++                    (TRIM(COALESCE(anchor.supplier_package_code,''))<>''
++                     AND BINARY TRIM(i.supplier_package_code)=BINARY TRIM(anchor.supplier_package_code))
++                    OR (TRIM(COALESCE(anchor.supplier_package_code,''))=''
++                        AND i.id=anchor.id AND v.id=anchor_version.id)
++                  )
++                  AND v.valid_from IS NOT NULL AND v.valid_to IS NOT NULL
++                  AND v.valid_from<>'' AND v.valid_to<>''
++                  AND pr.pax_min=pr.pax_max AND pr.pax_min>0
++                  AND pr.rate_per_person>0
++                ORDER BY v.rate_priority DESC,v.id DESC,g.id,pr.pax_min ASC,pr.id ASC
++                FOR UPDATE";
++        $params=[$draftPackageId,$contractId];
++    }
+     $st=$pdo->prepare($sql);
+-    $st->execute([$contractId]);
++    $st->execute($params);
+     $raw=$st->fetchAll(PDO::FETCH_ASSOC)?:[];
+     if(!$raw) return [];
+ 
+     // version -> star -> smallest exact PAX -> conservative rate
+     $versions=[];
+@@ -584,39 +667,78 @@
+ }
+ 
+ function tsPSOInsertPackageMasterReferencePrices(PDO $pdo, int $packageId, int $contractId): int
+ {
+     if($packageId<=0 || $contractId<=0 || !tsPSOTableExists($pdo,'package_date_prices')) return 0;
+-    $rows=tsPSOPackageMasterReferencePriceRows($pdo,$contractId);
+-    if(!$rows) return 0;
+-    $ins=$pdo->prepare("INSERT INTO package_date_prices(package_id,valid_from,valid_to,price_3_star,price_4_star,price_5_star,sort_order) VALUES(?,?,?,?,?,?,?)");
+-    $sort=1;
+-    foreach($rows as $r){
+-        $ins->execute([$packageId,$r['valid_from'],$r['valid_to'],$r['price_3_star'],$r['price_4_star'],$r['price_5_star'],$sort++]);
+-    }
+-    return count($rows);
+-}
+-
+-function tsPSOCreatePackageFromSupplier(PDO $pdo, int $itineraryId, int $adminId): int
++    $ownsTransaction=!$pdo->inTransaction();
++    if($ownsTransaction)$pdo->beginTransaction();
++    try{
++        // Match bulk import's contract -> package lock order, then recheck
++        // pricing under the package lock so repeated requests cannot duplicate
++        // periods or replace a selling price saved by an administrator.
++        $contract=$pdo->prepare('SELECT id FROM supplier_contracts WHERE id=? FOR UPDATE');
++        $contract->execute([$contractId]);
++        $lock=$pdo->prepare('SELECT * FROM packages WHERE id=? FOR UPDATE');
++        $lock->execute([$packageId]);$package=$lock->fetch(PDO::FETCH_ASSOC);
++        $inserted=0;
++        if($package && (string)($package['source_type']??'')==='supplier_imported'
++           && (string)($package['status']??'')==='draft'
++           && (float)($package['sale_price']??0)<=0
++           && (float)($package['regular_price']??0)<=0){
++            // A locking read also sees repairs committed after a caller's
++            // earlier REPEATABLE READ snapshot was established.
++            $existing=$pdo->prepare('SELECT id FROM package_date_prices WHERE package_id=? AND (COALESCE(price_3_star,0)>0 OR COALESCE(price_4_star,0)>0 OR COALESCE(price_5_star,0)>0) LIMIT 1 FOR UPDATE');
++            $existing->execute([$packageId]);
++            if(!$existing->fetchColumn()){
++                $rows=tsPSOPackageMasterReferencePriceRows($pdo,$contractId,$packageId);
++                if($rows){
++                    // Keep empty placeholders if no real source prices exist.
++                    // Replace them only once eligible saved rates are resolved.
++                    $pdo->prepare('DELETE FROM package_date_prices WHERE package_id=? AND COALESCE(price_3_star,0)<=0 AND COALESCE(price_4_star,0)<=0 AND COALESCE(price_5_star,0)<=0')->execute([$packageId]);
++                    $ins=$pdo->prepare('INSERT INTO package_date_prices(package_id,valid_from,valid_to,price_3_star,price_4_star,price_5_star,sort_order) VALUES(?,?,?,?,?,?,?)');
++                    $sort=1;
++                    foreach($rows as $r){
++                        $ins->execute([$packageId,$r['valid_from'],$r['valid_to'],$r['price_3_star'],$r['price_4_star'],$r['price_5_star'],$sort++]);
++                    }
++                    $inserted=count($rows);
++                }
++            }
++        }
++        if($ownsTransaction)$pdo->commit();
++        return $inserted;
++    }catch(Throwable $e){
++        if($ownsTransaction&&$pdo->inTransaction())$pdo->rollBack();
++        throw $e;
++    }
++}
++
++function tsPSOCreatePackageFromSupplier(PDO $pdo, int $itineraryId, int $adminId, bool $allowDraftSource=false): int
+ {
+     if(!tsPSOReady($pdo))throw new RuntimeException('Install the V20 Package Supplier SQL first.');
+     $data=tsPSOImportPayload($pdo,$itineraryId);$it=$data['itinerary'];
+-    if((string)($it['status']??'')!=='active' || (string)($it['version_status']??'')!=='active') throw new RuntimeException('Only an ACTIVE supplier package from an ACTIVE Rate Book can be imported.');
++    $sourceActive=(string)($it['status']??'')==='active'&&(string)($it['version_status']??'')==='active'&&(string)($it['contract_status']??'')==='active';
++    if((string)($it['supplier_status']??'')!=='active')throw new RuntimeException('Only packages from an active supplier can be imported.');
++    if($allowDraftSource){
++        if((string)($it['record_type']??'')!=='package'||!in_array((string)($it['contract_status']??''),['active','draft'],true)||!in_array((string)($it['status']??''),['active','review'],true)||!in_array((string)($it['version_status']??''),['active','review'],true))throw new RuntimeException('Only active or review supplier package content can be copied into a draft.');
++    }elseif(!$sourceActive)throw new RuntimeException('Only an ACTIVE supplier package from an ACTIVE Rate Book can be imported.');
+     $title=trim((string)$it['title']);if($title==='')$title=trim((string)$it['supplier_package_code']);if($title==='')$title='Imported Travel Package';
+     $code=tsPSONextPackageCode($pdo);$slug=tsPSOUniqueSlug($pdo,tsPSOSlug($title));
+     $currency=strtoupper(trim((string)$it['currency']))?:'INR';
+     $inclusions=implode("\n",tsPSOUniqueCustomerItems(array_merge([(string)($it['inclusions']??'')],$data['policy']['inclusions'])));
+     $exclusions=implode("\n",tsPSOUniqueCustomerItems(array_merge([(string)($it['exclusions']??'')],$data['policy']['exclusions'])));
+     $customerContent=tsPSOBuildCustomerContent($data);
+-    $shortDescription=trim((string)$customerContent['short_description']);
++    // The supplied Package Master schema stores this summary in VARCHAR(255).
++    // Keep the complete supplier narrative in description.
++    $shortDescription=tsPSOTrimCustomerText((string)$customerContent['short_description'],255);
+     $fullDescription=trim((string)$customerContent['description']);
+     $tourHighlights=trim((string)$customerContent['tour_highlights']);
+     $terms=tsPSOBuildPackageTerms($data);
+     $legacyIt=[];foreach($data['days'] as $d){$legacyIt[]='Day '.(int)$d['day_number'].': '.tsPSOCustomerText((string)$d['day_title'])."\n".tsPSOCustomerText((string)$d['day_description']);}
+     $packageType='holiday';
+     try{$q=$pdo->query("SELECT slug FROM package_types WHERE status='active' ORDER BY sort_order,id LIMIT 1");$candidate=trim((string)($q->fetchColumn()?:''));if($candidate!=='')$packageType=$candidate;}catch(Throwable $ignored){}
+-    $pdo->beginTransaction();
++    $ownsTransaction=!$pdo->inTransaction();
++    if($ownsTransaction)$pdo->beginTransaction();
+     try{
+         $sql="INSERT INTO packages(destination_id,title,slug,package_code,short_description,description,duration_days,duration_nights,child_age_min,child_age_max,child_price,regular_price,sale_price,currency,package_type,source_type,source_supplier_id,source_contract_version_id,source_itinerary_id,source_supplier_package_code,main_image,inclusions,exclusions,itinerary,terms,tour_highlights,featured,bestseller,status,views)
+               VALUES(?,?,?,?,?,?,?, ?,0,0,NULL,NULL,0,?,?,?,?,?,?,?,NULL,?,?,?,?,?,0,0,'draft',0)";
+         $pdo->prepare($sql)->execute([
+             (int)$it['destination_id']>0?(int)$it['destination_id']:null,$title,$slug,$code,
+@@ -632,14 +754,15 @@
+         if($data['days']){
+             $ins=$pdo->prepare("INSERT INTO package_itinerary_days(package_id,day_number,title,description,image,sort_order) VALUES(?,?,?,?,NULL,?)");
+             foreach($data['days'] as $d){$n=max(1,(int)$d['day_number']);$dayTitle=tsPSOCustomerText((string)$d['day_title']);$dayDescription=tsPSOCustomerText((string)$d['day_description']);$ins->execute([$packageId,$n,$dayTitle!==''?$dayTitle:null,$dayDescription!==''?$dayDescription:null,$n]);}
+         }
+         tsPSOInsertPackageMasterReferencePrices($pdo,$packageId,(int)$it['contract_id']);
+-        tsPSOLink($pdo,$packageId,$itineraryId,'primary_dmc',true,$adminId,'Imported from supplier Rate Book.');
+-        $pdo->commit();
++        $optionId=tsPSOLink($pdo,$packageId,$itineraryId,'primary_dmc',true,$adminId,'Imported from supplier Rate Book.');
++        if(!$sourceActive)$pdo->prepare('UPDATE package_supplier_options SET enabled_for_quotation=0 WHERE id=? AND package_id=?')->execute([$optionId,$packageId]);
++        if($ownsTransaction)$pdo->commit();
+         return $packageId;
+-    }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
++    }catch(Throwable $e){if($ownsTransaction&&$pdo->inTransaction())$pdo->rollBack();throw $e;}
+ }
+ 
+ /**
+  * V24.12 - Rebuild customer-facing content for an existing supplier-imported
+  * Package Master record from its linked supplier package. This intentionally
+@@ -663,13 +786,17 @@
+     $terms=tsPSOBuildPackageTerms($data);
+     $legacy=[];foreach($data['days'] as $d){$legacy[]='Day '.(int)$d['day_number'].': '.tsPSOCustomerText((string)$d['day_title'])."\n".tsPSOCustomerText((string)$d['day_description']);}
+ 
+     $pdo->beginTransaction();
+     try{
++        // Reference-price repair takes the same contract -> package lock order.
++        // Acquire the source contract before the content update locks Master.
++        $sourceLock=$pdo->prepare('SELECT id FROM supplier_contracts WHERE id=? FOR UPDATE');
++        $sourceLock->execute([(int)$it['contract_id']]);
+         $pdo->prepare("UPDATE packages SET short_description=?,description=?,duration_days=?,duration_nights=?,inclusions=?,exclusions=?,itinerary=?,terms=?,tour_highlights=? WHERE id=?")
+             ->execute([
+-                trim((string)$content['short_description'])?:null,
++                tsPSOTrimCustomerText((string)$content['short_description'],255)?:null,
+                 trim((string)$content['description'])?:null,
+                 (int)($it['duration_days']??$package['duration_days']??0),
+                 (int)($it['duration_nights']??$package['duration_nights']??0),
+                 $inclusions!==''?$inclusions:null,
+                 $exclusions!==''?$exclusions:null,
+--- a/admin-packages.php
++++ b/admin-packages.php
+@@ -260,10 +260,11 @@
+         return [
+             'ready' => false,
+             'score' => 0,
+             'required_missing' => ['Package record not found'],
+             'warnings' => [],
++            'has_selling_price' => false,
+         ];
+     }
+ 
+     $supplierImported = (string)($package['source_type'] ?? '') === 'supplier_imported';
+     $hasMainImage = trim((string)($package['main_image'] ?? '')) !== '';
+@@ -298,11 +299,10 @@
+                 $q = $pdo->prepare('SELECT contract_id FROM supplier_contract_versions WHERE id=? LIMIT 1');
+                 $q->execute([(int)$package['source_contract_version_id']]);
+                 $contractId = (int)($q->fetchColumn() ?: 0);
+             }
+             if ($contractId > 0) {
+-                $pdo->prepare('DELETE FROM package_date_prices WHERE package_id=? AND COALESCE(price_3_star,0)<=0 AND COALESCE(price_4_star,0)<=0 AND COALESCE(price_5_star,0)<=0')->execute([$packageId]);
+                 tsPSOInsertPackageMasterReferencePrices($pdo, $packageId, $contractId);
+                 $priceStmt->execute([$packageId]);
+                 $priceCount = (int)$priceStmt->fetchColumn();
+             }
+         } catch (Throwable $priceRepairError) {
+@@ -351,10 +351,11 @@
+         'ready' => !$required,
+         'score' => $score,
+         'required_missing' => $required,
+         'warnings' => $warnings,
+         'itinerary_count' => $itineraryCount,
++        'has_selling_price' => $priceCount > 0,
+     ];
+ }
+ 
+ function clonePackageRecord(PDO $pdo, int $sourcePackageId, int $adminId): int
+ {
+@@ -13753,18 +13754,30 @@
+     adminPackageImageUrl(
+         $package['main_image']
+         ?? ''
+     );
+ 
++$packageReadiness = packagePublishReadiness($pdo, (int)$package['id']);
++
+ $displayPrice =
+     (float)$package['sale_price'] > 0
+         ? (float)$package['sale_price']
+         : ((float)($package['regular_price'] ?? 0) > 0
+             ? (float)$package['regular_price']
+             : (float)($package['reference_start_price'] ?? 0));
+ 
+-$packageReadiness = packagePublishReadiness($pdo, (int)$package['id']);
++// Readiness can recover a draft's saved supplier rates after this list was
++// fetched. Show the recovered reference price on this same page visit.
++if ($displayPrice <= 0 && !empty($packageReadiness['has_selling_price'])) {
++    $freshReferencePrice = $pdo->prepare("SELECT COALESCE(
++        MIN(CASE WHEN COALESCE(price_3_star,0)>0 THEN price_3_star END),
++        MIN(CASE WHEN COALESCE(price_4_star,0)>0 THEN price_4_star END),
++        MIN(CASE WHEN COALESCE(price_5_star,0)>0 THEN price_5_star END)
++    ) FROM package_date_prices WHERE package_id=?");
++    $freshReferencePrice->execute([(int)$package['id']]);
++    $displayPrice = (float)($freshReferencePrice->fetchColumn() ?: 0);
++}
+ 
+ ?>
+ 
+ <tr>
+ 
