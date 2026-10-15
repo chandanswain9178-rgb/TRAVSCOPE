@@ -1,0 +1,2072 @@
+{
+  "artifacts": {
+    "TRAVSCOPE_CURRENT_V25_26_COLOURFUL_PUBLIC_FULL.zip": {
+      "bytes": 21638997,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_CURRENT_V25_26_COLOURFUL_PUBLIC_FULL.zip",
+      "sha256": "fcac9cf71c1106fd161a0fb226c16d4b609a97ce648829fabf3d2a8ab960df9d"
+    },
+    "TRAVSCOPE_V25_26_COLOURFUL_PUBLIC_PATCH.zip": {
+      "bytes": 617394,
+      "path": "/workspace/shared/downloads/TRAVSCOPE_V25_26_COLOURFUL_PUBLIC_PATCH.zip",
+      "sha256": "3ce357e23062f9f75f9c190de0f659c5b9ff705d3e35ae518eaebd2a079ee75d"
+    }
+  },
+  "baseline_runtime_file_count": 357,
+  "baseline_runtime_manifest_sha256": "cbe937af7ae750cf073eb0104a16f0a650749096938e2144e315179fd422497b",
+  "database_changes": "none; separate user SQL is excluded",
+  "date": "2026-10-15",
+  "presentation_hooks_manifest_sha256": "77ea0dc31602c35a1d3ec99342666a342dcf64ebb7d66f73d684c39d78bbdb35",
+  "preserved_baseline_file_sha256": {
+    ".htaccess": "f4976365491261ec8524be37f593549d641213439078226479102189d3932ea4",
+    "PHPMailer/COMMITMENT": "340ae872d625b128586b8751f3d599f63893417d8867cdb488702c48ea58fbc1",
+    "PHPMailer/LICENSE": "a1a33180d02960ab1c5de36cf20b1a2f0fe9888d83826ad263da5db52f1b183b",
+    "PHPMailer/README.md": "55789c10b9bacdbc0e3f0ba81d02486b55268dc32df1cba25f974e6a56fa75c1",
+    "PHPMailer/SECURITY.md": "748329021e3d7307694d5c0e108dd8a31850e58ac96bc6de6cf1099568906eca",
+    "PHPMailer/SMTPUTF8.md": "eb3409266849cdb958db6d939b70a31097767f87e0e1003353528a746423a013",
+    "PHPMailer/VERSION": "318630f32c0dac5c715d91aecff9c07b2ce055b792ccb015a815cb013ea80fc6",
+    "PHPMailer/composer.json": "0d29d0a9c86be376433530333bee758ba563e7267347300c181299f5a1d920a4",
+    "PHPMailer/get_oauth_token.php": "c461d8181348df478a5639013af6719e89182bd6153b2e48469525763371f743",
+    "PHPMailer/language/phpmailer.lang-af.php": "d4c5272712f1b1cd6b3d08f83a89fbdae257de308a58e6eee1f4e7f519c86062",
+    "PHPMailer/language/phpmailer.lang-ar.php": "ad11ffbf21f84fe6e812a0cf4f82df4412dd232ab6f6b6fe47e2c760845ec04f",
+    "PHPMailer/language/phpmailer.lang-as.php": "8aaaa3925b2e79a475ffd7b65e29406b1e86c8ea48a666ec32243668f5e28494",
+    "PHPMailer/language/phpmailer.lang-az.php": "8b116561af83e2bd1ef3319ff8103f169883e89efab592115d98c9ae7c09d6df",
+    "PHPMailer/language/phpmailer.lang-ba.php": "df573ba9a9431bff2c602b7b297040e0f9cf9b319562f17c686f01f1ed4ebfad",
+    "PHPMailer/language/phpmailer.lang-be.php": "47c51cef7371142b993b58764c0abd4e82fe7213f9bd85b6dcfb24d0acd223ec",
+    "PHPMailer/language/phpmailer.lang-bg.php": "9a556b5ad45ead80d7331f5ed713799e7fb810c52f8d7913725585fbeff084c2",
+    "PHPMailer/language/phpmailer.lang-bn.php": "ff7842ce6fdc7cbb846b16f292e126fbc578e0c27da48092e4a5f44d928aebe6",
+    "PHPMailer/language/phpmailer.lang-ca.php": "2b62db0921d2d321c80869bc9544b744747fd7cf398cc17358c0ae0b2533548c",
+    "PHPMailer/language/phpmailer.lang-cs.php": "4bdb6445032c31fa1c41d65b8840f4fed0c30b96a6e68418ea6968e6de49f664",
+    "PHPMailer/language/phpmailer.lang-da.php": "bd266892cb528bdb3a691d1716f139c3c84435272e93ca7e6a0b70e74f3e1ce2",
+    "PHPMailer/language/phpmailer.lang-de.php": "41e9bee22a8b00d42b28ebadae85ba531134a2482108489c0e5ced6ddc25b062",
+    "PHPMailer/language/phpmailer.lang-el.php": "3760e138e5c0fdc17a896718d2d86239b6d2d936abc0cf016fc5350ee034a8dd",
+    "PHPMailer/language/phpmailer.lang-eo.php": "bf02aaf8e09a94ec0e20355dfb6e0f1a37a56ae06944014c277de208e39b16f9",
+    "PHPMailer/language/phpmailer.lang-es.php": "182270f8e64be0dcbb5c22c6c672efc5a3da4c0295b4d2d69373e18424657a91",
+    "PHPMailer/language/phpmailer.lang-et.php": "7a854b796bc5058913ab5f5ad489b02ed246ad49220e844a1c3fbb0ffa908fa6",
+    "PHPMailer/language/phpmailer.lang-fa.php": "7e38e2e75326d9d7bbb87fc4f6dc5c40ce79c9ce43016a707e84af9d7e332102",
+    "PHPMailer/language/phpmailer.lang-fi.php": "3efb47c9e164860b45ee3a9f707975210d7f87bbc356a7dada075528fc37052c",
+    "PHPMailer/language/phpmailer.lang-fo.php": "2b778d73170ff1864126bd65839d39098a9dde290e31fe6ea6719b68a030daa2",
+    "PHPMailer/language/phpmailer.lang-fr.php": "1d816ccae7fa8eea24907686ffeeeeb5861ffdf794690e6a91c142d49d05efd7",
+    "PHPMailer/language/phpmailer.lang-gl.php": "fe2fd5068446a04e73ca767ca05eba81f6648fcb93988a307a4dbd619054780a",
+    "PHPMailer/language/phpmailer.lang-he.php": "7d944fe5e073d0dfb8a53cf9f8e9c409d40f5f0149ce6d47c1f4088cb28d69fe",
+    "PHPMailer/language/phpmailer.lang-hi.php": "2a260e1b5f0d7efbfccc436ea040aa172ecd5ac8ea394482c0dd9a2e7c9d3206",
+    "PHPMailer/language/phpmailer.lang-hr.php": "b337f280f2e5f087daaa44bd1f359bbc41e01062cbd07a5c67345a45a01ccbaf",
+    "PHPMailer/language/phpmailer.lang-hu.php": "94045618ef5a86dc4f8176f3ebae3fbb1e29b7ef7cb1ce99ba57ee4724aef3be",
+    "PHPMailer/language/phpmailer.lang-hy.php": "52fc3f40d24d55ef95702a59ec006c4c5996a22e54a6b00e54a25707db341629",
+    "PHPMailer/language/phpmailer.lang-id.php": "a9c606b5da1470c02140c96c1ef3fc5ba1175ad0ce119b6f2d93e02c112d2ae1",
+    "PHPMailer/language/phpmailer.lang-it.php": "06e7faf9dc2dabebe8ea8c684eb9b798ffd241ce039945a8e5583993705b1c3e",
+    "PHPMailer/language/phpmailer.lang-ja.php": "c1cb38a994fb2f1b523dc622174dd4f7b9e9ba20e8cd864ae44744bd2b8050fc",
+    "PHPMailer/language/phpmailer.lang-ka.php": "0bf765b1e28e33947df929657c325cd957c506ec42d44d2a32b3d30794f09b31",
+    "PHPMailer/language/phpmailer.lang-ko.php": "674f7f333694475a3a6164c1c5cb84e25f94a5b0d3118cb49ff2e5a318260c64",
+    "PHPMailer/language/phpmailer.lang-ku.php": "4cc2ad8c0516ce01090997c802c7cdc3362e974e55ea26823140e60d50328f71",
+    "PHPMailer/language/phpmailer.lang-lt.php": "ee21a138a136caf9b213b3fe9f070afb9c20f4cdd51178045798bb60ccc82865",
+    "PHPMailer/language/phpmailer.lang-lv.php": "a986f934cb4a2b9cf5bad1c150f0af9d8a0c7745d36b9904882d68b1bb07fb5d",
+    "PHPMailer/language/phpmailer.lang-mg.php": "eebd4b1c9caa2b0ad5637b623cad66a0b67363a2e752cbd86eacb2139636fd85",
+    "PHPMailer/language/phpmailer.lang-mn.php": "e1b246c27568a92fef27a44e9601ce3ff41ca0dac0f564782dc46bfd03f42724",
+    "PHPMailer/language/phpmailer.lang-ms.php": "f6b8ec01f2734624eadb3e9135e408a5a6da20a5a684b5577d7ba29bddd4b5aa",
+    "PHPMailer/language/phpmailer.lang-nb.php": "1e3ec30df862181ac8679da0fd16c31fdf02104530ec45c1e192a55685c32b4e",
+    "PHPMailer/language/phpmailer.lang-nl.php": "fdc521f74bcf25bde2395483441c7920919b26f7b181d89602fe0807868620d9",
+    "PHPMailer/language/phpmailer.lang-pl.php": "9c00369f9bd935c4fa6faaf2692a8511369993119a0294c1badc33313f8d6e91",
+    "PHPMailer/language/phpmailer.lang-pt.php": "588e547a80a7c867594f2e956ca12625d3b48446b16cd0e47f48fea71ef3ed2c",
+    "PHPMailer/language/phpmailer.lang-pt_br.php": "8965d817b5667787efd6ffe58b15af236e51ff085594562fafccaf85d9f1bcd8",
+    "PHPMailer/language/phpmailer.lang-ro.php": "f0cf6c8032723215293095e7a9b2f2a9c1159bb51221511efb6163f4096b9232",
+    "PHPMailer/language/phpmailer.lang-ru.php": "981aa0630326df0b5dd48da086c19c4a329571a7426c36f6e08ff6470f24687d",
+    "PHPMailer/language/phpmailer.lang-si.php": "502364f4ccb0c546093c13b4fc2a9ef15e0d47b4e4b789729d72b6cb33c6871e",
+    "PHPMailer/language/phpmailer.lang-sk.php": "b3327b7d377f16e0aeabca54ca2c8906e23c5a77cdb19d2d4fb85f0bbd39d3cd",
+    "PHPMailer/language/phpmailer.lang-sl.php": "642ab71b9a02ee00abc39516e6d005957beff6dde91948155d0f25ce4f98630d",
+    "PHPMailer/language/phpmailer.lang-sr.php": "9982802bafa971f1d2e376fca86f8da86c7e43158ef6d3cb6f7c3ff51cc1c7e9",
+    "PHPMailer/language/phpmailer.lang-sr_latn.php": "0f67cf31fa3b5f2db2a2c74911096a73892377096c966923c0dc1fbbbc612a32",
+    "PHPMailer/language/phpmailer.lang-sv.php": "c1cb0390311cdff2f93ab37fff165b389fa74dca7f6341ce08240eca886b5ac3",
+    "PHPMailer/language/phpmailer.lang-tl.php": "48fa60bb2a88fdeb53960878fd0cdf88f7a59736a9efa487787b61de1c5d9db9",
+    "PHPMailer/language/phpmailer.lang-tr.php": "9f19069be7c25d8a0563ee535bbc57ebe3c65698b2af99320349a4002db99091",
+    "PHPMailer/language/phpmailer.lang-uk.php": "767609225673b2983c2cf7b208ae954d49d7728287da2c2cb859ca8c9273efd3",
+    "PHPMailer/language/phpmailer.lang-ur.php": "4404c38f4f64a1098678e0d30a62c63cd1dd56949fcc7f6ea89557fbf0693e06",
+    "PHPMailer/language/phpmailer.lang-vi.php": "3b5acbfceceb34f90dc7f905f044a51e48cce7f79cbf998b579b8bf00fa1fabc",
+    "PHPMailer/language/phpmailer.lang-zh.php": "ad235ae24994a85b63ff1bd2dadab9de1f2806a9764c162cf047459fa037814c",
+    "PHPMailer/language/phpmailer.lang-zh_cn.php": "cd53b733c64eeac233b140e33a6d58d337cd1ac28d6a5cd3231d87169f548c07",
+    "PHPMailer/src/DSNConfigurator.php": "429f5f0a962864ec7b67efd572c0f85cc0f33fd4585413d8dc80d41c8562399e",
+    "PHPMailer/src/Exception.php": "22ab858ae438d98f58f41f38ad2191d1b0d59570aebea0463a7948cfae1021b7",
+    "PHPMailer/src/OAuth.php": "44b2c9a3b6e538a65b90261251f197d700e2eb90d51d4944fb80577263210fb4",
+    "PHPMailer/src/OAuthTokenProvider.php": "f2318ea1b2841b2481b636e205c281a733f9de944a71ae403e0b59fa71219572",
+    "PHPMailer/src/PHPMailer.php": "c1d9ea181f36dcec5a7cfe796e66c6c5529c165ee9004057ee4bd867b51f3940",
+    "PHPMailer/src/POP3.php": "3a3fbd3b585a50711ff0f4741c3293397fcb6a36a0ca7dd80c81e52af617ba0e",
+    "PHPMailer/src/SMTP.php": "a584d94e7fd2d0a5a0cb9503f93e3d8151c70b098d20292677563b82b5ebaff0",
+    "QA_V25_00.md": "24311797bc635e01bf80f7072b6c07bd10087f9834cad68a1296463b84a595e9",
+    "QA_V25_08.md": "d1e81c21a7760acc61d19a1d3c81b892cff34e4c74a7b937e589b5845e7e3862",
+    "README_V24_10_INSTANT_DELETE.txt": "b7398c7aac53fe38ee6e5e2a85ed6f0ddd86587f1bfa1e58c68bf0403cf72e0c",
+    "README_V24_11_ADMIN_DELETE_OTP.txt": "80c4905238fba058eab1b9605f27bdd43ddaadefd9a427854b43a81117088b6e",
+    "README_V24_12_DELETE_OTP_TOGGLE.txt": "4d8c8909cc6fb5dff3f8705ebcb4bdf669466db5fa5f99a1346b0843c0bad900",
+    "README_V24_1_CLEAR_ENQUIRY_QUOTATION_WORKSPACE.txt": "354c070f65c6c7f2a9e86fffb3b881f95b3c27e89b24642154c54a3fbee5413c",
+    "README_V24_8.txt": "331e0b0ee7b2df0dcfe8f7f8eb9cba2b665774ab7fff1677e0d9fbd7829a2bda",
+    "README_V24_86_SUPPLIER_PAYABLES.txt": "2c173001f4bb3abf3203e341aae646e5e9368e42c21f4584074cd8a435d2f877",
+    "README_V24_89_INTELLECTUAL_CONTENT_STANDARD.txt": "b7cad0132153ff531c0a9d2d18e8802961741e6425a2ea172b47e9f2f8723120",
+    "README_V24_90_BULK_PACKAGE_MASTER.txt": "2c73cba66dd4a680d9419f55b1bfb2446574ed6771139d46b206e08490f92160",
+    "README_V24_91_UNIFIED_SUPPLIER_IMPORT.txt": "2a2168f34649acafd33dfd99ed9c0165de234500f8d8cfd80064ba85748ba687",
+    "README_V24_92_PROFESSIONAL_DAYWISE_ITINERARY.txt": "f3ef7287f98897cf9432b1a6499b144c7c4257a2bb2dc43e361be4c4e03c2d68",
+    "README_V24_93_INTERNATIONAL_ITINERARY_SPACING.txt": "049e50ae7d9ebe35806ee21a5bff84bd32c3b506f6eee9343997521346e55588",
+    "README_V24_94_EDITORIAL_ITINERARY_QUOTATION_PDF.txt": "7f3a73a21be8d609792bf7536c89e4e6913bf387fa32337f507c19b51750b501",
+    "README_V24_95_PREMIUM_CONTENT_PRESENTATION.txt": "38c024e65c9be7811e9bd0a4ff74781f691d685f238f694077e65278465440d8",
+    "README_V24_96_INTERNATIONAL_QUOTATION_PRINT_GALLERY.txt": "f4e65950bee31dc2285b37012e237c4c142560032a90c42bd41872472b3dd750",
+    "README_V24_97_ITINERARY_STUDIO.txt": "78d140ac1163594c7e070fb056bb9479f279f4a5465be7b70927af1f4e9db855",
+    "README_V24_98_LAPTOP_FIRST_CRM_WORKSPACES.txt": "4e84b5059640428b496298a394060edce1b2763c07d2b8f57c0a532a998206e4",
+    "README_V24_99_RESPONSIVE_TYPOGRAPHY.txt": "806cbfbdffd705fb548f9da4d535b849f07c2cc1d2276a53bdd1811338894114",
+    "README_V25_00_EXPERIENCE_PRODUCTIVITY.txt": "b90da6e6a15943aca4daf3b816858987c8354af91b76bb428022f91ae4501b1d",
+    "README_V25_01_CREDENTIAL_LOGOS.md": "13f139a2fd4826cd08a7af39dd7b3dc73d50b4441e0af6d7227c4802a5440b1b",
+    "README_V25_02_EXPANDABLE_CREDENTIAL_LIBRARY.md": "7685de69adf48e4986435256b59686d7f945917dce33cb845388d3f845001e38",
+    "README_V25_06_BOOKING_DELETE.md": "2e245c5882372830aac5ea6d993da59673c187ba156fe5ce9c72927aabf095ff",
+    "README_V25_07_BOOKING_DELETE_FIX.txt": "7318bf9586a738e3b07d64cb4836c3767fd2204806108f17145629e716acecd8",
+    "README_V25_08_BOOKING_REMOVE_ALL_STATUSES.md": "32f292353a8d7b1264ce9d42da532f6d6ed7f7b450a8c490b0699249a76dc80e",
+    "README_V25_09_ENQUIRY_TRIP_ARCHIVE.md": "5a03c8a2b3b4f868988df293b154c2b4ea6b9ff15c7316771ff6abf77b702c50",
+    "README_V25_10_CUSTOMER_PACKAGE_QUOTATION_DELETE.md": "d37b452a10f02da56c7a6d3794800271fc84cbb336380a7ddeed95e032965f8b",
+    "README_V25_11_PIPELINE_DELETE.md": "a11ca8396c6f39c6be7e75f174ac7149df5ad88fd17a508966892b19c8933cc4",
+    "README_V25_15.md": "f081880fceedb2dd7cd7529de6544da2cfc414983ac4408b740ed1861829f4a9",
+    "README_V25_16_MULTI_PACKAGE_TYPES.md": "35c8e362c113f3b83b50f274a8bca10ff9cfd967e9808dd25648151ee137366a",
+    "README_V25_17_HIGHLIGHTS_FX.txt": "dea0077979a0c8f6bd8d9e9266e0d7ea605ab7b04d9559f25534c4ceb2c6ff5e",
+    "TRAVSCOPE_CURRENT_V25_11_CRM_PIPELINE_DELETE_ALL_FULL.zip": "6cfee76c1fa219aca66453adf111ca532041974c7d0b26b021aefbb7e733b75f",
+    "access-control-functions.php": "11fb68c0ca70cc42d02124f9e90fbb2035faff473b5e3456ee5003675c15d5b5",
+    "admin-access-control.php": "5204f5b551dabd1a19e631ecddef11fc08044d4afab900a83e00c7aff4dcb5a9",
+    "admin-blogs.php": "c8c877adcb93c89e917e68297457b56946f09f66dc46d9f0af29b8486c21529e",
+    "admin-booking-communications.php": "a6395cfaf47806c6a7da7370c56a4ab56fe727f6a37766ef5ba7c20139c750fd",
+    "admin-booking-details.php": "2c67278180b0a6a4d4f2aabc248182e10ff3b3de0ebc06b3b40e1236c0d9eeeb",
+    "admin-booking-documents.php": "4492fa871af08b7e435e73e093e642a928f16707ac00656fa86d712a8ee70314",
+    "admin-bookings.php": "0120305c77300dec83d6dcc332f31e6361e20a962e7b4000ac424c1f47954064",
+    "admin-business-analytics.php": "2bd1246c4ba18de4a40eed0c6c2ca4873458a736a730b6f909df77c6f4abaefe",
+    "admin-cancellations.php": "249d8ea6b6ca0884d922b37cd807d71f781cbf9da2205c1d69ecfb99d8dc267c",
+    "admin-communication-attachment.php": "1edf19eeef933e280650191353ed041eccbb444b54609fc9826de8311488931a",
+    "admin-communications.php": "ca8757a9289d2c4dd05da00421e03116a605c723ee7a3a544aa631fc14eaa372",
+    "admin-coupons.php": "b3492dc0234cabc1f48d712d4acd2b456a8d07d60ed2e9606721f921e3572aa0",
+    "admin-crm-archive.php": "c9606902f87201883e45b7f5c03b29f4fc8cf538fc31823b6d0394e8c29520d4",
+    "admin-crm-pipeline-actions.php": "455a7d9b7c71c1a8f699ab3f79fa81688b614df61cd7e0986215f13fe0f60953",
+    "admin-crm.php": "f5b79b526d21d4d2fba9812b8da57d0125821f7a6601a7f3f9c46626fda39a2a",
+    "admin-crm.php.bak": "66a53c2b6481c1142dc951c952518d9e1dc39e4961b05bb55fc74f4b79e0cf2f",
+    "admin-customer-geo.php": "86c4d47ee935a585587a37788194d4bfff5f6879b239c6ec6eb22043ad4c0b4b",
+    "admin-customer-packages.php": "a393469528a40002e4178a6d8d4f0a319d9dce7f1ff31db2e76344eb06d96266",
+    "admin-customer-quotations.php": "b81bde7d8dbede2eb9f8845e8f1d8e5edc2c460a3a3a28f314cd813bc58b9e59",
+    "admin-customers.php": "1fc035b893459f6ef21c155905e39c61524418af710c4d3d65cebc40355bfeca",
+    "admin-dashboard.php": "a34719a6948f14e1c3c8ac565413ce1a5fa0a3ec80834c0e4cfbe13dfbb05401",
+    "admin-data-import.php": "92a87c9545c2d332d96d5fa0b207c83c697532edc16defc49d40923aae612962",
+    "admin-delete-otp-functions.php": "266b3305de327b03dcd477d767c837558efb6ffede4eb84b3c83638d8229aaaf",
+    "admin-delete-otp.php": "fb554e28ff2ad9a7b68fef01c598103004683642d6a3615d1f0bf84cddf807e8",
+    "admin-deployment-safety.php": "7fb08924467a92535c1e730078b364480ca54c86c561f4a6c7f04f87efc36d3a",
+    "admin-destination-locations.php": "d83fb40f5c02ba8f8b27ea67676a5fa88d3dbae652fca3976e103abc90ad26ed",
+    "admin-destinations.php": "d7fbf45ef1ba4cdc2e4d3529331b1ee57aebbbf3b80ff490c682b79af704e00a",
+    "admin-enquiries.php": "4a2b1d69fe850994453bb7542b3023cccd308d9f4ec4eedcd59c1cbf73466a28",
+    "admin-enquiry-details.php": "77bafefec29d4e2749a049255dde1f5f7d4c97de7b1d621ec4d3599c758f3b15",
+    "admin-finance.php": "9efd990fec2d4c4f272292e03df7c8077bcbe7caa790ce6b332ce75f8b34078e",
+    "admin-hotels.php": "1674031bb7123e4997c0ea531ca6acd22d2f5b030226895d6ddb6f96437f07b5",
+    "admin-master-data.php": "53d98c9c45d53868735f68fb3cec715ae714de268d956c8e6665ee879cfc70e9",
+    "admin-mis-reports.php": "b7c972c4270725d43459c6d1525065482841a0b9f42c37b2d349639eae5ce38d",
+    "admin-notifications.php": "0911568ecdfe0bc6dec42d2c033ab5c6c8d8ce980d9d7e202ef9294d40d6dada",
+    "admin-operational-settings.php": "6b59da823d911c0f037abed711347a84739126a8fc6c71f7594cfe8c0f7a87c3",
+    "admin-package-images.php": "a7818eef674eefbfddc3dd4c63ac1eb3a8bd2bdb040704a1422d6081c86a287d",
+    "admin-package-import-supplier.php": "0a7438571e7d123dc348fe3ba05ea8929aec7a0170156242e13bd368f02eb406",
+    "admin-package-occupancy.php": "fa3e052eaf4711171603070af0e075613df036dfb982402102cdbb62380a0f21",
+    "admin-package-services.php": "71e275debde455bdd219367c0920c1ad6ae35c93ddfd711cd9537df315fe5a07",
+    "admin-package-suppliers.php": "0cfc1d78a4e06700e3479cda6e08557cbe2b0fa621e4e3df30f76d2b4c98f737",
+    "admin-packages.php": "1b025a2ed26fdbef2f3d03e0626c43231aa6068b1447ff9b1e97a4ee5fd86063",
+    "admin-pages.php": "23dfaac4d92e16fac10cd2ba0773c5eab0a9fc36d0859af8fec165a51f1c8a8f",
+    "admin-payment-details.php": "076f0b4632a375a3c38e99bb110767aadb0b7573cf4663a3cd4a178287c19ceb",
+    "admin-payments.php": "5d292d9df04c0504c345c5c261c99afd35ae6076cf9dc56515adba73a9c426b1",
+    "admin-reviews.php": "6b7a2538e7fc134835a7b599c89e50d81fe5333094f47f00162533fbbf6e418b",
+    "admin-settings.php": "4d34dca549d3f7e38527052fc30b8dceaef9201d42f702f8f39be9dbce772627",
+    "admin-supplier-compare.php": "155484fb4ec3d6870d0b1a0950b1342d8b33bf33c1a097c2245eb4f5cb7f74ff",
+    "admin-supplier-contract-inventory.php": "118129292dfe36dfaedbeeb38ecec95e2a46c1792a14e969499dfff7ede21d97",
+    "admin-supplier-contract-rates.php": "fc27006f571ff7bd67ae7d65e52b3b8e4a04efce3329d11ddbafde961b17001a",
+    "admin-supplier-details.php": "fab1041e0bb1bd877628ed760e14b0ad78505c3754de3790c788f5925fadff3e",
+    "admin-supplier-document.php": "d34eeff6a8fcec50d38009de8b046b7aa4e5d3d72f3ce3b3b8211e5e48738bfc",
+    "admin-supplier-documents.php": "6cd238d6a7474f3227848b052eca8ecdf186d6f516e7d2ea32b51458c21b5556",
+    "admin-supplier-hotel-import.php": "23f679c55c6043ce7df6571b356eb808fbbe7d69b337afb136a4050bd49764ef",
+    "admin-supplier-hotels.php": "c11fc329cdb7d3ec28f074beb5ff75f73600ac5f4d94108d943e9a039b923a2e",
+    "admin-supplier-package-import.php": "401811f3ad0e1a245e71d88d0588c3370f32afda23f985cbddb898f05836f5e5",
+    "admin-supplier-package-manual-expanded.txt": "66add3a026db87f56efeea4260f02f0d1c32e528f7a4b3718511f40d13d5c363",
+    "admin-supplier-package-manual.php": "be4ee403ec6a128415f66bff21549e07acd1f11b27fc4f5bcd96d7a88f9fdb2a",
+    "admin-supplier-packages.php": "7ace12be0b0b92d640e7a230d510c1a8ec756ef25029e08a85850e775fd34c0f",
+    "admin-supplier-rate-book.php": "63163aca6ca0a8ae02dbdb6ae1832ab3ead21d79064d26ee4a69f0df5b7c76aa",
+    "admin-supplier-rate-books.php": "13837a0caf02ecd1d5ccb8d2e327a42aa7d2c8bc2487efc1ab10c21465c95dd6",
+    "admin-supplier-request-details.php": "dbd70de2df3b6178e0bc9c4defe2de5c0a63c5825e6a5d4a5398801b883b30c6",
+    "admin-supplier-requests.php": "5d09c9e5263d8f2597d1b5fbd343cc327dc3e17290c8fe5049e157b732c85c11",
+    "admin-supplier-vehicle-import.php": "4e3bc751240445f8eac28ef604cc1e6bf97c6e4a2f2d42b50f408050cc4c6ed1",
+    "admin-supplier-vehicles.php": "7a74d3e045fd4dac22d38807cab5b66452f84bd02e86361b7960abd0b8feccec",
+    "admin-suppliers.php": "913680ade3b2207dc2f42660124fa2a3e9216c2f7ba79138f0a9022bab089d41",
+    "admin-system-health.php": "dc0b39b18addaae8adec726a3d5759de54509a4629d939c2380c4bef26313579",
+    "admin-system-jobs.php": "81f11a0a2d242858ee319225a1995b234c27049c64b6e16dde878d676ca9c154",
+    "admin-tax-invoice.php": "6f8b02d55025d79c177bd6f768ba102a03d644b75a5c02e89acf32bf2c95bbc2",
+    "admin-transport.php": "309265d2fa336c489df95d3294d394f674c3d7840104482a26f8dbdc23fa6902",
+    "admin-travel-suggestions.php": "14824df5e06b42669dd6ec63662d1a0c0fa99678c10d0c544bc6a35ac384e511",
+    "admin-trip-commercial-hub.php": "4daf362ec045f83c7fb76f3c3c8e8bb12036e5ff152dc2e943ed0a950807ac3a",
+    "admin-trip-contract-rates.php": "ddd83af51406543b26637d0e49b9b62ec10aec7fb7446707196d1a098597a813",
+    "admin-trip-hotel-allocations.php": "20d923f66643603e49219b6116ea94358b62400ab2f98ec243bad3a05b495075",
+    "admin-trip-transport-allocations.php": "755f75c9ff796f9f09a68bee1203d276aa70ed70a3dc79f718a1a1ce5083a5c7",
+    "admin-web-gallery.php": "51e50a1613dc14df5404a6487d493954d09be857d3cb0d6b7ccf722604ddac12",
+    "amendment-functions.php": "857b87d2a7ff402fd1e2dbb183d2dafce07ed6876972a3dcd5936a5c5914c60c",
+    "analytics-functions.php": "d82c43eba81d9bec438e8ca4ee4d9b9d1988bf7f295605dac0c774cd21c95411",
+    "assets/credentials-manager-v2502.js": "4f91b6a90e4e0883cbcd6210958e98476d0582c193948fde3392366f3b062905",
+    "assets/credentials-v2501.css": "b66c6b90aa1068fe618e8349df74fe49725c4a46ab65c98dbd6a9acbe0baa501",
+    "assets/crm-itinerary-studio-v2497.css": "f3d80f3ec90e750e562f63083dbd618c12cd09a48b7694e37bce98ac6ab1958c",
+    "assets/crm-itinerary-studio-v2497.js": "45a6ec83ca26b39cee5c7496dc47aa7ab8783c9cab25f36ac23ab10065b78ff5",
+    "assets/crm-laptop-workspaces-v2498.css": "ca4018c7de581e6556b2e488c90209404a52d658c4cd7ffb2bdf55223a2e3618",
+    "assets/crm-laptop-workspaces-v2498.js": "ff6647ff2d5f3616a525ab56000cf000cc622d48eedadfa478d50faa8ec5fed3",
+    "assets/customer-version-removal-v2510.js": "30a8977cf9aa48c7dcef46ba01a6a0f22c451b288d8c9438e6a07a3def857527",
+    "assets/travscope-dashboard-hero.svg": "f1a88da5a483db2407586edb153586dc15df0ecbf5e3e32a457aced3bede61dd",
+    "assets/travscope-document-logo-wide.jpg": "f7fbd0885e3ffb74dd5090c81b9905db94aa8677c519fa7891d256445c5060f7",
+    "assets/travscope-document-logo-wide.png": "401a3c24245200736c5b6652738a2b21ff0b7ad4580e013e34dd3c1306444736",
+    "assets/travscope-experience-v2500.css": "404f332da949c7b8e781c1b5107dbd8db7a4b402c80705697628e4cf6a7ca94e",
+    "assets/travscope-experience-v2500.js": "8842028f7dd185eb6ffd4a5035e2cfbd918f873cf4878a5575d0741ad1a8fc91",
+    "assets/travscope-packages-v2513.css": "f0e952792b832975d110cc6120cccec5ca13c2fbec12f0c35c3a70f4e8328245",
+    "assets/travscope-pro-admin.css": "b9609dd061ed5c5ccff015c6c9cac996cc1c1d6449e94da48629914da1405600",
+    "assets/travscope-pro-admin.js": "f45cf227cb3e864e85e3bcb0f280f02a614002648f6148f1fd641fb04a005792",
+    "assets/travscope-pro-public.css": "accd894b57841a1ba4d3be3aa752b2380a5b9bae1f666c37c4f1d96e16f7056d",
+    "assets/travscope-pro-public.js": "b67cea74b55347b7af3a697739fed729a59d5e4e21bbb69515847b83dd8c6b6a",
+    "assets/travscope-responsive-admin-v2499.css": "d2e33801765865aab94c389774a610d08c583f841a4a33a11a1dfde27e5a8d7b",
+    "assets/travscope-responsive-core-v2499.css": "bcf535b14660047ce93ae10643f1b9be9d16b5f08d7cc8392e0d941507dcb330",
+    "assets/travscope-responsive-public-v2499.css": "a278cebee0f2a32abe26cdf6bfad0d654c3b2ee6794d2d89dc767005ef53d84b",
+    "assets/travscope-responsive-v2499.js": "e795c9c09cb26c3420d1a28e4b32da8d0eb6304f3d3b38187ede639221a54d2f",
+    "assets/ts-mountain.svg": "8f44bd8c1bda35a262dcd161e8d72b9c43235507c06b9c0a920195c747478d02",
+    "assets_2026-09-30_17:12:26.zip": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+    "billing-functions.php": "4fe6f59fc5edfa5cd895105d6ec6cce439a1e9b37fff7f9e7d49123c0cb32128",
+    "blog-details.php": "f25a43c1c5ee24a23328d8c6f3f6a9df7e07eb8cda3a33d582ebf6ee75dee3ab",
+    "blog.php": "407322e17788d56636f9dfe656990d735920b4b084b904b815fc68a1551951c4",
+    "book-package.php": "720c3a33b694ba8e5961ae0925cffce4efa602d586684ac339df16c401d55926",
+    "booking-communications.php": "70e02cb61a2f13e81ce4839aabec74dfdcf8a4c704b45d9285b3d679c0074317",
+    "booking-details.php": "32ba23ce2f76cdb187210ae6ff6d418e46c6caae5d5d092836767c63d8a2503c",
+    "booking-document-file.php": "bd7b02b85f4771b1f0e57d9a0a9bd7703e3dbe7692b50b49bcfe6e526b1c7285",
+    "booking-document-pack-download.php": "b3ef9046be21c1284ae5ef387f89269d551bb5830b23ba86494372b0854243c5",
+    "booking-document-pack.php": "0f12eed28747a520aa2f36547d26e49d03586dc9ae1bb4cb973e652315ffb6c6",
+    "booking-documents.php": "46d0e843ef3f107512ef2894ad2b4360f634f392b7bcf62f8319c83b8d5c5a88",
+    "booking-invoice.php": "aa82521d01093a567e9dbc90b513e553b2bac5510f275fb64632c673c16f9643",
+    "booking-statement.php": "bd3b303a1951e2f553872d675fb465662d9d11c5c7aa5f1648b3f9adc5b8802f",
+    "booking-success.php": "b7c2ba79d9376d8bf17123acd99d93e43a10f45558ac017b13406b545da859da",
+    "booking-voucher.php": "eb0fad78e54b51d357c8829678b1823c7c4f9a3519317e408e09c6a48c5597df",
+    "build_v202.py": "0501fdecd6181d0ef19bd2e116f2fb2cc80b48210be7c0f59ade28ca2c308809",
+    "cancel-booking.php": "1870290665d9980e4d8885d1b2be74dd3f5390cff5a3041ae87fe661c6fe243b",
+    "cancellation-costing-functions.php": "0bab766428e2207586539a4a33a89c98cf74a3ea513f21cf06d4e67410c9bc1f",
+    "cancellation-mail-functions.php": "aee222caaf31aec8ed3579e2c2853bce21df400985919ba55cacf44c9dcff223",
+    "cancellation-workflow-functions.php": "65a1390099b2a69b7cab7e5d34013978ae868a77af09e6b11bd135584b22aa31",
+    "change-password.php": "81cf1f3901b7acf134a7f6aa01dbd6dd182b50ba3d775fd43265ccff6053f349",
+    "commercial-workflow-functions.php": "919ae15aa2d8e0b75e5d649c7dbb8e5763d380dc084843d573dddc8c54a6fda3",
+    "communication-center-functions.php": "39e6545c7f5622c44daea1d83f5e1fe4aed34b4ecb2dfe1eff9401ef61eabe29",
+    "communication-cron.php": "81f419a3ebed5e1c8c50511bbf4743f8acee5d2c5bb4c2f2358c69690950b521",
+    "communication-email-view.php": "859a4e3000ca659eb110458d016981f7fda82af42ea3eed9f9d4ae36c5f30e9c",
+    "communication-functions.php": "854b6530c7096ca7f0ca34ec673268f744affb886a692731848c9711734e739e",
+    "communication-inbox-cron.php": "71e305f7df0aa90abc448e62d54194a98a1e4d0e0a1b02905af6595336d4fa5c",
+    "config.php": "246ace7cb7800053bbc623417979fcaf92e2cf242463a24cde6695a020697772",
+    "contact.php": "f4f5fcabcf847e2db12ae2f4fc43c971a75c6f74f3d5fb5bddf9ff555fe32d89",
+    "credential-display.php": "0bb52e568fb0e117809d7658c50cc905a0a0c8c7315cd34806a8acbf752fafec",
+    "crm-archive-functions.php": "e7db5e53cced411d47895068b78f236b649c5118f37c25264f2b4e505d12d801",
+    "crm-functions.php": "b66801ff0dc57fd39dbd3fd85c90b9b60f3ee812e59d0cf281f16084a1857028",
+    "customer-location-directory.json": "1841362b27fd65e4e222abbdd5fb235269e564442a4196d84a3f762a98cc90aa",
+    "customer-version-directory-removal.php": "d87f96d9bce300f9f9a653c09b014171cc80ae3ffa8c9f5a37aef1e82d59cc8b",
+    "dashboard.php": "df2af92a8b23c0641ad403acd8907a321ade6a1520c16729035b728d6e9d4cae",
+    "deployment-backup-download.php": "0b4f98921793a0d197697520e1e8fc3f3cbdbfda1b6b46e6d0f103066e223dc4",
+    "deployment-functions.php": "544b06f133e95c98238b48bff778d6416fd0efaf1ce0832a79eca8b76eacb7eb",
+    "document-functions.php": "be755d067c763e8ac731a885bd4b9a768cce72c60e3219ccf3d902deea9e7f58",
+    "error_pages/503.html": "bb5c1bba6eec1c02be017e473548a09b588f52ec648425a72499399ecf598b26",
+    "execution-functions.php": "1892315a43bd161be38c637414f6098b9ad19c8c5d4dc1e7b67e29c7a6ef48e2",
+    "finance-functions.php": "f29f4110a51b941fdf01817f11c877e91ae768a053751f007b324a839ca6b9b1",
+    "forgot-password.php": "8dc92c17fc79a9caae11aa6fbb16b77bee2db1b597f055ae2e4c1389c95adb43",
+    "google-auth.php": "fa8cd7775ad5578b3d7dbce77119d01bd57562a1c7f10e34515012c1d524afd4",
+    "health-cron.php": "c183dc8eb7e805d21112128408a6538979c4ecdbde10dd710b17fc4ec2c1806d",
+    "health-functions.php": "a27e42dc0b7bddd307ac1b077e03962ffd2ec47aeca5df04651c1bd5ee7fbe35",
+    "hotel-allocation-functions.php": "d704c83e9d87d1af45b08d4de78724a48c0f75facc7342cfe3c9c1b67510d826",
+    "hotel-google-places-functions.php": "7bfad9e3291dd0455b6709eb3d7181674d96c768050ca2191f1d296a678041e0",
+    "hotel-master-api.php": "361d5d6944ad36f2221182ede1bb5cc3ad1f55bb8036a6dea9026f52d8c2749a",
+    "hotel-place-photo.php": "e1007c423a7a0fd18521e3964d7c6c2140d19b678184ea65176df7839bcf2cab",
+    "hotel-search-api.php": "faa5a9c20085f839470975f555924a94e585fb7078c5fe8a0ff841b4827a7807",
+    "import-functions.php": "cffa73402396968dfd420d03231c9049e2e70338604dab2b30ea1592378addae",
+    "includes/admin-sidebar.php": "01009db31a0f477b6242a8e9df9b0577b51db3ac75b0f9925f74b20e3e1ffe72",
+    "includes/functions.php": "9c72b41b6488e591fc17b14cf788760d26b22c42e3ca7d1017cd96e095e629b0",
+    "job-functions.php": "f880307879aedf53e54aea2b7df7e4534412940bbb68a34d10c23f2c8ca1c12b",
+    "location-master-functions.php": "de2d8863092b809264f83238821c4e699010695263ba099a3e3ba1d8cd0bf956",
+    "login.php": "4a5e940853384ae7149e1fc7ef5714714f3e607c16068c25ad7deb2bb79e893d",
+    "logout.php": "d5269b231722a142fb31755353860862c22b8bfc1a5d7e8d4ebc77c6803b82ab",
+    "manager.php": "949f7b06b45f7c4a8b78a663cc610471f48e1aebe2d239087acb312e5b842000",
+    "master-data-functions.php": "665e3a894060eb3a602486d8d47eab0599cb83a299381f75161e94531d5bf47b",
+    "mis-functions.php": "989ce36dc170f13bc3d7b59564d675868182ecf19bd125805ef3bd4efd57d32e",
+    "my-bookings.php": "0d50466549b984f0bb66bd0ed87a3d356796ff03c61543c3d0e0c8845f7e4b1d",
+    "my-enquiries.php": "e58ed13bf9bc89f89a0cbfa1215b4c3ea263048d090c845f067131fb8bef83db",
+    "notification-cron.php": "09fe1a1784aaed8d928c80a4bce13644e3bec36b514f115890d269660e7b9578",
+    "notification-functions.php": "0d390f5bab64c2c65d5c9eb2e6b1ac5ddc543044568acd2bf472028848af7b3f",
+    "operations-functions.php": "95da4e77a052bd2e55e4b175a6a8ee300321afd9ce9f8b58375a8a5efc126925",
+    "package-action-mode.php": "0f60f5a001a4efa937b329a943f04271b2bdc58ec89e4b0947a1e289fbfa99d3",
+    "package-currency-functions.php": "1cef84cf847aa89fdf4d3cd28df2618faa4259545de75a75ff97f2c19e7dcb0c",
+    "package-hotels-api.php": "236a9b3f1525752c7dbf9d0175397d76c98a721b77fee1c6f97f67bda0d0331d",
+    "package-services-functions.php": "95fe209a80a98de653d931da7d605a66fd8936576249ab4c16eb19a46edaf06c",
+    "package-supplier-functions.php": "a6259caf4b44a4de5df8264c28bda50e58c23674bc8754a83d25a3b97d90b23e",
+    "package-type-assignments.php": "df5e78a13fb70403aa806c254e3749a50d6396a0db628737f4a4508c1fb12f22",
+    "pages.php": "81394d39f40919586fc029c05eae279f0255c8fed980a238587712b345b4376f",
+    "payment-pending.php": "dabddc84a306ce4dd5de82704e643c996c310b303710197fd05c8161720e7efb",
+    "payment-receipt.php": "7653c9751d6ed383a314cefd21a5f08b4b7ac1aed237fb0a6fb3960d823af1cc",
+    "payment.php": "174ce7afeb875fd3d7d63eee04598cec6d19b190b8a49fe657155d72588bde9d",
+    "pexels-http-functions.php": "aefc15071a5c854120795b741a803009c35d86370f34343ede79c84339cfcecc",
+    "profile.php": "4ee41c8d417a01341c2db292caa6cb005a077f6bef3ed7d5c357f5ec1e454070",
+    "quotation-customer-functions.php": "c5bd52d6104bde3da2e17ec1d62749616c80139de9326ec66e18e596b566d0f7",
+    "quotation.php": "01d0d87641f6d50dd29acc92daff6e3f88c5002b0b88e4377174d6a83e93909b",
+    "railradar-suggestion-functions.php": "2af390365244919c62007f6e690bddabfbf386bccc20c9a5bc8aea80226c3e0d",
+    "receipt-pdf-functions.php": "654dfe82eced65b5915f6ae7c88063d4669d7edcf543f9c95e8d3ecf9062f455",
+    "register.php": "29ba8048dcf7d07cac10f99998fb8a1c636a270a5a59da1111ff6a784444a0c9",
+    "reminder-functions.php": "fb19021bf9fbaab3389ddc193464910cb817b64f9a185c47bda48516a65d755b",
+    "request-booking-change.php": "27ef4f006be78e85b214fceefc68707d9cd28e569fab2f0b177dbc64b44655f0",
+    "reset-password.php": "e6f9ad078682a4b08210e8f17ad6e81948dec9ca11346a37141bed76cc8bd4fa",
+    "reviews.php": "e7df9a368a81c6beb5e225e5456fdeb67515e95d594a91e535701382528d8bd9",
+    "site-brand-config.php": "84478bfd780465995613a7126df119900a59f6c089ae6f47dcf3ef808f9a9944",
+    "site-brand-sync.js": "c91f2208dffff446bd2c17531225497489bdcea02ab731d9fdcd83f26be64d91",
+    "staff.php": "960af9fdad6f5ae69e62d8988b61589f6d22a2ddf7a030161d1afb7dd99e4780",
+    "supplier-booking-response.php": "3b84056f4ceeff5fe0f4aec9b986dfbe8737fa525d7c77370bef98b7d66016a7",
+    "supplier-contract-inventory-functions.php": "19c48ebb7fc264fdf6fc6f5ac4005d4bbf388be014b783bd532316920fc0abcc",
+    "supplier-contract-rate-functions.php": "a1438ed722785c816977e4e200821bee72d68c11602a4510dc9f2332fc3c6803",
+    "supplier-document-functions.php": "4ea1d22f91ce4630b9190d33dffceade9342327478890fffa27cc043cfc314a1",
+    "supplier-functions.php": "bc5cdf6c40cf6edddeb6198e6516a3ed01437f8f46a4d00e97b7a91a0fc4c8a3",
+    "supplier-hotel-import-functions.php": "90394d00d08f801e79ab939a320cfd22f1bad2f63bba689e7f0102bd3ee0438d",
+    "supplier-hotel-option-functions.php": "dbae2c587dc4741ca1a5568197fa471ede7468cf055c74381dac4fac9416d828",
+    "supplier-manual-package-functions.php": "97e37299831e27bff3a0d7099546984cd4acf832b8c1fb04e2425e168926c54b",
+    "supplier-package-import-functions.php": "487a8c48ec5605edda696ec662e64acc07247934730eb16a62792dc4e6864aad",
+    "supplier-payables-functions.php": "9b9de67266761be07c400923ad76ddd90296da65fb0f6fea4c40e3903eb7507b",
+    "supplier-payment-voucher.php": "f2b34d703a6b6a8be0ca85dbe6c6216e189f1b4bbd6848374b2b5efec20db606",
+    "supplier-rate-book-functions.php": "d7517d5756a1d841cc4521e9055b6187c3b3ecf91d73c92952e06b0889590e29",
+    "supplier-response.php": "ef59205df9a4738a272fa054a955d8382b2d9a4b51ca73df5dd837a31de7818e",
+    "supplier-vehicle-import-functions.php": "ab354a369189f86bf91d78da7936405846b79ec4ac34455b4c1688ead0b4cd67",
+    "supplier-vehicle-option-functions.php": "f598d80295aa0e60ff701062ac352e9b855c0fd48e668a396f06204c9ef8e960",
+    "system-settings-functions.php": "f4e1331ecf5dddd372d06b18a829b726f5bc228489c1f33253c9f48c853fdb6b",
+    "templates/TRAVSCOPE_Supplier_Day_Wise_Itinerary_Import_Template.csv": "e4ea36b2a2d1598b0d8be5e7b89e4ac005fe27cd24ac0eef69f877b18d54ce24",
+    "templates/TRAVSCOPE_Supplier_Hotel_Options_Bulk_Import_Template.csv": "0f3926508d64f53fa0481d167c144fb8c971e044abee691cbddb9f14e5fd81c8",
+    "templates/TRAVSCOPE_Supplier_Hotel_Options_Bulk_Import_Template.xlsx": "0cf6b5d077e550e23ba02ea1d69f0f60001a7c549bbe2eb7bdba70d408d37705",
+    "templates/TRAVSCOPE_Supplier_Package_All_Information_Import_Template.csv": "cf9f718a8c5627bcf834e07736c552e77f8a140502312abbf2a79afcb2d05afd",
+    "templates/TRAVSCOPE_Supplier_Package_All_Information_Import_Template.xlsx": "8185feee6dd2eee34317d24d7313e84512b5be0bd2e45233b76444cc4ce017d8",
+    "templates/TRAVSCOPE_Supplier_Package_Rates_Bulk_Import_Template.csv": "cf9f718a8c5627bcf834e07736c552e77f8a140502312abbf2a79afcb2d05afd",
+    "templates/TRAVSCOPE_Supplier_Package_Rates_Bulk_Import_Template.xlsx": "8185feee6dd2eee34317d24d7313e84512b5be0bd2e45233b76444cc4ce017d8",
+    "templates/TRAVSCOPE_Supplier_Tour_Package_Rates_Daywise_Itinerary_Import_Template.xlsx": "a1c4dbdc63c9990803ed383824655ec619b044211e58ff495729c67818397c0c",
+    "templates/TRAVSCOPE_Supplier_Vehicle_Options_Bulk_Import_Template.csv": "191df9dbca3e8622f98b039ba1e9a9ae7bdc617866d6c13152fe529ad85cf79d",
+    "templates/TRAVSCOPE_Supplier_Vehicle_Options_Bulk_Import_Template.xlsx": "845e2adc3dc252765862fd47f457605bf2bf060a7e3ef4587abf07c57b6f2cf5",
+    "templates/TRAVSCOPE_Unified_Supplier_Package_Hotel_Import_Template.xlsx": "52bdfac6793b814ee673dde59195785f1799f79f43c7cb65df496e70d6a8e8b6",
+    "transport-allocation-functions.php": "516f90b52a26c6174af1292594eca3d336a8390e92ad1fe787ecfe6a69b45d8e",
+    "travel-suggestion-functions.php": "8bc62e8da9f8cc932bbee438a614b34806ae1660ca9554746778e448aabcd974",
+    "unsplash-photo-functions.php": "fea83038c66154d2090bccc8edc140ef06298cd7a417c1be79d73dc6050f5ee9",
+    "uploads/destinations/A breathtaking waterfall cascades in a lush rainforest highlighting natures beauty - Pexels 2905617.jpg": "e8d7412e28d3196ac60b96ccb445c820c0360251c48d0aa45dedb51262567f8f",
+    "uploads/packages/A breathtaking aerial view of a picturesque village nestled in a lush mountain valley - Pexels 6726188.jpg": "414349df644c0cb08fa4799923672ebdfb5a2cdd97f7fe33051597e09706d1eb",
+    "uploads/packages/A freight train arrives at an Indian railway station platform during a calm day - Pexels 7237530.jpg": "494a34ffa8039416d0fbb047ef7abf0f51ce472e53cbc030130391bb86d5d4f6",
+    "uploads/packages/A local commuter train arriving at Izumisano Station Osaka Japan during day - Pexels 39466491.jpg": "9b33ca052618d438bca02c13ba366800fb95a3bf757d8097f98d3d36f4485562",
+    "uploads/packages/A picturesque aerial view of the lush greenery and flowing river in Minnesotas tranquil la - Pexels 12402958.jpg": "b0631b3f61672e63f5488009f02f31abe1b28c9f5288b9c63d92ead90c914662",
+    "uploads/packages/A scenic curved road through mountainous terrain under a clear sky ideal for adventure tra - Pexels 32277458.jpg": "5f3035d1dd0720a602eaa9fb9a49f865e203e318c677c9eeb079281b2fae3c98",
+    "uploads/packages/A serene dirt path winding through lush green forest featuring a rustic wooden bridge and  - Pexels 20722955.jpg": "29ad32a1351ecbb75933d0cdcbda3b1159ea09b795997de9d4c1d52d162b1bab",
+    "uploads/packages/A tranquil river winding through the Fann Mountains showcasing natural beauty and rugged t - Pexels 39590481.jpg": "7f70e2629e642a75bde1c901822cc30c4cf775c4a94a93aa896cc79364a8a2e4",
+    "uploads/packages/A vivid train station platform in Bangladesh with lush greenery and open sky - Pexels 9749564.jpg": "9e892b675f7cdf0cdf86c768d8ccd7fa30119c2b000240dced5dd8435a0fedfe",
+    "uploads/packages/Aerial shot of lush green valleys with winding roads and river view - Pexels 34160187.jpg": "11e100f658e01a3210c7d7606b52916dde5181950b3cbf1dedb9bb1a31f0eeed",
+    "uploads/packages/Aerial view of Gulmarg covered in snow showcasing a serene winter wonderland - Pexels 11126344.jpg": "a1a753904de79c36ac62be925b0f9a665f67eb48be7e87eed97c5c26cb26b7d2",
+    "uploads/packages/Aerial view of a vibrant resort with a swimming pool in Vinales Valley Cuba set against a  - Pexels 19573772.jpg": "b78bf44e403f6c3cc8c350527606150ea44bddcb6cb6e4c762506d206c707058",
+    "uploads/packages/Aerial view of lush green mountains and river in Bhimashankar India - Pexels 14069124.jpg": "7ba6c45d13cd1b3bac33dbbdc75dcb4b822041b1d9b812f244de6e1948e365a5",
+    "uploads/packages/Aerial view of picturesque landscape with green hills a winding road and mountain backdrop - Pexels 38514006.jpg": "20bcd22988ab98c4fd9f06427b89d43a7cc4a676603eedb41a4dc03534649007",
+    "uploads/packages/An Indian rhinoceros by a tranquil lake surrounded by lush greenery - Pexels 38232180.jpg": "9b24aa97066c02ad9e58f04422d0b68aea47f5136b92e68a135b49f8efc20d06",
+    "uploads/packages/Breathtaking view of green hills with sun rays over a town in the valley - Pexels 15718401.jpg": "862d648797520d0f7906f8cddc7e473c75436b9c250323ac20785fbd043f874f",
+    "uploads/packages/Colorful Buddhist temple surrounded by prayer flags in the misty Himalayan mountains - Pexels 19864968.jpg": "7f2e871d9e1b114d467de7c72b146f8698bf8020f9da9010f8543d6bf6ccf9c6",
+    "uploads/packages/Expansive view of green hills and grasslands with trees and flowers under a cloudy sky - Pexels 16731225.jpg": "b3b62e2536e0a778a7fa6eca8b4feaa57427067b52fac713c9b061b92fc581ed",
+    "uploads/packages/Explore the scenic wooden walkway in the lush Sundarbans mangrove forest Bangladesh - Pexels 34991637.jpg": "4977d14d061ce61cf046c862a70a726bafa0b95b9eb947f6e41f4b1d05573d8c",
+    "uploads/packages/Lush green hills under clear blue sky in Sunol California showcasing vibrant spring landsc - Pexels 36489161.jpg": "1033ab547c5a6bdc76083ec4b16a7fbc207774aa3e8dc7ba7e77c4986332d5e4",
+    "uploads/packages/Lush green valley with distant mountains under a bright sky in the Georgian countryside - Pexels 38939762.jpg": "a8445717f6b0a5bc58f21824c734f0b60d87bea8479c5be6dd18cb0e6dca17c0",
+    "uploads/packages/Scenic view of an alpine house amidst lush green valley in Pahalgam with mountainous backd - Pexels 16151009.jpg": "8ace35234dfaf2c9ead901a80958263409e9affe34426e12148537c56dbb8f88",
+    "uploads/packages/Serene landscape of lush green mountains and winding river in Kashmir a nature lovers para - Pexels 38520176.jpg": "f705cdca4f81571cabee4ebc54a3be3f43b950bd90c3e7dd94df4ccef38cf039",
+    "uploads/packages/South African Airways plane docked at a gate in an airport captured from an aerial view - Pexels 38340833.jpg": "4595b0c05730ef86cc29eea9afbbb3209c69920cacf55a5c1a5203667bab72f4",
+    "uploads/packages/Stunning view of a snow-capped mountain range with vibrant green valleys - Pexels 38441491.jpg": "9efc0fce6701e529b5834aa5829d186b723537aad462b8ef60d424461953eac3",
+    "uploads/packages/Traffic flows on a tree-lined road with stunning mountain backdrop - Pexels 28588657.jpg": "171628797e8f3ee8ba76abe27d1e19a3243ee9584b0c4a0d73ee8410f23accde",
+    "uploads/packages/Vibrant vineyard rows in Northern California with rolling hills and spring foliage perfect - Pexels 12811544.jpg": "49ecdf7523eb84f1a30154de5adbbd54a3c2d04b82137acdbb4176497327220e",
+    "uploads/packages/Yaks transporting goods through Khumjung village in Nepal with scenic mountain backdrop - Pexels 14158631.jpg": "4470fabed4111d9543c6163339be4343824013e17ad28ae27e6cc089faf1673e",
+    "verify-email.php": "553240bb861ff08c502eebe87c95e87084b424a7febbd46bfbc248a7855defea",
+    "wishlist.php": "d6e4b95b8e069ce628917900bece39b7253e84bc220163365b21873fe11b51db"
+  },
+  "preserved_config_sha256": "246ace7cb7800053bbc623417979fcaf92e2cf242463a24cde6695a020697772",
+  "preserved_embedded_archive_sha256": {
+    "TRAVSCOPE_CURRENT_V25_11_CRM_PIPELINE_DELETE_ALL_FULL.zip": "6cfee76c1fa219aca66453adf111ca532041974c7d0b26b021aefbb7e733b75f",
+    "assets_2026-09-30_17:12:26.zip": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a"
+  },
+  "product_files": {
+    "assets/travscope-world-catalog-v2526.css": {
+      "bytes": 33614,
+      "mode": "0644",
+      "sha256": "a801cce0f60ff4b570503e8b779a9e911c8cea7323ac8d701bd666faa640c936"
+    },
+    "assets/travscope-world-landscape-pexels-38441491.jpg": {
+      "bytes": 237929,
+      "mode": "0644",
+      "sha256": "9efc0fce6701e529b5834aa5829d186b723537aad462b8ef60d424461953eac3"
+    },
+    "assets/travscope-world-v2526.css": {
+      "bytes": 16987,
+      "mode": "0644",
+      "sha256": "fe9e9a3f17467477259ac381d421bbe6b0e5c7439420f3e26a51083e2bc9c406"
+    },
+    "destinations.php": {
+      "bytes": 27186,
+      "mode": "0644",
+      "sha256": "15ed4aae196bdd1eecdc0f335af484e57d69b03a62caec8f5e44fbf0850d5d65"
+    },
+    "index.php": {
+      "bytes": 64870,
+      "mode": "0644",
+      "sha256": "0a28165fb42e5a8bab1f10571994f277141c5027d0cd81db0dc0153e6fb815c2"
+    },
+    "package-details.php": {
+      "bytes": 217216,
+      "mode": "0644",
+      "sha256": "0f62a2d8c6cd11509763d89df4395fa300946a34ef42b91dd8008708485412c2"
+    },
+    "packages.php": {
+      "bytes": 105557,
+      "mode": "0644",
+      "sha256": "2771f14dcc8550be75ccad572f80c110610efab0ca38e97dfd58735d96ffaae4"
+    }
+  },
+  "recovered_runtime_counts": {
+    "PHPMailer": 72,
+    "assets": 5,
+    "error_pages": 1,
+    "includes": 2,
+    "templates": 10,
+    "uploads": 28
+  },
+  "recovered_runtime_provenance": {
+    "PHPMailer/COMMITMENT": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2092,
+      "entry": "PHPMailer/COMMITMENT",
+      "sha256": "340ae872d625b128586b8751f3d599f63893417d8867cdb488702c48ea58fbc1"
+    },
+    "PHPMailer/LICENSE": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 26529,
+      "entry": "PHPMailer/LICENSE",
+      "sha256": "a1a33180d02960ab1c5de36cf20b1a2f0fe9888d83826ad263da5db52f1b183b"
+    },
+    "PHPMailer/README.md": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 16831,
+      "entry": "PHPMailer/README.md",
+      "sha256": "55789c10b9bacdbc0e3f0ba81d02486b55268dc32df1cba25f974e6a56fa75c1"
+    },
+    "PHPMailer/SECURITY.md": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 7585,
+      "entry": "PHPMailer/SECURITY.md",
+      "sha256": "748329021e3d7307694d5c0e108dd8a31850e58ac96bc6de6cf1099568906eca"
+    },
+    "PHPMailer/SMTPUTF8.md": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 5915,
+      "entry": "PHPMailer/SMTPUTF8.md",
+      "sha256": "eb3409266849cdb958db6d939b70a31097767f87e0e1003353528a746423a013"
+    },
+    "PHPMailer/VERSION": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 6,
+      "entry": "PHPMailer/VERSION",
+      "sha256": "318630f32c0dac5c715d91aecff9c07b2ce055b792ccb015a815cb013ea80fc6"
+    },
+    "PHPMailer/composer.json": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3016,
+      "entry": "PHPMailer/composer.json",
+      "sha256": "0d29d0a9c86be376433530333bee758ba563e7267347300c181299f5a1d920a4"
+    },
+    "PHPMailer/get_oauth_token.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 6304,
+      "entry": "PHPMailer/get_oauth_token.php",
+      "sha256": "c461d8181348df478a5639013af6719e89182bd6153b2e48469525763371f743"
+    },
+    "PHPMailer/language/phpmailer.lang-af.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1584,
+      "entry": "PHPMailer/language/phpmailer.lang-af.php",
+      "sha256": "d4c5272712f1b1cd6b3d08f83a89fbdae257de308a58e6eee1f4e7f519c86062"
+    },
+    "PHPMailer/language/phpmailer.lang-ar.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2024,
+      "entry": "PHPMailer/language/phpmailer.lang-ar.php",
+      "sha256": "ad11ffbf21f84fe6e812a0cf4f82df4412dd232ab6f6b6fe47e2c760845ec04f"
+    },
+    "PHPMailer/language/phpmailer.lang-as.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3792,
+      "entry": "PHPMailer/language/phpmailer.lang-as.php",
+      "sha256": "8aaaa3925b2e79a475ffd7b65e29406b1e86c8ea48a666ec32243668f5e28494"
+    },
+    "PHPMailer/language/phpmailer.lang-az.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1749,
+      "entry": "PHPMailer/language/phpmailer.lang-az.php",
+      "sha256": "8b116561af83e2bd1ef3319ff8103f169883e89efab592115d98c9ae7c09d6df"
+    },
+    "PHPMailer/language/phpmailer.lang-ba.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1745,
+      "entry": "PHPMailer/language/phpmailer.lang-ba.php",
+      "sha256": "df573ba9a9431bff2c602b7b297040e0f9cf9b319562f17c686f01f1ed4ebfad"
+    },
+    "PHPMailer/language/phpmailer.lang-be.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2178,
+      "entry": "PHPMailer/language/phpmailer.lang-be.php",
+      "sha256": "47c51cef7371142b993b58764c0abd4e82fe7213f9bd85b6dcfb24d0acd223ec"
+    },
+    "PHPMailer/language/phpmailer.lang-bg.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2196,
+      "entry": "PHPMailer/language/phpmailer.lang-bg.php",
+      "sha256": "9a556b5ad45ead80d7331f5ed713799e7fb810c52f8d7913725585fbeff084c2"
+    },
+    "PHPMailer/language/phpmailer.lang-bn.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3845,
+      "entry": "PHPMailer/language/phpmailer.lang-bn.php",
+      "sha256": "ff7842ce6fdc7cbb846b16f292e126fbc578e0c27da48092e4a5f44d928aebe6"
+    },
+    "PHPMailer/language/phpmailer.lang-ca.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1730,
+      "entry": "PHPMailer/language/phpmailer.lang-ca.php",
+      "sha256": "2b62db0921d2d321c80869bc9544b744747fd7cf398cc17358c0ae0b2533548c"
+    },
+    "PHPMailer/language/phpmailer.lang-cs.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1798,
+      "entry": "PHPMailer/language/phpmailer.lang-cs.php",
+      "sha256": "4bdb6445032c31fa1c41d65b8840f4fed0c30b96a6e68418ea6968e6de49f664"
+    },
+    "PHPMailer/language/phpmailer.lang-da.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2752,
+      "entry": "PHPMailer/language/phpmailer.lang-da.php",
+      "sha256": "bd266892cb528bdb3a691d1716f139c3c84435272e93ca7e6a0b70e74f3e1ce2"
+    },
+    "PHPMailer/language/phpmailer.lang-de.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1886,
+      "entry": "PHPMailer/language/phpmailer.lang-de.php",
+      "sha256": "41e9bee22a8b00d42b28ebadae85ba531134a2482108489c0e5ced6ddc25b062"
+    },
+    "PHPMailer/language/phpmailer.lang-el.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3307,
+      "entry": "PHPMailer/language/phpmailer.lang-el.php",
+      "sha256": "3760e138e5c0fdc17a896718d2d86239b6d2d936abc0cf016fc5350ee034a8dd"
+    },
+    "PHPMailer/language/phpmailer.lang-eo.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2766,
+      "entry": "PHPMailer/language/phpmailer.lang-eo.php",
+      "sha256": "bf02aaf8e09a94ec0e20355dfb6e0f1a37a56ae06944014c277de208e39b16f9"
+    },
+    "PHPMailer/language/phpmailer.lang-es.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2831,
+      "entry": "PHPMailer/language/phpmailer.lang-es.php",
+      "sha256": "182270f8e64be0dcbb5c22c6c672efc5a3da4c0295b4d2d69373e18424657a91"
+    },
+    "PHPMailer/language/phpmailer.lang-et.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1744,
+      "entry": "PHPMailer/language/phpmailer.lang-et.php",
+      "sha256": "7a854b796bc5058913ab5f5ad489b02ed246ad49220e844a1c3fbb0ffa908fa6"
+    },
+    "PHPMailer/language/phpmailer.lang-fa.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2079,
+      "entry": "PHPMailer/language/phpmailer.lang-fa.php",
+      "sha256": "7e38e2e75326d9d7bbb87fc4f6dc5c40ce79c9ce43016a707e84af9d7e332102"
+    },
+    "PHPMailer/language/phpmailer.lang-fi.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1659,
+      "entry": "PHPMailer/language/phpmailer.lang-fi.php",
+      "sha256": "3efb47c9e164860b45ee3a9f707975210d7f87bbc356a7dada075528fc37052c"
+    },
+    "PHPMailer/language/phpmailer.lang-fo.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1637,
+      "entry": "PHPMailer/language/phpmailer.lang-fo.php",
+      "sha256": "2b778d73170ff1864126bd65839d39098a9dde290e31fe6ea6719b68a030daa2"
+    },
+    "PHPMailer/language/phpmailer.lang-fr.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2732,
+      "entry": "PHPMailer/language/phpmailer.lang-fr.php",
+      "sha256": "1d816ccae7fa8eea24907686ffeeeeb5861ffdf794690e6a91c142d49d05efd7"
+    },
+    "PHPMailer/language/phpmailer.lang-gl.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1742,
+      "entry": "PHPMailer/language/phpmailer.lang-gl.php",
+      "sha256": "fe2fd5068446a04e73ca767ca05eba81f6648fcb93988a307a4dbd619054780a"
+    },
+    "PHPMailer/language/phpmailer.lang-he.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1812,
+      "entry": "PHPMailer/language/phpmailer.lang-he.php",
+      "sha256": "7d944fe5e073d0dfb8a53cf9f8e9c409d40f5f0149ce6d47c1f4088cb28d69fe"
+    },
+    "PHPMailer/language/phpmailer.lang-hi.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3768,
+      "entry": "PHPMailer/language/phpmailer.lang-hi.php",
+      "sha256": "2a260e1b5f0d7efbfccc436ea040aa172ecd5ac8ea394482c0dd9a2e7c9d3206"
+    },
+    "PHPMailer/language/phpmailer.lang-hr.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1754,
+      "entry": "PHPMailer/language/phpmailer.lang-hr.php",
+      "sha256": "b337f280f2e5f087daaa44bd1f359bbc41e01062cbd07a5c67345a45a01ccbaf"
+    },
+    "PHPMailer/language/phpmailer.lang-hu.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1717,
+      "entry": "PHPMailer/language/phpmailer.lang-hu.php",
+      "sha256": "94045618ef5a86dc4f8176f3ebae3fbb1e29b7ef7cb1ce99ba57ee4724aef3be"
+    },
+    "PHPMailer/language/phpmailer.lang-hy.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2185,
+      "entry": "PHPMailer/language/phpmailer.lang-hy.php",
+      "sha256": "52fc3f40d24d55ef95702a59ec006c4c5996a22e54a6b00e54a25707db341629"
+    },
+    "PHPMailer/language/phpmailer.lang-id.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1997,
+      "entry": "PHPMailer/language/phpmailer.lang-id.php",
+      "sha256": "a9c606b5da1470c02140c96c1ef3fc5ba1175ad0ce119b6f2d93e02c112d2ae1"
+    },
+    "PHPMailer/language/phpmailer.lang-it.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1819,
+      "entry": "PHPMailer/language/phpmailer.lang-it.php",
+      "sha256": "06e7faf9dc2dabebe8ea8c684eb9b798ffd241ce039945a8e5583993705b1c3e"
+    },
+    "PHPMailer/language/phpmailer.lang-ja.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2934,
+      "entry": "PHPMailer/language/phpmailer.lang-ja.php",
+      "sha256": "c1cb38a994fb2f1b523dc622174dd4f7b9e9ba20e8cd864ae44744bd2b8050fc"
+    },
+    "PHPMailer/language/phpmailer.lang-ka.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2884,
+      "entry": "PHPMailer/language/phpmailer.lang-ka.php",
+      "sha256": "0bf765b1e28e33947df929657c325cd957c506ec42d44d2a32b3d30794f09b31"
+    },
+    "PHPMailer/language/phpmailer.lang-ko.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1771,
+      "entry": "PHPMailer/language/phpmailer.lang-ko.php",
+      "sha256": "674f7f333694475a3a6164c1c5cb84e25f94a5b0d3118cb49ff2e5a318260c64"
+    },
+    "PHPMailer/language/phpmailer.lang-ku.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2238,
+      "entry": "PHPMailer/language/phpmailer.lang-ku.php",
+      "sha256": "4cc2ad8c0516ce01090997c802c7cdc3362e974e55ea26823140e60d50328f71"
+    },
+    "PHPMailer/language/phpmailer.lang-lt.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1627,
+      "entry": "PHPMailer/language/phpmailer.lang-lt.php",
+      "sha256": "ee21a138a136caf9b213b3fe9f070afb9c20f4cdd51178045798bb60ccc82865"
+    },
+    "PHPMailer/language/phpmailer.lang-lv.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1643,
+      "entry": "PHPMailer/language/phpmailer.lang-lv.php",
+      "sha256": "a986f934cb4a2b9cf5bad1c150f0af9d8a0c7745d36b9904882d68b1bb07fb5d"
+    },
+    "PHPMailer/language/phpmailer.lang-mg.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1782,
+      "entry": "PHPMailer/language/phpmailer.lang-mg.php",
+      "sha256": "eebd4b1c9caa2b0ad5637b623cad66a0b67363a2e752cbd86eacb2139636fd85"
+    },
+    "PHPMailer/language/phpmailer.lang-mn.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2186,
+      "entry": "PHPMailer/language/phpmailer.lang-mn.php",
+      "sha256": "e1b246c27568a92fef27a44e9601ce3ff41ca0dac0f564782dc46bfd03f42724"
+    },
+    "PHPMailer/language/phpmailer.lang-ms.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1734,
+      "entry": "PHPMailer/language/phpmailer.lang-ms.php",
+      "sha256": "f6b8ec01f2734624eadb3e9135e408a5a6da20a5a684b5577d7ba29bddd4b5aa"
+    },
+    "PHPMailer/language/phpmailer.lang-nb.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2697,
+      "entry": "PHPMailer/language/phpmailer.lang-nb.php",
+      "sha256": "1e3ec30df862181ac8679da0fd16c31fdf02104530ec45c1e192a55685c32b4e"
+    },
+    "PHPMailer/language/phpmailer.lang-nl.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2801,
+      "entry": "PHPMailer/language/phpmailer.lang-nl.php",
+      "sha256": "fdc521f74bcf25bde2395483441c7920919b26f7b181d89602fe0807868620d9"
+    },
+    "PHPMailer/language/phpmailer.lang-pl.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2676,
+      "entry": "PHPMailer/language/phpmailer.lang-pl.php",
+      "sha256": "9c00369f9bd935c4fa6faaf2692a8511369993119a0294c1badc33313f8d6e91"
+    },
+    "PHPMailer/language/phpmailer.lang-pt.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2465,
+      "entry": "PHPMailer/language/phpmailer.lang-pt.php",
+      "sha256": "588e547a80a7c867594f2e956ca12625d3b48446b16cd0e47f48fea71ef3ed2c"
+    },
+    "PHPMailer/language/phpmailer.lang-pt_br.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2719,
+      "entry": "PHPMailer/language/phpmailer.lang-pt_br.php",
+      "sha256": "8965d817b5667787efd6ffe58b15af236e51ff085594562fafccaf85d9f1bcd8"
+    },
+    "PHPMailer/language/phpmailer.lang-ro.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2448,
+      "entry": "PHPMailer/language/phpmailer.lang-ro.php",
+      "sha256": "f0cf6c8032723215293095e7a9b2f2a9c1159bb51221511efb6163f4096b9232"
+    },
+    "PHPMailer/language/phpmailer.lang-ru.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3297,
+      "entry": "PHPMailer/language/phpmailer.lang-ru.php",
+      "sha256": "981aa0630326df0b5dd48da086c19c4a329571a7426c36f6e08ff6470f24687d"
+    },
+    "PHPMailer/language/phpmailer.lang-si.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3425,
+      "entry": "PHPMailer/language/phpmailer.lang-si.php",
+      "sha256": "502364f4ccb0c546093c13b4fc2a9ef15e0d47b4e4b789729d72b6cb33c6871e"
+    },
+    "PHPMailer/language/phpmailer.lang-sk.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1909,
+      "entry": "PHPMailer/language/phpmailer.lang-sk.php",
+      "sha256": "b3327b7d377f16e0aeabca54ca2c8906e23c5a77cdb19d2d4fb85f0bbd39d3cd"
+    },
+    "PHPMailer/language/phpmailer.lang-sl.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2577,
+      "entry": "PHPMailer/language/phpmailer.lang-sl.php",
+      "sha256": "642ab71b9a02ee00abc39516e6d005957beff6dde91948155d0f25ce4f98630d"
+    },
+    "PHPMailer/language/phpmailer.lang-sr.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2301,
+      "entry": "PHPMailer/language/phpmailer.lang-sr.php",
+      "sha256": "9982802bafa971f1d2e376fca86f8da86c7e43158ef6d3cb6f7c3ff51cc1c7e9"
+    },
+    "PHPMailer/language/phpmailer.lang-sr_latn.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1814,
+      "entry": "PHPMailer/language/phpmailer.lang-sr_latn.php",
+      "sha256": "0f67cf31fa3b5f2db2a2c74911096a73892377096c966923c0dc1fbbbc612a32"
+    },
+    "PHPMailer/language/phpmailer.lang-sv.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1610,
+      "entry": "PHPMailer/language/phpmailer.lang-sv.php",
+      "sha256": "c1cb0390311cdff2f93ab37fff165b389fa74dca7f6341ce08240eca886b5ac3"
+    },
+    "PHPMailer/language/phpmailer.lang-tl.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1721,
+      "entry": "PHPMailer/language/phpmailer.lang-tl.php",
+      "sha256": "48fa60bb2a88fdeb53960878fd0cdf88f7a59736a9efa487787b61de1c5d9db9"
+    },
+    "PHPMailer/language/phpmailer.lang-tr.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2606,
+      "entry": "PHPMailer/language/phpmailer.lang-tr.php",
+      "sha256": "9f19069be7c25d8a0563ee535bbc57ebe3c65698b2af99320349a4002db99091"
+    },
+    "PHPMailer/language/phpmailer.lang-uk.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2282,
+      "entry": "PHPMailer/language/phpmailer.lang-uk.php",
+      "sha256": "767609225673b2983c2cf7b208ae954d49d7728287da2c2cb859ca8c9273efd3"
+    },
+    "PHPMailer/language/phpmailer.lang-ur.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2265,
+      "entry": "PHPMailer/language/phpmailer.lang-ur.php",
+      "sha256": "4404c38f4f64a1098678e0d30a62c63cd1dd56949fcc7f6ea89557fbf0693e06"
+    },
+    "PHPMailer/language/phpmailer.lang-vi.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1793,
+      "entry": "PHPMailer/language/phpmailer.lang-vi.php",
+      "sha256": "3b5acbfceceb34f90dc7f905f044a51e48cce7f79cbf998b579b8bf00fa1fabc"
+    },
+    "PHPMailer/language/phpmailer.lang-zh.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1669,
+      "entry": "PHPMailer/language/phpmailer.lang-zh.php",
+      "sha256": "ad235ae24994a85b63ff1bd2dadab9de1f2806a9764c162cf047459fa037814c"
+    },
+    "PHPMailer/language/phpmailer.lang-zh_cn.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 2333,
+      "entry": "PHPMailer/language/phpmailer.lang-zh_cn.php",
+      "sha256": "cd53b733c64eeac233b140e33a6d58d337cd1ac28d6a5cd3231d87169f548c07"
+    },
+    "PHPMailer/src/DSNConfigurator.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 6883,
+      "entry": "PHPMailer/src/DSNConfigurator.php",
+      "sha256": "429f5f0a962864ec7b67efd572c0f85cc0f33fd4585413d8dc80d41c8562399e"
+    },
+    "PHPMailer/src/Exception.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1256,
+      "entry": "PHPMailer/src/Exception.php",
+      "sha256": "22ab858ae438d98f58f41f38ad2191d1b0d59570aebea0463a7948cfae1021b7"
+    },
+    "PHPMailer/src/OAuth.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3791,
+      "entry": "PHPMailer/src/OAuth.php",
+      "sha256": "44b2c9a3b6e538a65b90261251f197d700e2eb90d51d4944fb80577263210fb4"
+    },
+    "PHPMailer/src/OAuthTokenProvider.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1538,
+      "entry": "PHPMailer/src/OAuthTokenProvider.php",
+      "sha256": "f2318ea1b2841b2481b636e205c281a733f9de944a71ae403e0b59fa71219572"
+    },
+    "PHPMailer/src/PHPMailer.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 192458,
+      "entry": "PHPMailer/src/PHPMailer.php",
+      "sha256": "c1d9ea181f36dcec5a7cfe796e66c6c5529c165ee9004057ee4bd867b51f3940"
+    },
+    "PHPMailer/src/POP3.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 12452,
+      "entry": "PHPMailer/src/POP3.php",
+      "sha256": "3a3fbd3b585a50711ff0f4741c3293397fcb6a36a0ca7dd80c81e52af617ba0e"
+    },
+    "PHPMailer/src/SMTP.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 53119,
+      "entry": "PHPMailer/src/SMTP.php",
+      "sha256": "a584d94e7fd2d0a5a0cb9503f93e3d8151c70b098d20292677563b82b5ebaff0"
+    },
+    "assets/travscope-pro-admin.css": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 46810,
+      "entry": "assets/travscope-pro-admin.css",
+      "sha256": "b9609dd061ed5c5ccff015c6c9cac996cc1c1d6449e94da48629914da1405600"
+    },
+    "assets/travscope-pro-admin.js": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 22392,
+      "entry": "assets/travscope-pro-admin.js",
+      "sha256": "f45cf227cb3e864e85e3bcb0f280f02a614002648f6148f1fd641fb04a005792"
+    },
+    "assets/travscope-pro-public.css": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1300,
+      "entry": "assets/travscope-pro-public.css",
+      "sha256": "accd894b57841a1ba4d3be3aa752b2380a5b9bae1f666c37c4f1d96e16f7056d"
+    },
+    "assets/travscope-pro-public.js": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 79,
+      "entry": "assets/travscope-pro-public.js",
+      "sha256": "b67cea74b55347b7af3a697739fed729a59d5e4e21bbb69515847b83dd8c6b6a"
+    },
+    "assets/ts-mountain.svg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 1297,
+      "entry": "assets/ts-mountain.svg",
+      "sha256": "8f44bd8c1bda35a262dcd161e8d72b9c43235507c06b9c0a920195c747478d02"
+    },
+    "error_pages/503.html": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 3504,
+      "entry": "error_pages/503.html",
+      "sha256": "bb5c1bba6eec1c02be017e473548a09b588f52ec648425a72499399ecf598b26"
+    },
+    "includes/admin-sidebar.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 4327,
+      "entry": "includes/admin-sidebar.php",
+      "sha256": "01009db31a0f477b6242a8e9df9b0577b51db3ac75b0f9925f74b20e3e1ffe72"
+    },
+    "includes/functions.php": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 40486,
+      "entry": "includes/functions.php",
+      "sha256": "9c72b41b6488e591fc17b14cf788760d26b22c42e3ca7d1017cd96e095e629b0"
+    },
+    "templates/TRAVSCOPE_Supplier_Day_Wise_Itinerary_Import_Template.csv": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 232,
+      "entry": "templates/TRAVSCOPE_Supplier_Day_Wise_Itinerary_Import_Template.csv",
+      "sha256": "e4ea36b2a2d1598b0d8be5e7b89e4ac005fe27cd24ac0eef69f877b18d54ce24"
+    },
+    "templates/TRAVSCOPE_Supplier_Hotel_Options_Bulk_Import_Template.csv": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 288,
+      "entry": "templates/TRAVSCOPE_Supplier_Hotel_Options_Bulk_Import_Template.csv",
+      "sha256": "0f3926508d64f53fa0481d167c144fb8c971e044abee691cbddb9f14e5fd81c8"
+    },
+    "templates/TRAVSCOPE_Supplier_Hotel_Options_Bulk_Import_Template.xlsx": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 19315,
+      "entry": "templates/TRAVSCOPE_Supplier_Hotel_Options_Bulk_Import_Template.xlsx",
+      "sha256": "0cf6b5d077e550e23ba02ea1d69f0f60001a7c549bbe2eb7bdba70d408d37705"
+    },
+    "templates/TRAVSCOPE_Supplier_Package_All_Information_Import_Template.csv": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 479,
+      "entry": "templates/TRAVSCOPE_Supplier_Package_All_Information_Import_Template.csv",
+      "sha256": "cf9f718a8c5627bcf834e07736c552e77f8a140502312abbf2a79afcb2d05afd"
+    },
+    "templates/TRAVSCOPE_Supplier_Package_All_Information_Import_Template.xlsx": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 37175,
+      "entry": "templates/TRAVSCOPE_Supplier_Package_All_Information_Import_Template.xlsx",
+      "sha256": "8185feee6dd2eee34317d24d7313e84512b5be0bd2e45233b76444cc4ce017d8"
+    },
+    "templates/TRAVSCOPE_Supplier_Package_Rates_Bulk_Import_Template.csv": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 479,
+      "entry": "templates/TRAVSCOPE_Supplier_Package_Rates_Bulk_Import_Template.csv",
+      "sha256": "cf9f718a8c5627bcf834e07736c552e77f8a140502312abbf2a79afcb2d05afd"
+    },
+    "templates/TRAVSCOPE_Supplier_Package_Rates_Bulk_Import_Template.xlsx": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 37175,
+      "entry": "templates/TRAVSCOPE_Supplier_Package_Rates_Bulk_Import_Template.xlsx",
+      "sha256": "8185feee6dd2eee34317d24d7313e84512b5be0bd2e45233b76444cc4ce017d8"
+    },
+    "templates/TRAVSCOPE_Supplier_Tour_Package_Rates_Daywise_Itinerary_Import_Template.xlsx": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 63274,
+      "entry": "templates/TRAVSCOPE_Supplier_Tour_Package_Rates_Daywise_Itinerary_Import_Template.xlsx",
+      "sha256": "a1c4dbdc63c9990803ed383824655ec619b044211e58ff495729c67818397c0c"
+    },
+    "templates/TRAVSCOPE_Supplier_Vehicle_Options_Bulk_Import_Template.csv": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 211,
+      "entry": "templates/TRAVSCOPE_Supplier_Vehicle_Options_Bulk_Import_Template.csv",
+      "sha256": "191df9dbca3e8622f98b039ba1e9a9ae7bdc617866d6c13152fe529ad85cf79d"
+    },
+    "templates/TRAVSCOPE_Supplier_Vehicle_Options_Bulk_Import_Template.xlsx": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 14446,
+      "entry": "templates/TRAVSCOPE_Supplier_Vehicle_Options_Bulk_Import_Template.xlsx",
+      "sha256": "845e2adc3dc252765862fd47f457605bf2bf060a7e3ef4587abf07c57b6f2cf5"
+    },
+    "uploads/destinations/A breathtaking waterfall cascades in a lush rainforest highlighting natures beauty - Pexels 2905617.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 87050,
+      "entry": "uploads/destinations/A breathtaking waterfall cascades in a lush rainforest highlighting natures beauty - Pexels 2905617.jpg",
+      "sha256": "e8d7412e28d3196ac60b96ccb445c820c0360251c48d0aa45dedb51262567f8f"
+    },
+    "uploads/packages/A breathtaking aerial view of a picturesque village nestled in a lush mountain valley - Pexels 6726188.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 244320,
+      "entry": "uploads/packages/A breathtaking aerial view of a picturesque village nestled in a lush mountain valley - Pexels 6726188.jpg",
+      "sha256": "414349df644c0cb08fa4799923672ebdfb5a2cdd97f7fe33051597e09706d1eb"
+    },
+    "uploads/packages/A freight train arrives at an Indian railway station platform during a calm day - Pexels 7237530.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 151514,
+      "entry": "uploads/packages/A freight train arrives at an Indian railway station platform during a calm day - Pexels 7237530.jpg",
+      "sha256": "494a34ffa8039416d0fbb047ef7abf0f51ce472e53cbc030130391bb86d5d4f6"
+    },
+    "uploads/packages/A local commuter train arriving at Izumisano Station Osaka Japan during day - Pexels 39466491.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 146717,
+      "entry": "uploads/packages/A local commuter train arriving at Izumisano Station Osaka Japan during day - Pexels 39466491.jpg",
+      "sha256": "9b33ca052618d438bca02c13ba366800fb95a3bf757d8097f98d3d36f4485562"
+    },
+    "uploads/packages/A picturesque aerial view of the lush greenery and flowing river in Minnesotas tranquil la - Pexels 12402958.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 288169,
+      "entry": "uploads/packages/A picturesque aerial view of the lush greenery and flowing river in Minnesotas tranquil la - Pexels 12402958.jpg",
+      "sha256": "b0631b3f61672e63f5488009f02f31abe1b28c9f5288b9c63d92ead90c914662"
+    },
+    "uploads/packages/A scenic curved road through mountainous terrain under a clear sky ideal for adventure tra - Pexels 32277458.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 178008,
+      "entry": "uploads/packages/A scenic curved road through mountainous terrain under a clear sky ideal for adventure tra - Pexels 32277458.jpg",
+      "sha256": "5f3035d1dd0720a602eaa9fb9a49f865e203e318c677c9eeb079281b2fae3c98"
+    },
+    "uploads/packages/A serene dirt path winding through lush green forest featuring a rustic wooden bridge and  - Pexels 20722955.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 257867,
+      "entry": "uploads/packages/A serene dirt path winding through lush green forest featuring a rustic wooden bridge and  - Pexels 20722955.jpg",
+      "sha256": "29ad32a1351ecbb75933d0cdcbda3b1159ea09b795997de9d4c1d52d162b1bab"
+    },
+    "uploads/packages/A tranquil river winding through the Fann Mountains showcasing natural beauty and rugged t - Pexels 39590481.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 189959,
+      "entry": "uploads/packages/A tranquil river winding through the Fann Mountains showcasing natural beauty and rugged t - Pexels 39590481.jpg",
+      "sha256": "7f70e2629e642a75bde1c901822cc30c4cf775c4a94a93aa896cc79364a8a2e4"
+    },
+    "uploads/packages/A vivid train station platform in Bangladesh with lush greenery and open sky - Pexels 9749564.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 234730,
+      "entry": "uploads/packages/A vivid train station platform in Bangladesh with lush greenery and open sky - Pexels 9749564.jpg",
+      "sha256": "9e892b675f7cdf0cdf86c768d8ccd7fa30119c2b000240dced5dd8435a0fedfe"
+    },
+    "uploads/packages/Aerial shot of lush green valleys with winding roads and river view - Pexels 34160187.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 182183,
+      "entry": "uploads/packages/Aerial shot of lush green valleys with winding roads and river view - Pexels 34160187.jpg",
+      "sha256": "11e100f658e01a3210c7d7606b52916dde5181950b3cbf1dedb9bb1a31f0eeed"
+    },
+    "uploads/packages/Aerial view of Gulmarg covered in snow showcasing a serene winter wonderland - Pexels 11126344.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 215646,
+      "entry": "uploads/packages/Aerial view of Gulmarg covered in snow showcasing a serene winter wonderland - Pexels 11126344.jpg",
+      "sha256": "a1a753904de79c36ac62be925b0f9a665f67eb48be7e87eed97c5c26cb26b7d2"
+    },
+    "uploads/packages/Aerial view of a vibrant resort with a swimming pool in Vinales Valley Cuba set against a  - Pexels 19573772.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 233948,
+      "entry": "uploads/packages/Aerial view of a vibrant resort with a swimming pool in Vinales Valley Cuba set against a  - Pexels 19573772.jpg",
+      "sha256": "b78bf44e403f6c3cc8c350527606150ea44bddcb6cb6e4c762506d206c707058"
+    },
+    "uploads/packages/Aerial view of lush green mountains and river in Bhimashankar India - Pexels 14069124.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 197760,
+      "entry": "uploads/packages/Aerial view of lush green mountains and river in Bhimashankar India - Pexels 14069124.jpg",
+      "sha256": "7ba6c45d13cd1b3bac33dbbdc75dcb4b822041b1d9b812f244de6e1948e365a5"
+    },
+    "uploads/packages/Aerial view of picturesque landscape with green hills a winding road and mountain backdrop - Pexels 38514006.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 114575,
+      "entry": "uploads/packages/Aerial view of picturesque landscape with green hills a winding road and mountain backdrop - Pexels 38514006.jpg",
+      "sha256": "20bcd22988ab98c4fd9f06427b89d43a7cc4a676603eedb41a4dc03534649007"
+    },
+    "uploads/packages/An Indian rhinoceros by a tranquil lake surrounded by lush greenery - Pexels 38232180.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 195444,
+      "entry": "uploads/packages/An Indian rhinoceros by a tranquil lake surrounded by lush greenery - Pexels 38232180.jpg",
+      "sha256": "9b24aa97066c02ad9e58f04422d0b68aea47f5136b92e68a135b49f8efc20d06"
+    },
+    "uploads/packages/Breathtaking view of green hills with sun rays over a town in the valley - Pexels 15718401.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 130549,
+      "entry": "uploads/packages/Breathtaking view of green hills with sun rays over a town in the valley - Pexels 15718401.jpg",
+      "sha256": "862d648797520d0f7906f8cddc7e473c75436b9c250323ac20785fbd043f874f"
+    },
+    "uploads/packages/Colorful Buddhist temple surrounded by prayer flags in the misty Himalayan mountains - Pexels 19864968.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 231097,
+      "entry": "uploads/packages/Colorful Buddhist temple surrounded by prayer flags in the misty Himalayan mountains - Pexels 19864968.jpg",
+      "sha256": "7f2e871d9e1b114d467de7c72b146f8698bf8020f9da9010f8543d6bf6ccf9c6"
+    },
+    "uploads/packages/Expansive view of green hills and grasslands with trees and flowers under a cloudy sky - Pexels 16731225.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 213147,
+      "entry": "uploads/packages/Expansive view of green hills and grasslands with trees and flowers under a cloudy sky - Pexels 16731225.jpg",
+      "sha256": "b3b62e2536e0a778a7fa6eca8b4feaa57427067b52fac713c9b061b92fc581ed"
+    },
+    "uploads/packages/Explore the scenic wooden walkway in the lush Sundarbans mangrove forest Bangladesh - Pexels 34991637.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 231743,
+      "entry": "uploads/packages/Explore the scenic wooden walkway in the lush Sundarbans mangrove forest Bangladesh - Pexels 34991637.jpg",
+      "sha256": "4977d14d061ce61cf046c862a70a726bafa0b95b9eb947f6e41f4b1d05573d8c"
+    },
+    "uploads/packages/Lush green hills under clear blue sky in Sunol California showcasing vibrant spring landsc - Pexels 36489161.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 191412,
+      "entry": "uploads/packages/Lush green hills under clear blue sky in Sunol California showcasing vibrant spring landsc - Pexels 36489161.jpg",
+      "sha256": "1033ab547c5a6bdc76083ec4b16a7fbc207774aa3e8dc7ba7e77c4986332d5e4"
+    },
+    "uploads/packages/Lush green valley with distant mountains under a bright sky in the Georgian countryside - Pexels 38939762.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 167188,
+      "entry": "uploads/packages/Lush green valley with distant mountains under a bright sky in the Georgian countryside - Pexels 38939762.jpg",
+      "sha256": "a8445717f6b0a5bc58f21824c734f0b60d87bea8479c5be6dd18cb0e6dca17c0"
+    },
+    "uploads/packages/Scenic view of an alpine house amidst lush green valley in Pahalgam with mountainous backd - Pexels 16151009.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 115321,
+      "entry": "uploads/packages/Scenic view of an alpine house amidst lush green valley in Pahalgam with mountainous backd - Pexels 16151009.jpg",
+      "sha256": "8ace35234dfaf2c9ead901a80958263409e9affe34426e12148537c56dbb8f88"
+    },
+    "uploads/packages/Serene landscape of lush green mountains and winding river in Kashmir a nature lovers para - Pexels 38520176.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 241522,
+      "entry": "uploads/packages/Serene landscape of lush green mountains and winding river in Kashmir a nature lovers para - Pexels 38520176.jpg",
+      "sha256": "f705cdca4f81571cabee4ebc54a3be3f43b950bd90c3e7dd94df4ccef38cf039"
+    },
+    "uploads/packages/South African Airways plane docked at a gate in an airport captured from an aerial view - Pexels 38340833.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 147532,
+      "entry": "uploads/packages/South African Airways plane docked at a gate in an airport captured from an aerial view - Pexels 38340833.jpg",
+      "sha256": "4595b0c05730ef86cc29eea9afbbb3209c69920cacf55a5c1a5203667bab72f4"
+    },
+    "uploads/packages/Stunning view of a snow-capped mountain range with vibrant green valleys - Pexels 38441491.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 237929,
+      "entry": "uploads/packages/Stunning view of a snow-capped mountain range with vibrant green valleys - Pexels 38441491.jpg",
+      "sha256": "9efc0fce6701e529b5834aa5829d186b723537aad462b8ef60d424461953eac3"
+    },
+    "uploads/packages/Traffic flows on a tree-lined road with stunning mountain backdrop - Pexels 28588657.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 184111,
+      "entry": "uploads/packages/Traffic flows on a tree-lined road with stunning mountain backdrop - Pexels 28588657.jpg",
+      "sha256": "171628797e8f3ee8ba76abe27d1e19a3243ee9584b0c4a0d73ee8410f23accde"
+    },
+    "uploads/packages/Vibrant vineyard rows in Northern California with rolling hills and spring foliage perfect - Pexels 12811544.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 150571,
+      "entry": "uploads/packages/Vibrant vineyard rows in Northern California with rolling hills and spring foliage perfect - Pexels 12811544.jpg",
+      "sha256": "49ecdf7523eb84f1a30154de5adbbd54a3c2d04b82137acdbb4176497327220e"
+    },
+    "uploads/packages/Yaks transporting goods through Khumjung village in Nepal with scenic mountain backdrop - Pexels 14158631.jpg": {
+      "archive": "assets_2026-09-30_17:12:26.zip",
+      "archive_sha256": "ec12740fdf5a78c283a91572dd10363055e70a55eb8484dd2b58b09c130f7f0a",
+      "bytes": 215817,
+      "entry": "uploads/packages/Yaks transporting goods through Khumjung village in Nepal with scenic mountain backdrop - Pexels 14158631.jpg",
+      "sha256": "4470fabed4111d9543c6163339be4343824013e17ad28ae27e6cc089faf1673e"
+    }
+  },
+  "release": "Colourful international customer website presentation with original text layout",
+  "reports": {
+    "browser_http": {
+      "checks": [
+        {
+          "name": "http.home",
+          "passed": true
+        },
+        {
+          "name": "http.destinations",
+          "passed": true
+        },
+        {
+          "name": "http.destination-packages",
+          "passed": true
+        },
+        {
+          "name": "http.packages",
+          "passed": true
+        },
+        {
+          "name": "http.package-details",
+          "passed": true
+        },
+        {
+          "name": "http.destination_card_link",
+          "passed": true
+        },
+        {
+          "name": "runtime.blocks_mutating_posts",
+          "passed": true
+        },
+        {
+          "name": "runtime.no_private_customer_rows",
+          "passed": true
+        },
+        {
+          "name": "browser.render_home_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.render_destinations_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.render_destination-packages_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.render_packages_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.render_package-details_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.home_destination_search_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.destination_search_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.package_destination_filter_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.booking_form_preserved_1440",
+          "passed": true
+        },
+        {
+          "name": "browser.render_home_390",
+          "passed": true
+        },
+        {
+          "name": "browser.render_destinations_390",
+          "passed": true
+        },
+        {
+          "name": "browser.render_destination-packages_390",
+          "passed": true
+        },
+        {
+          "name": "browser.render_packages_390",
+          "passed": true
+        },
+        {
+          "name": "browser.render_package-details_390",
+          "passed": true
+        },
+        {
+          "name": "browser.home_destination_search_390",
+          "passed": true
+        },
+        {
+          "name": "browser.destination_search_390",
+          "passed": true
+        },
+        {
+          "name": "browser.package_destination_filter_390",
+          "passed": true
+        },
+        {
+          "name": "browser.booking_form_preserved_390",
+          "passed": true
+        },
+        {
+          "name": "regression.public_forms_and_links_match_baseline",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "passed": 27,
+      "sha256": "d0805456d3febaf1fb28e9a66442dd4d742164867a69177949667196dff548ae"
+    },
+    "extended_browser": {
+      "checks": [
+        {
+          "name": "responsive.no_horizontal_overflow_home_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_home_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_home_320",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_destinations_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_destinations_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_destinations_320",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_destination-packages_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_destination-packages_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_destination-packages_320",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_packages_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_packages_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_packages_320",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_package-details_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.existing_detail_navigation_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.detail_gallery_open_close_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.detail_share_menu_320",
+          "passed": true
+        },
+        {
+          "name": "interaction.mobile_booking_cta_320",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_home_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_home_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_home_768",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_destinations_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_destinations_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_destinations_768",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_destination-packages_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_destination-packages_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_destination-packages_768",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_packages_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.hamburger_packages_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.search_unobstructed_packages_768",
+          "passed": true
+        },
+        {
+          "name": "responsive.no_horizontal_overflow_package-details_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.existing_detail_navigation_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.detail_gallery_open_close_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.detail_share_menu_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.detail_booking_calculation_768",
+          "passed": true
+        },
+        {
+          "name": "interaction.detail_booking_calculation_1440",
+          "passed": true
+        },
+        {
+          "name": "print.new_theme_leaves_computed_styles_unchanged_home",
+          "passed": true
+        },
+        {
+          "name": "print.new_theme_leaves_computed_styles_unchanged_destinations",
+          "passed": true
+        },
+        {
+          "name": "print.new_theme_leaves_computed_styles_unchanged_packages",
+          "passed": true
+        },
+        {
+          "name": "print.new_theme_leaves_computed_styles_unchanged_package-details",
+          "passed": true
+        },
+        {
+          "name": "integrity.seven_product_files_unchanged_during_qa",
+          "passed": true
+        },
+        {
+          "name": "integrity.catalog_database_unchanged",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "passed": 41,
+      "sha256": "4155fd50085fc6eb15f706bcfb4517a5d9adcd13dbf9f907faf5c802199a85f7"
+    },
+    "interaction_snapshots": {
+      "after_sha256": "542f62304da251ffef19f15e86291401c448ac1b02c9766ee118ebcba759db48",
+      "before_sha256": "542f62304da251ffef19f15e86291401c448ac1b02c9766ee118ebcba759db48",
+      "forms_and_links_unchanged": true,
+      "views": 10
+    },
+    "semantic_review": {
+      "checks": [
+        {
+          "name": "uploaded_v2524_archive_identity",
+          "passed": true
+        },
+        {
+          "name": "uploaded_entries_match_baseline",
+          "passed": true
+        },
+        {
+          "name": "bounded_product_scope",
+          "passed": true
+        },
+        {
+          "name": "inverse_exact.index.php",
+          "passed": true
+        },
+        {
+          "name": "php_lint.index.php",
+          "passed": true
+        },
+        {
+          "name": "inverse_exact.destinations.php",
+          "passed": true
+        },
+        {
+          "name": "php_lint.destinations.php",
+          "passed": true
+        },
+        {
+          "name": "inverse_exact.packages.php",
+          "passed": true
+        },
+        {
+          "name": "php_lint.packages.php",
+          "passed": true
+        },
+        {
+          "name": "inverse_exact.package-details.php",
+          "passed": true
+        },
+        {
+          "name": "php_lint.package-details.php",
+          "passed": true
+        },
+        {
+          "name": "unchanged.admin",
+          "passed": true
+        },
+        {
+          "name": "unchanged.business_auth_booking_payment",
+          "passed": true
+        },
+        {
+          "name": "unchanged.all_original_assets",
+          "passed": true
+        },
+        {
+          "name": "unchanged.javascript",
+          "passed": true
+        },
+        {
+          "name": "unchanged.sql",
+          "passed": true
+        },
+        {
+          "name": "provided_photo_reuse",
+          "passed": true
+        },
+        {
+          "name": "original_text_formatting_preserved",
+          "passed": true
+        },
+        {
+          "name": "no_action_hiding_or_interaction_overrides",
+          "passed": true
+        },
+        {
+          "name": "credentials_logo_geometry_preserved",
+          "passed": true
+        },
+        {
+          "name": "managed_hero_photography_preserved",
+          "passed": true
+        },
+        {
+          "name": "chromium_css_parse.assets/travscope-world-v2526.css",
+          "passed": true
+        },
+        {
+          "name": "screen_and_public_scope.assets/travscope-world-v2526.css",
+          "passed": true
+        },
+        {
+          "name": "chromium_css_parse.assets/travscope-world-catalog-v2526.css",
+          "passed": true
+        },
+        {
+          "name": "screen_and_public_scope.assets/travscope-world-catalog-v2526.css",
+          "passed": true
+        },
+        {
+          "name": "chromium_print_media_isolation",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "passed": 26,
+      "sha256": "fb522d7a010d24d75011250f281c11cbf1ca83abfc1e94bf77e99be33e1d013f"
+    },
+    "verification": {
+      "checks": [
+        {
+          "name": "browser_http.http.home",
+          "passed": true
+        },
+        {
+          "name": "browser_http.http.destinations",
+          "passed": true
+        },
+        {
+          "name": "browser_http.http.destination-packages",
+          "passed": true
+        },
+        {
+          "name": "browser_http.http.packages",
+          "passed": true
+        },
+        {
+          "name": "browser_http.http.package-details",
+          "passed": true
+        },
+        {
+          "name": "browser_http.http.destination_card_link",
+          "passed": true
+        },
+        {
+          "name": "browser_http.runtime.blocks_mutating_posts",
+          "passed": true
+        },
+        {
+          "name": "browser_http.runtime.no_private_customer_rows",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_home_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_destinations_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_destination-packages_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_packages_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_package-details_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.home_destination_search_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.destination_search_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.package_destination_filter_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.booking_form_preserved_1440",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_home_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_destinations_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_destination-packages_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_packages_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.render_package-details_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.home_destination_search_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.destination_search_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.package_destination_filter_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.browser.booking_form_preserved_390",
+          "passed": true
+        },
+        {
+          "name": "browser_http.regression.public_forms_and_links_match_baseline",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_home_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_home_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_home_320",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_destinations_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_destinations_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_destinations_320",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_destination-packages_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_destination-packages_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_destination-packages_320",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_packages_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_packages_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_packages_320",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_package-details_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.existing_detail_navigation_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.detail_gallery_open_close_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.detail_share_menu_320",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.mobile_booking_cta_320",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_home_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_home_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_home_768",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_destinations_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_destinations_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_destinations_768",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_destination-packages_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_destination-packages_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_destination-packages_768",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_packages_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.hamburger_packages_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.search_unobstructed_packages_768",
+          "passed": true
+        },
+        {
+          "name": "extended.responsive.no_horizontal_overflow_package-details_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.existing_detail_navigation_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.detail_gallery_open_close_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.detail_share_menu_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.detail_booking_calculation_768",
+          "passed": true
+        },
+        {
+          "name": "extended.interaction.detail_booking_calculation_1440",
+          "passed": true
+        },
+        {
+          "name": "extended.print.new_theme_leaves_computed_styles_unchanged_home",
+          "passed": true
+        },
+        {
+          "name": "extended.print.new_theme_leaves_computed_styles_unchanged_destinations",
+          "passed": true
+        },
+        {
+          "name": "extended.print.new_theme_leaves_computed_styles_unchanged_packages",
+          "passed": true
+        },
+        {
+          "name": "extended.print.new_theme_leaves_computed_styles_unchanged_package-details",
+          "passed": true
+        },
+        {
+          "name": "extended.integrity.seven_product_files_unchanged_during_qa",
+          "passed": true
+        },
+        {
+          "name": "extended.integrity.catalog_database_unchanged",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.itinerary_styles_match_original_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.itinerary_text_p_br_lists_unchanged_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.overview_styles_match_original_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.overview_text_p_br_lists_unchanged_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.important-information_styles_match_original_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.important-information_text_p_br_lists_unchanged_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.original_itinerary_alignment_320",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.itinerary_styles_match_original_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.itinerary_text_p_br_lists_unchanged_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.overview_styles_match_original_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.overview_text_p_br_lists_unchanged_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.important-information_styles_match_original_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.important-information_text_p_br_lists_unchanged_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.original_itinerary_alignment_768",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.itinerary_styles_match_original_1440",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.itinerary_text_p_br_lists_unchanged_1440",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.overview_styles_match_original_1440",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.overview_text_p_br_lists_unchanged_1440",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.important-information_styles_match_original_1440",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.important-information_text_p_br_lists_unchanged_1440",
+          "passed": true
+        },
+        {
+          "name": "text_format.text-format.original_itinerary_alignment_1440",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "passed": 89,
+      "sha256": "0d585cb1c1a0e1b6644c00a7fa57fb631630c4104e7e5fcc83dd9de5c6ff601c"
+    }
+  },
+  "reviewed_source_sha256": {
+    "assets/travscope-world-catalog-v2526.css": "a801cce0f60ff4b570503e8b779a9e911c8cea7323ac8d701bd666faa640c936",
+    "assets/travscope-world-landscape-pexels-38441491.jpg": "9efc0fce6701e529b5834aa5829d186b723537aad462b8ef60d424461953eac3",
+    "assets/travscope-world-v2526.css": "fe9e9a3f17467477259ac381d421bbe6b0e5c7439420f3e26a51083e2bc9c406",
+    "destinations.php": "15ed4aae196bdd1eecdc0f335af484e57d69b03a62caec8f5e44fbf0850d5d65",
+    "index.php": "0a28165fb42e5a8bab1f10571994f277141c5027d0cd81db0dc0153e6fb815c2",
+    "package-details.php": "0f62a2d8c6cd11509763d89df4395fa300946a34ef42b91dd8008708485412c2",
+    "packages.php": "2771f14dcc8550be75ccad572f80c110610efab0ca38e97dfd58735d96ffaae4"
+  },
+  "text_patch": {
+    "git_binary_patch": true,
+    "name": "TRAVSCOPE_V25_26_COLOURFUL_PUBLIC_FROM_V25_24.patch",
+    "product_files": [
+      "index.php",
+      "destinations.php",
+      "packages.php",
+      "package-details.php",
+      "assets/travscope-world-v2526.css",
+      "assets/travscope-world-catalog-v2526.css",
+      "assets/travscope-world-landscape-pexels-38441491.jpg"
+    ],
+    "sha256": "f17ada8a7649e4f2451f774c514a31acda4bccc0d95d050f5fbfa806c3e48736"
+  },
+  "uploaded_baseline_archive": {
+    "bytes": 15865710,
+    "entries": 239,
+    "name": "TRAVSCOPE_CURRENT_V25_24_VISIBLE_PACKAGE_STATUS_FULL.zip",
+    "sha256": "94d9e10a4d3c55baa9a96224adfa8a52d9dfe3a7a3e26792287b6064d546bbc1"
+  },
+  "validation": {
+    "all_other_runtime_sources_unchanged": true,
+    "changed_uploaded_files": [
+      "destinations.php",
+      "index.php",
+      "package-details.php",
+      "packages.php"
+    ],
+    "config_bytes_preserved": true,
+    "full_entry_count": 360,
+    "nested_archive_bytes_preserved": true,
+    "new_presentation_asset_count": 3,
+    "patch_entry_count": 10,
+    "php_syntax": "passed for all four reconstructed PHP files",
+    "presentation_hooks_inverse_exact": true,
+    "recovered_supplied_runtime_file_count": 118,
+    "targeted_product_file_count": 7,
+    "text_binary_patch_apply_and_exact_reconstruction": "passed",
+    "unchanged_uploaded_payload_metadata_compressed_records": 235,
+    "zip_crc": "passed"
+  },
+  "version": "V25.26"
+}
