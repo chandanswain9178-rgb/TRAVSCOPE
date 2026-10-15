@@ -1,0 +1,372 @@
+/* TRAVSCOPE international customer theme. Presentation only; screen only. */
+@media screen {
+  body.ts-world-public {
+    --world-ink: #122b39;
+    --world-teal: #087f83;
+    --world-muted: #62747d;
+    --world-line: #e4e9e8;
+    --world-paper: #faf9f6;
+    --world-white: #fff;
+    --blue: var(--world-teal);
+    --navy: var(--world-ink);
+    --border: var(--world-line);
+    --muted: var(--world-muted);
+    --ts-blue: var(--world-teal);
+    --ts-blue-hover: #06666a;
+    --ts-navy: var(--world-ink);
+    --ts-text: var(--world-ink);
+    --ts-muted: var(--world-muted);
+    --ts-border: var(--world-line);
+    --ts-bg: var(--world-paper);
+    --ts-focus: 0 0 0 4px rgb(8 127 131 / 17%);
+    background: var(--world-paper) !important;
+    color: var(--world-ink) !important;
+    font-family: "DM Sans", Arial, sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.ts-world-public .container {
+    width: calc(100% - 80px) !important;
+    max-width: 1280px !important;
+    margin-inline: auto;
+  }
+  body.ts-world-public :is(h1,h2,h3,h4) {
+    color: var(--world-ink);
+    font-family: "Manrope", "DM Sans", Arial, sans-serif !important;
+    letter-spacing: -.035em;
+    overflow-wrap: anywhere;
+  }
+  body.ts-world-public :is(a,button,input,select,textarea):focus-visible {
+    outline: 2px solid var(--world-teal) !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 0 4px rgb(8 127 131 / 12%) !important;
+  }
+  body.ts-world-public :is(button,input,select,textarea) { font-family: inherit; }
+  body.ts-world-public :is(.btn,.header-button) {
+    min-height: 46px !important;
+    border-radius: 10px !important;
+    padding: 11px 20px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    letter-spacing: .005em !important;
+    box-shadow: none !important;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  body.ts-world-public :is(.btn-blue,.header-button.primary) {
+    background: var(--world-teal) !important;
+    border-color: var(--world-teal) !important;
+    color: white !important;
+  }
+  body.ts-world-public :is(.btn-blue,.header-button.primary):hover {
+    background: #06666a !important;
+    border-color: #06666a !important;
+  }
+  body.ts-world-public :is(.btn-light,.header-button.light) {
+    background: white !important;
+    color: var(--world-ink) !important;
+    border: 1px solid var(--world-line) !important;
+  }
+  body.ts-world-public > .header {
+    height: 84px !important;
+    min-height: 84px !important;
+    padding: 0 max(40px, calc((100vw - 1280px)/2)) !important;
+    background: white !important;
+    border-bottom: 1px solid var(--world-line) !important;
+    box-shadow: none !important;
+    gap: 26px;
+  }
+  body.ts-world-public .header > .nav { gap: 25px !important; }
+  body.ts-world-public .header > .nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 0 !important;
+    color: #4b606b !important;
+    font-size: 13px !important;
+    border-radius: 0 !important;
+    font-weight: 600 !important;
+  }
+  body.ts-world-public .header > .nav a:is(.active,:hover) {
+    color: var(--world-teal) !important;
+    background: transparent !important;
+  }
+  body.ts-world-public .header-actions { gap: 10px !important; }
+  body.ts-world-public .mobile-nav {
+    top: 84px !important;
+    background: white !important;
+    border-color: var(--world-line) !important;
+    box-shadow: 0 20px 32px rgb(18 43 57 / 10%) !important;
+  }
+  body.ts-world-public .mobile-nav a {
+    min-height: 46px;
+    padding: 12px 18px !important;
+    font-size: 15px !important;
+    color: var(--world-ink) !important;
+  }
+  body.ts-world-public .footer {
+    background: #102d39 !important;
+    color: #c1d0d5 !important;
+    padding-top: 64px !important;
+    border-top: 0 !important;
+  }
+  body.ts-world-public .footer :is(h3,h4) {
+    color: white !important;
+    font-size: 15px !important;
+    letter-spacing: 0;
+  }
+  body.ts-world-public .footer :is(p,a,.flinks span) {
+    font-size: 13px !important;
+    line-height: 1.85 !important;
+  }
+  body.ts-world-public .footer a { color: #d0dcdf !important; }
+  body.ts-world-public .footer a:hover { color: white !important; }
+  body.ts-world-public .footer .copyright {
+    border-color: rgb(255 255 255 / 12%) !important;
+    padding-block: 22px !important;
+    font-size: 12px !important;
+    color: #b8cbd0 !important;
+  }
+  body.ts-world-public .ts-credentials--website {
+    background: #f0f4f1;
+    border-color: var(--world-line);
+  }
+  body.ts-world-public .cta {
+    padding: 54px 60px !important;
+    margin-block: 28px 76px !important;
+    border-radius: 22px !important;
+    border: 0 !important;
+    background-color: #143f49 !important;
+    background-image: linear-gradient(115deg, rgb(16 45 57 / 96%), rgb(8 94 99 / 85%)) !important;
+    box-shadow: none !important;
+    text-align: left;
+  }
+  body.ts-world-public .cta h2 {
+    color: white !important;
+    font-size: clamp(30px,3.1vw,44px) !important;
+    line-height: 1.2 !important;
+  }
+  body.ts-world-public .cta p {
+    color: #dbe8e8 !important;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    max-width: 650px;
+    margin-block: 16px 24px !important;
+  }
+
+  /* Home: photography, editorial hierarchy, and the existing search. */
+  body.ts-world-home .topbar {
+    min-height: 34px;
+    padding-block: 7px !important;
+    background: #f0f4f1 !important;
+    color: #506770 !important;
+    font-size: 11px !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  body.ts-world-home .topbar i { color: var(--world-teal) !important; }
+  body.ts-world-home > .nav {
+    background: white !important;
+    border-bottom: 1px solid var(--world-line) !important;
+    box-shadow: none !important;
+  }
+  body.ts-world-home .navin { height: 84px !important; gap: 20px !important; }
+  body.ts-world-home .links { gap: 20px !important; }
+  body.ts-world-home .links a {
+    color: #4b606b !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 12px 0 !important;
+  }
+  body.ts-world-home .links a:hover { color: var(--world-teal) !important; }
+  body.ts-world-home .actions { gap: 9px !important; }
+  body.ts-world-home .hero { min-height: 650px !important; background-color: #143b48 !important; background-image: url("travscope-world-landscape-pexels-38441491.jpg"); background-size: cover; background-position: center; }
+  body.ts-world-home .hero-slide::after {
+    background: linear-gradient(90deg, rgb(8 32 43 / 77%), rgb(8 32 43 / 37%) 56%, rgb(8 32 43 / 5%)) !important;
+    opacity: 1 !important;
+  }
+  body.ts-world-home .hero-content {
+    max-width: 760px !important;
+    padding: 88px 0 132px !important;
+    color: white !important;
+  }
+  body.ts-world-home .hero h1 {
+    margin: 22px 0 0 !important;
+    color: white !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: clamp(44px,5.5vw,76px) !important;
+    line-height: 1.06 !important;
+    font-weight: 400 !important;
+    letter-spacing: -.035em !important;
+    text-shadow: 0 2px 24px rgb(8 32 43 / 8%);
+  }
+  body.ts-world-home .hero h1 span { color: #c2eee4 !important; }
+  body.ts-world-home .hero p {
+    max-width: 54ch !important;
+    margin: 22px 0 26px !important;
+    color: #e9f0f0 !important;
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+  }
+  body.ts-world-home .hero .badge {
+    padding: 8px 14px !important;
+    border: 1px solid rgb(255 255 255 / 35%) !important;
+    border-radius: 30px !important;
+    color: #fff !important;
+    background: rgb(255 255 255 / 10%) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: .075em;
+  }
+  body.ts-world-home .hero-buttons { gap: 12px !important; }
+  body.ts-world-home .hero-buttons .btn { min-height: 50px !important; padding-inline: 24px !important; }
+  body.ts-world-home .hero .btn-outline {
+    background: rgb(255 255 255 / 9%) !important;
+    color: white !important;
+    border: 1px solid rgb(255 255 255 / 65%) !important;
+  }
+  body.ts-world-home .trust { font-size: 11px !important; gap: 18px !important; color: #d6e6e6 !important; }
+  body.ts-world-home .trust i { color: #a8e3d5 !important; }
+  body.ts-world-home .hero-dots { bottom: 85px !important; gap: 10px !important; }
+  body.ts-world-home .searchwrap { margin-top: -54px !important; }
+  body.ts-world-home .searchbox {
+    padding: 26px !important;
+    border: 1px solid var(--world-line) !important;
+    border-radius: 16px !important;
+    background: white !important;
+    box-shadow: 0 16px 45px rgb(18 43 57 / 9%) !important;
+  }
+  body.ts-world-home .searchgrid { gap: 14px !important; }
+  body.ts-world-home .field label {
+    margin-bottom: 9px !important;
+    font-size: 10px !important;
+    letter-spacing: .07em;
+    color: #556d76 !important;
+  }
+  body.ts-world-home .control {
+    min-width: 0;
+    height: 52px !important;
+    background: #f8faf9 !important;
+    border: 1px solid var(--world-line) !important;
+    border-radius: 9px !important;
+    padding-inline: 12px !important;
+  }
+  body.ts-world-home .control :is(input,select) {
+    min-width: 0;
+    font-size: 13px !important;
+    color: var(--world-ink) !important;
+    background: transparent !important;
+  }
+  body.ts-world-home .control i { color: var(--world-teal) !important; }
+  body.ts-world-home .searchgrid > .btn { min-height: 52px !important; }
+  body.ts-world-home .section {
+    padding: 84px 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  body.ts-world-home .section.soft { background: #f1f4f0 !important; }
+  body.ts-world-home .heading { max-width: 740px !important; margin-bottom: 38px !important; }
+  body.ts-world-home .eyebrow { font-size: 11px !important; letter-spacing: .14em !important; color: var(--world-teal) !important; }
+  body.ts-world-home .heading h2 { margin-top: 12px !important; font-size: clamp(30px,3vw,42px) !important; line-height: 1.2 !important; }
+  body.ts-world-home .heading p { margin-top: 16px !important; color: var(--world-muted) !important; font-size: 15px !important; }
+  body.ts-world-home :is(.destgrid,.pkggrid,.newgrid,.storygrid,.services,.reviewgrid) { gap: 24px !important; }
+  body.ts-world-home .dest { height: 320px !important; border-radius: 16px !important; box-shadow: none !important; }
+  body.ts-world-home .dest::after { background: linear-gradient(180deg,transparent 28%,rgb(8 32 43 / 80%)) !important; opacity: 1 !important; }
+  body.ts-world-home .destbody { left: 24px !important; bottom: 23px !important; }
+  body.ts-world-home .destbody strong { color: white !important; font-size: 22px !important; }
+  body.ts-world-home .destbody span { color: #e1ebed !important; font-size: 12px !important; }
+  body.ts-world-home .destcount { top: 18px !important; left: 18px !important; padding: 7px 11px !important; font-size: 10px !important; }
+  body.ts-world-home .typebar { gap: 10px !important; margin-top: 30px !important; }
+  body.ts-world-home .typebar a { padding: 10px 16px !important; font-size: 12px !important; border-color: #dbe3df !important; }
+  body.ts-world-home :is(.pkg,.newcard,.storycard,.service,.review) {
+    background: white !important;
+    border: 1px solid var(--world-line) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 5px 18px rgb(18 43 57 / 3%) !important;
+  }
+  body.ts-world-home #packages .pkgbody { padding: 24px !important; }
+  body.ts-world-home #packages .pkgbody h3 { font-size: 19px !important; line-height: 1.45 !important; margin-bottom: 12px !important; }
+  body.ts-world-home #packages .pkgbody :is(.loc,.meta,.desc) { font-size: 12px !important; line-height: 1.75 !important; color: var(--world-muted) !important; }
+  body.ts-world-home #packages .pkgbody .meta { flex-wrap: wrap; gap: 8px 16px !important; margin-block: 14px !important; }
+  body.ts-world-home #packages .pkgbody .price strong { font-size: 24px !important; color: var(--world-teal) !important; }
+  body.ts-world-home #packages .pkgbody .price small { font-size: 11px !important; }
+  body.ts-world-home #packages .pkgbody .pkgfoot { flex-wrap: wrap; gap: 18px !important; margin-top: 20px !important; padding-top: 20px !important; }
+  body.ts-world-home .cardactions { gap: 8px !important; flex-wrap: wrap; }
+  body.ts-world-home .cardactions .mini { min-height: 42px !important; padding: 10px 12px !important; font-size: 11px !important; }
+  body.ts-world-home .ts-home-enquire { color: var(--world-teal) !important; border: 1px solid #b9d9d6 !important; background: #f0f8f5 !important; }
+  body.ts-world-home .newbody { padding: 20px !important; }
+  body.ts-world-home .newbody h3 { font-size: 16px !important; line-height: 1.45 !important; }
+  body.ts-world-home .newbody p { font-size: 12px !important; margin-top: 10px !important; }
+  body.ts-world-home .newprice { margin-top: 18px !important; }
+  body.ts-world-home .newprice strong { font-size: 19px !important; color: var(--world-teal) !important; }
+  body.ts-world-home .service { padding: 30px !important; }
+  body.ts-world-home .service i { width: 50px !important; height: 50px !important; background: #e7f3ef !important; color: var(--world-teal) !important; }
+  body.ts-world-home .service h3 { font-size: 18px !important; margin-top: 22px !important; }
+  body.ts-world-home .service p { font-size: 14px !important; margin-top: 12px !important; line-height: 1.8 !important; }
+  body.ts-world-home .stats { background: #123744 !important; }
+  body.ts-world-home .stat { padding: 44px 20px !important; }
+  body.ts-world-home .stat strong { color: #b7e4d8 !important; font-size: 38px !important; }
+  body.ts-world-home .stat span { color: #d4e1e5 !important; font-size: 12px !important; }
+  body.ts-world-home .review { padding: 28px !important; }
+  body.ts-world-home .review-text { font-size: 14px !important; color: var(--world-muted) !important; }
+  body.ts-world-home .storybody { padding: 24px !important; }
+  body.ts-world-home .storybody h3 { font-size: 20px !important; }
+  body.ts-world-home .storydesc { font-size: 14px !important; color: var(--world-muted) !important; }
+  body.ts-world-home .footgrid { gap: 42px !important; padding-bottom: 48px !important; }
+  @media (max-width:1180px) {
+    body.ts-world-home .searchgrid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+    body.ts-world-home .searchgrid > .btn { grid-column: 1/-1; }
+    body.ts-world-home .links { gap: 13px !important; }
+  }
+  @media (max-width:1050px) and (min-width:761px) {
+    body.ts-world-home .mobilemenu { inset: 118px 0 0 !important; }
+  }
+  @media (max-width:760px) {
+    body.ts-world-public .container { width: calc(100% - 40px) !important; }
+    body.ts-world-public > .header { height: 72px !important; min-height: 72px !important; padding-inline: 20px !important; gap: 12px; }
+    body.ts-world-public .mobile-nav { top: 72px !important; }
+    body.ts-world-public :is(.btn,.header-button) { padding: 10px 14px !important; }
+    body.ts-world-public .footer { padding-top: 44px !important; }
+    body.ts-world-public .cta { padding: 32px 26px !important; margin-block: 20px 48px !important; border-radius: 16px !important; }
+    body.ts-world-public .cta h2 { font-size: 30px !important; }
+    body.ts-world-public .cta p { font-size: 14px !important; }
+    body.ts-world-home .navin { height: 72px !important; }
+    body.ts-world-home .mobilemenu { inset: 72px 0 0 !important; }
+    body.ts-world-home .hero { min-height: 670px !important; }
+    body.ts-world-home .hero-content { padding: 60px 0 110px !important; max-width: 100% !important; }
+    body.ts-world-home .hero h1 { font-size: clamp(42px,9vw,58px) !important; }
+    body.ts-world-home .hero p { font-size: 15px !important; line-height: 1.75 !important; margin-block: 20px !important; }
+    body.ts-world-home .trust { gap: 8px 14px !important; margin-top: 22px !important; }
+    body.ts-world-home .hero-dots { bottom: 70px !important; }
+    body.ts-world-home .searchwrap { margin-top: -34px !important; }
+    body.ts-world-home .searchbox { padding: 22px !important; }
+    body.ts-world-home .searchgrid { grid-template-columns: 1fr 1fr !important; gap: 18px 12px !important; }
+    body.ts-world-home .section { padding: 56px 0 !important; }
+    body.ts-world-home .heading { margin-bottom: 28px !important; }
+    body.ts-world-home .heading h2 { font-size: 31px !important; }
+    body.ts-world-home .heading p { font-size: 14px !important; }
+    body.ts-world-home :is(.destgrid,.pkggrid,.newgrid,.storygrid,.services,.reviewgrid) { gap: 20px !important; }
+    body.ts-world-home .dest { height: 300px !important; }
+    body.ts-world-home .stat { padding: 30px 14px !important; }
+    body.ts-world-home .stat strong { font-size: 31px !important; }
+  }
+  @media (max-width:480px) {
+    body.ts-world-home .searchgrid { grid-template-columns: 1fr !important; }
+    body.ts-world-home .hero-buttons .btn { width: 100%; }
+    body.ts-world-home .searchgrid .control :is(input,select) { font-size: 16px !important; }
+    body.ts-world-home #packages .pkgbody { padding: 22px !important; }
+    body.ts-world-home #packages .pkgbody .pkgfoot { flex-direction: column !important; align-items: stretch !important; }
+    body.ts-world-home .cardactions { width: 100%; }
+    body.ts-world-home .cardactions .btn { flex: 1; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    body.ts-world-public *, body.ts-world-public *::before, body.ts-world-public *::after {
+      scroll-behavior: auto !important;
+      animation-duration: .01ms !important;
+      transition-duration: .01ms !important;
+    }
+  }
+}

@@ -1,0 +1,444 @@
+/* TRAVSCOPE V25.25: customer catalogue presentation only.
+   Scoped to the three public catalogue views; forms, states and print retain
+   their original behaviour. Existing photography and image credits remain. */
+@media screen {
+  /* Destination directory and package discovery. */
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero {
+    min-height:370px;
+    padding:62px max(24px,calc((100vw - 1240px)/2)) 88px;
+    background-color:var(--world-ink,#122b39);
+  }
+  body.ts-world-public.ts-world-destinations .hero {min-height:420px;}
+  body.ts-world-public.ts-world-destinations .hero-inner {
+    width:100%;max-width:1240px;padding:0;
+  }
+  body.ts-world-public.ts-world-packages .hero-content {max-width:1240px;}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero h1 {
+    max-width:780px;margin-top:18px;color:#fff!important;
+    font-family:Georgia,"Times New Roman",serif!important;
+    font-size:clamp(38px,4.4vw,62px);font-weight:400;line-height:1.09;
+    letter-spacing:-1.8px;text-wrap:balance;
+  }
+  body.ts-world-public.ts-world-packages .hero h1 span {color:#c8e8e1;}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero p {
+    max-width:650px;color:#e4ecec;font-size:16px;line-height:1.75;
+  }
+  body.ts-world-public.ts-world-destinations .hero::after {background:rgba(8,127,131,.13);}
+  body.ts-world-public.ts-world-destinations .hero .eyebrow,
+  body.ts-world-public.ts-world-packages .hero-tag {
+    padding:7px 0;border:0;background:transparent;
+    color:#c7e5dd;font-size:11px!important;letter-spacing:1.8px;
+    font-weight:700;backdrop-filter:none;
+  }
+  body.ts-world-public.ts-world-destinations .hero-stats {gap:0;margin-top:26px;}
+  body.ts-world-public.ts-world-destinations .hero-stat {
+    min-width:145px;max-width:290px;padding:0 25px;
+    border:0;border-left:1px solid rgba(255,255,255,.25);
+    border-radius:0;background:transparent;backdrop-filter:none;
+  }
+  body.ts-world-public.ts-world-destinations .hero-stat:first-child {padding-left:0;border-left:0;}
+  body.ts-world-public.ts-world-destinations .hero-stat strong {font-size:21px;color:#fff;}
+  body.ts-world-public.ts-world-destinations .hero-stat span {color:#c8d7d8;font-size:12px;}
+
+  body.ts-world-public.ts-world-destinations .search-wrap,
+  body.ts-world-public.ts-world-packages .search-area {
+    width:calc(100% - 48px);max-width:1240px;padding:0;margin:-36px auto 0;
+  }
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .search-card {
+    padding:23px;border:1px solid var(--world-line,#e4e9e8);
+    border-radius:18px;gap:16px;background:var(--world-white,#fff);
+    box-shadow:0 12px 36px rgba(18,43,57,.07);
+  }
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .search-card .field {min-width:0;}
+  body.ts-world-public.ts-world-packages .field-control {
+    min-height:50px;border-color:var(--world-line,#e4e9e8)!important;
+    border-radius:10px;background:#fbfcfa;
+  }
+  body.ts-world-public.ts-world-packages .field-control i {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-packages .field-control :is(input,select) {
+    min-width:0;background:transparent;
+  }
+  body.ts-world-public.ts-world-destinations .search-btn,
+  body.ts-world-public.ts-world-packages .search-button {
+    min-height:50px;height:auto;padding:13px 22px;border-radius:10px;
+    background:var(--world-teal,#087f83);color:#fff;font-size:14px;font-weight:700;
+    box-shadow:none;
+  }
+  body.ts-world-public.ts-world-destinations .search-btn:hover,
+  body.ts-world-public.ts-world-packages .search-button:hover {background:#06676b;}
+
+  body.ts-world-public.ts-world-destinations main.container {
+    width:calc(100% - 48px);max-width:1240px;padding:68px 0 80px;
+  }
+  body.ts-world-public.ts-world-packages > .container {
+    width:100%;max-width:1288px;padding:62px 24px 80px;
+  }
+  body.ts-world-public.ts-world-destinations .section-head {margin-bottom:30px;gap:24px;}
+  body.ts-world-public.ts-world-destinations .section-head h2,
+  body.ts-world-public.ts-world-packages .section-heading h2 {
+    color:var(--world-ink,#122b39);font-size:clamp(25px,2.5vw,34px);line-height:1.3;
+    letter-spacing:-.9px;
+  }
+  body.ts-world-public.ts-world-destinations .section-head p,
+  body.ts-world-public.ts-world-packages .section-heading p {
+    margin-top:9px;color:var(--world-muted,#62747d);font-size:14px;line-height:1.65;
+  }
+  body.ts-world-public.ts-world-destinations .result-summary {color:var(--world-muted,#62747d);font-size:13px;}
+  body.ts-world-public.ts-world-destinations .reset-link {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-destinations .destination-grid {gap:26px;align-items:stretch;}
+  body.ts-world-public.ts-world-destinations .destination-card {
+    display:flex;flex-direction:column;min-width:0;
+    border-color:var(--world-line,#e4e9e8)!important;border-radius:18px!important;
+    background:#fff;box-shadow:0 3px 12px rgba(18,43,57,.025)!important;
+  }
+  body.ts-world-public.ts-world-destinations .destination-card:hover {
+    transform:translateY(-3px);box-shadow:0 12px 26px rgba(18,43,57,.07)!important;
+  }
+  body.ts-world-public.ts-world-destinations .destination-card > a {display:block;}
+  body.ts-world-public.ts-world-destinations .destination-image {height:245px;background:#e8edeb;}
+  body.ts-world-public.ts-world-destinations .image-overlay {
+    background:linear-gradient(180deg,transparent 44%,rgba(18,43,57,.7));
+  }
+  body.ts-world-public.ts-world-destinations .featured-badge {
+    top:16px;left:16px;padding:6px 10px;background:#fffdf8;
+    color:var(--world-ink,#122b39);font-size:10px;letter-spacing:.6px;
+  }
+  body.ts-world-public.ts-world-destinations .package-badge {bottom:17px;left:20px;font-size:12px;}
+  body.ts-world-public.ts-world-destinations .destination-body {
+    display:flex;flex-direction:column;flex:1;padding:23px;min-width:0;
+  }
+  body.ts-world-public.ts-world-destinations .location-line {
+    color:var(--world-teal,#087f83);font-size:11px;letter-spacing:.3px;flex-wrap:wrap;
+  }
+  body.ts-world-public.ts-world-destinations .destination-body h3 {
+    margin-top:9px;color:var(--world-ink,#122b39);font-size:23px;letter-spacing:-.6px;
+  }
+  body.ts-world-public.ts-world-destinations .destination-body p {
+    margin-top:10px;min-height:0;color:var(--world-muted,#62747d);font-size:14px;line-height:1.75;
+  }
+  body.ts-world-public.ts-world-destinations .destination-meta {
+    margin-top:auto;padding-top:20px;border-color:var(--world-line,#e4e9e8);
+    gap:16px;flex-wrap:wrap;
+  }
+  body.ts-world-public.ts-world-destinations .destination-body p + .destination-meta {margin-top:22px;}
+  body.ts-world-public.ts-world-destinations .start-price small {color:var(--world-muted,#62747d)!important;}
+  body.ts-world-public.ts-world-destinations .start-price strong {color:var(--world-ink,#122b39);font-size:20px;}
+  body.ts-world-public.ts-world-destinations .view-btn {
+    min-height:44px;padding:0 14px;border:1px solid #cfe4e0;border-radius:9px;
+    background:#edf6f3;color:#076a6e;font-size:12px;font-weight:700;
+  }
+  body.ts-world-public.ts-world-destinations .view-btn:hover {background:var(--world-teal,#087f83);border-color:var(--world-teal,#087f83);color:#fff;}
+
+  /* Package listing: retain the current grid, filters and every card action. */
+  body.ts-world-public.ts-world-packages .destination-section {margin-bottom:52px;}
+  body.ts-world-public.ts-world-packages .section-heading {margin-bottom:25px;}
+  body.ts-world-public.ts-world-packages .section-heading > a {color:var(--world-teal,#087f83)!important;font-size:13px!important;}
+  body.ts-world-public.ts-world-packages .destinations-grid {gap:18px;}
+  body.ts-world-public.ts-world-packages .destinations-grid .destination-card {
+    min-height:205px;padding:21px;border:0;border-radius:16px!important;
+    box-shadow:none!important;
+  }
+  body.ts-world-public.ts-world-packages .destination-card strong {font-size:20px;color:#fff;}
+  body.ts-world-public.ts-world-packages .destination-card span {color:#e4eded;font-size:13px;}
+  body.ts-world-public.ts-world-packages .package-layout {gap:30px;}
+  body.ts-world-public.ts-world-packages .filters {
+    border-color:var(--world-line,#e4e9e8);border-radius:16px;
+    background:#fff;box-shadow:none;
+  }
+  body.ts-world-public.ts-world-packages .filter-title {
+    min-height:67px;padding:0 21px;border-color:var(--world-line,#e4e9e8);
+  }
+  body.ts-world-public.ts-world-packages .filter-title strong {font-size:16px;color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-packages .filter-title a {color:var(--world-teal,#087f83);font-size:12px;}
+  body.ts-world-public.ts-world-packages .filter-body {padding:22px;}
+  body.ts-world-public.ts-world-packages .filter-group {margin-bottom:21px;min-width:0;}
+  body.ts-world-public.ts-world-packages .filter-group:last-child {margin-bottom:0;}
+  body.ts-world-public.ts-world-packages .filter-group label.title {font-size:11px!important;letter-spacing:.8px;color:var(--world-muted,#62747d)!important;}
+  body.ts-world-public.ts-world-packages .filter-select {height:45px;background:#fdfefc;}
+  body.ts-world-public.ts-world-packages .apply-filter {
+    min-height:46px;background:var(--world-ink,#122b39);border-radius:9px;
+    font-size:13px;font-weight:700;
+  }
+  body.ts-world-public.ts-world-packages .apply-filter:hover {background:#214351;}
+  body.ts-world-public.ts-world-packages .results-top {padding:0;margin-bottom:23px;gap:20px;}
+  body.ts-world-public.ts-world-packages .results-top h2 {color:var(--world-ink,#122b39);font-size:25px;letter-spacing:-.7px;}
+  body.ts-world-public.ts-world-packages .results-top p {margin-top:7px;color:var(--world-muted,#62747d);font-size:13px;}
+  body.ts-world-public.ts-world-packages .sort-box {min-height:45px;}
+  body.ts-world-public.ts-world-packages .packages-grid {gap:25px;}
+  body.ts-world-public.ts-world-packages .packages-grid > .package-card {
+    border-color:var(--world-line,#e4e9e8)!important;border-radius:18px!important;
+    box-shadow:0 3px 12px rgba(18,43,57,.025)!important;
+  }
+  body.ts-world-public.ts-world-packages .packages-grid > .package-card:hover {
+    border-color:#bdd6d2!important;box-shadow:0 12px 28px rgba(18,43,57,.07)!important;
+    transform:translateY(-3px);
+  }
+  body.ts-world-public.ts-world-packages .packages-grid .package-body {padding:23px;}
+  body.ts-world-public.ts-world-packages .packages-grid .location {color:var(--world-teal,#087f83);font-size:11px!important;line-height:1.6;flex-wrap:wrap;}
+  body.ts-world-public.ts-world-packages .packages-grid .package-body h3 {margin-top:10px;font-size:22px!important;line-height:1.35;letter-spacing:-.55px;}
+  body.ts-world-public.ts-world-packages .packages-grid .package-body h3 a {color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-packages .packages-grid .package-body h3 a:hover {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-packages .packages-grid .package-description {margin-top:10px;color:var(--world-muted,#62747d);font-size:14px!important;line-height:1.7;}
+  body.ts-world-public.ts-world-packages .packages-grid .badge {padding:7px 11px;background:rgba(18,43,57,.88);font-size:10px!important;}
+  body.ts-world-public.ts-world-packages .packages-grid .badge.red {background:rgba(166,58,70,.92);}
+  body.ts-world-public.ts-world-packages .packages-grid .badge.green {background:rgba(17,115,90,.94);}
+  body.ts-world-public.ts-world-packages .packages-grid .wishlist-button {width:42px;height:42px;box-shadow:0 3px 12px rgba(18,43,57,.12);}
+  body.ts-world-public.ts-world-packages .packages-grid .itinerary-preview {
+    margin-top:19px;padding:14px 15px;background:#f5f8f5;
+    border-color:var(--world-line,#e4e9e8);border-radius:11px;
+  }
+  body.ts-world-public.ts-world-packages .packages-grid .itinerary-preview-head {color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-packages .packages-grid .itinerary-preview-day strong {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-packages .packages-grid .itinerary-preview-day,
+  body.ts-world-public.ts-world-packages .packages-grid .itinerary-more {color:var(--world-muted,#62747d);}
+  body.ts-world-public.ts-world-packages .packages-grid .package-meta {padding-top:18px;color:var(--world-muted,#62747d);border-color:var(--world-line,#e4e9e8);}
+  body.ts-world-public.ts-world-packages .packages-grid .package-meta i {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-packages .packages-grid .package-bottom {margin-top:20px;gap:17px;}
+  body.ts-world-public.ts-world-packages .packages-grid .price-label,
+  body.ts-world-public.ts-world-packages .packages-grid .old-price {color:var(--world-muted,#62747d);line-height:1.6;}
+  body.ts-world-public.ts-world-packages .packages-grid .current-price {color:var(--world-ink,#122b39);font-size:27px!important;letter-spacing:-.7px;}
+  body.ts-world-public.ts-world-packages .packages-grid .current-price small {color:var(--world-muted,#62747d)!important;letter-spacing:0;}
+  body.ts-world-public.ts-world-packages .packages-grid .ts-package-card-ctas {width:100%;gap:8px;}
+  body.ts-world-public.ts-world-packages .packages-grid .ts-package-card-ctas a {
+    min-height:44px;min-width:0;padding:10px 9px;border-radius:9px;
+    font-size:12px!important;line-height:1.35;white-space:normal;text-align:center;
+  }
+  body.ts-world-public.ts-world-packages .packages-grid .details-button {
+    color:var(--world-ink,#122b39);border-color:#cbdad7;background:#fff;
+  }
+  body.ts-world-public.ts-world-packages .packages-grid .details-button:hover {background:#f0f6f3;}
+  body.ts-world-public.ts-world-packages .packages-grid .book-button {
+    background:var(--world-teal,#087f83);color:#fff;box-shadow:none;
+  }
+  body.ts-world-public.ts-world-packages .packages-grid .book-button:hover {background:#06676b;}
+  body.ts-world-public.ts-world-packages .packages-grid .enquire-button {
+    border-color:#d9dfce;background:#f5f5ea;color:#526343;
+  }
+  body.ts-world-public.ts-world-packages .page-link {border-color:var(--world-line,#e4e9e8);border-radius:9px;color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-packages .page-link.active {background:var(--world-teal,#087f83);border-color:var(--world-teal,#087f83);color:#fff;}
+  body.ts-world-public.ts-world-packages .empty-state,
+  body.ts-world-public.ts-world-destinations .empty {border-color:var(--world-line,#e4e9e8);background:#fff;border-radius:18px;}
+
+  /* Trip detail: clear narrative, image gallery and existing booking panel. */
+  body.ts-world-public.ts-world-detail .breadcrumb-wrap {background:#f1f4ef;border-color:var(--world-line,#e4e9e8);}
+  body.ts-world-public.ts-world-detail .breadcrumb {max-width:1288px;padding:17px 24px;color:var(--world-muted,#62747d);font-size:12px;}
+  body.ts-world-public.ts-world-detail .breadcrumb a {color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail .gallery-wrap {max-width:1288px;padding:28px 24px 0;margin:auto;}
+  body.ts-world-public.ts-world-detail .gallery {gap:12px;}
+  body.ts-world-public.ts-world-detail .gallery-main,
+  body.ts-world-public.ts-world-detail .gallery-small {border-radius:15px;background:#e8eeeb;}
+  body.ts-world-public.ts-world-detail .gallery-side {gap:12px;}
+  body.ts-world-public.ts-world-detail .view-photos {min-height:44px;background:#fff;color:var(--world-ink,#122b39);box-shadow:0 3px 12px rgba(18,43,57,.1);}
+  body.ts-world-public.ts-world-detail main.container {max-width:1288px;padding:40px 24px 86px;}
+  body.ts-world-public.ts-world-detail .layout {gap:38px;}
+  body.ts-world-public.ts-world-detail .package-title {color:var(--world-ink,#122b39);font-size:clamp(29px,3.2vw,43px);line-height:1.18;letter-spacing:-1.3px;}
+  body.ts-world-public.ts-world-detail .destination {margin-top:14px;color:var(--world-muted,#62747d);font-size:13px;}
+  body.ts-world-public.ts-world-detail .destination i {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-detail .package-code {border-color:var(--world-line,#e4e9e8);}
+  body.ts-world-public.ts-world-detail .badges .badge {padding:7px 10px;background:#eaf3ef;color:#176567;font-size:10px!important;letter-spacing:.5px;}
+  body.ts-world-public.ts-world-detail .badges .badge.best {background:#faf0e4;color:#966337;}
+  body.ts-world-public.ts-world-detail .badges .badge.discount {background:#e9f5ed;color:#267146;}
+  body.ts-world-public.ts-world-detail .share-btn {background:var(--world-ink,#122b39);box-shadow:none;}
+  body.ts-world-public.ts-world-detail .quick-info {gap:12px;margin-top:29px;}
+  body.ts-world-public.ts-world-detail .quick-item {padding:15px 12px;border-color:var(--world-line,#e4e9e8);border-radius:12px;background:#fff;}
+  body.ts-world-public.ts-world-detail .quick-icon {background:#edf5f0;color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-detail .quick-item small {font-size:10px!important;color:var(--world-muted,#62747d)!important;letter-spacing:.4px;}
+  body.ts-world-public.ts-world-detail .quick-item strong {font-size:13px;line-height:1.5;color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail .content-card {
+    margin-top:27px;padding:29px;border-color:var(--world-line,#e4e9e8)!important;
+    border-radius:17px!important;background:#fff;box-shadow:none!important;
+  }
+  body.ts-world-public.ts-world-detail .content-card h2 {color:var(--world-ink,#122b39);font-size:25px;letter-spacing:-.6px;}
+  body.ts-world-public.ts-world-detail .section-sub {color:var(--world-muted,#62747d);font-size:13px;line-height:1.7;}
+  body.ts-world-public.ts-world-detail .premium-section-kicker {color:var(--world-teal,#087f83);font-size:10px;letter-spacing:1.25px;}
+  body.ts-world-public.ts-world-detail .premium-section-mark {background:#edf4ef;color:var(--world-teal,#087f83);box-shadow:none;}
+  body.ts-world-public.ts-world-detail :is(.journey-overview-card,.tour-highlights-card,.trip-coverage-card)::before {background:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-detail .journey-fact-strip {gap:12px;}
+  body.ts-world-public.ts-world-detail .journey-fact {border-color:var(--world-line,#e4e9e8);background:#f6f8f3;border-radius:10px;}
+  body.ts-world-public.ts-world-detail .journey-fact span {color:var(--world-muted,#62747d);}
+  body.ts-world-public.ts-world-detail .journey-fact strong {color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail :is(.journey-description,.description,.important-information-content,.itinerary-content) {color:#4e626b;font-size:15px;line-height:1.9;}
+  body.ts-world-public.ts-world-detail .tour-highlight-item {background:#f7f9f5;border-color:var(--world-line,#e4e9e8);border-radius:12px;box-shadow:none;}
+  body.ts-world-public.ts-world-detail .tour-highlight-number {background:#e8f2ec;color:var(--world-teal,#087f83);box-shadow:none;}
+  body.ts-world-public.ts-world-detail .tour-highlight-copy strong {color:var(--world-ink,#122b39);font-size:14px;line-height:1.65;}
+  body.ts-world-public.ts-world-detail .tour-highlight-copy small {color:var(--world-muted,#62747d)!important;}
+  body.ts-world-public.ts-world-detail .tour-highlight-arrow {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day {padding-bottom:25px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-number {background:var(--world-teal,#087f83);box-shadow:0 0 0 1px #cee1dc;font-size:11px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day:not(:last-child)::before {background:#d9e8e0;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-card {padding:21px;border-color:var(--world-line,#e4e9e8);border-radius:13px;background:#fbfcf9;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-heading {margin-bottom:15px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-heading h3 {color:var(--world-ink,#122b39);font-size:20px;line-height:1.45;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-eyebrow {color:var(--world-teal,#087f83);letter-spacing:1px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-body p {color:#4e626b;font-size:14px;line-height:1.85;text-align:left;word-spacing:normal;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-meta {padding-top:12px;margin-top:13px;color:var(--world-muted,#62747d);border-color:var(--world-line,#e4e9e8);font-size:11px;}
+  body.ts-world-public.ts-world-detail .coverage-panel {border-color:var(--world-line,#e4e9e8);background:#fbfcf9;border-radius:12px;box-shadow:none;}
+  body.ts-world-public.ts-world-detail .coverage-panel--included {border-top-color:#4c9879;}
+  body.ts-world-public.ts-world-detail .coverage-panel--excluded {border-top-color:#bd7f77;}
+  body.ts-world-public.ts-world-detail .coverage-panel h3 {color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail .include-item {color:#4e626b;font-size:14px;line-height:1.75;}
+  body.ts-world-public.ts-world-detail .booking-card {
+    border-color:#d8e2da!important;border-radius:19px!important;
+    background:#fff;box-shadow:0 10px 32px rgba(18,43,57,.07)!important;
+  }
+  body.ts-world-public.ts-world-detail .booking-top {padding:24px;background:#f0f5ed;border-color:var(--world-line,#e4e9e8);}
+  body.ts-world-public.ts-world-detail .booking-label {color:var(--world-muted,#62747d);font-size:11px;letter-spacing:.8px;}
+  body.ts-world-public.ts-world-detail .booking-top .price {margin-top:9px;color:var(--world-ink,#122b39);font-size:34px;line-height:1.25;letter-spacing:-1px;}
+  body.ts-world-public.ts-world-detail .booking-top .price small {color:var(--world-muted,#62747d)!important;font-size:12px!important;letter-spacing:0;}
+  body.ts-world-public.ts-world-detail .current-price-period {margin-top:10px;color:var(--world-muted,#62747d);font-size:12px;line-height:1.6;}
+  body.ts-world-public.ts-world-detail .booking-body {padding:22px 22px 0;}
+  body.ts-world-public.ts-world-detail .booking-body .form-group {margin-bottom:17px;}
+  body.ts-world-public.ts-world-detail .booking-body .form-group label {font-size:11px!important;letter-spacing:.55px;}
+  body.ts-world-public.ts-world-detail .booking-body .form-control {min-height:47px;background:#fff;}
+  body.ts-world-public.ts-world-detail .hotel-category-arrow {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-detail .selected-hotel-price {background:#edf6f0;border-color:#d4e7d9;color:#276851;}
+  body.ts-world-public.ts-world-detail .child-age-section {background:#f7f9f5;border-color:var(--world-line,#e4e9e8);}
+  body.ts-world-public.ts-world-detail .estimate {margin-top:18px;padding:15px;border-color:var(--world-line,#e4e9e8);background:#f6f8f3;}
+  body.ts-world-public.ts-world-detail .estimate-row {color:var(--world-muted,#62747d);font-size:13px;line-height:1.6;}
+  body.ts-world-public.ts-world-detail .estimate-row.total {color:var(--world-ink,#122b39);border-color:#dce5dc;}
+  body.ts-world-public.ts-world-detail .estimate-row.total strong {color:var(--world-teal,#087f83);font-size:20px;}
+  body.ts-world-public.ts-world-detail .booking-actions-sticky {margin:17px -22px 0;padding:14px 22px 16px;background:#fff;border-color:var(--world-line,#e4e9e8);box-shadow:0 -5px 18px rgba(18,43,57,.035);}
+  body.ts-world-public.ts-world-detail .book-now {min-height:48px;background:var(--world-teal,#087f83);font-size:14px;box-shadow:none;}
+  body.ts-world-public.ts-world-detail .book-now:hover {background:#06676b;}
+  body.ts-world-public.ts-world-detail .enquire-now {min-height:46px;border-color:#c9ddd6;background:#f2f7f0;color:#176567;font-size:13px;}
+  body.ts-world-public.ts-world-detail .secure-note {color:var(--world-muted,#62747d);font-size:11px;line-height:1.5;}
+  body.ts-world-public.ts-world-detail .booking-benefits {border-color:var(--world-line,#e4e9e8);background:#fff;}
+  body.ts-world-public.ts-world-detail .booking-benefit {color:var(--world-muted,#62747d);font-size:12px;}
+  body.ts-world-public.ts-world-detail .booking-benefit i {color:var(--world-teal,#087f83);}
+  body.ts-world-public.ts-world-detail .traveller-review {border-color:var(--world-line,#e4e9e8);box-shadow:none;background:#fbfcf9;}
+  body.ts-world-public.ts-world-detail .traveller-review-text {color:#4e626b;font-size:14px;line-height:1.85;}
+  body.ts-world-public.ts-world-detail .official-response {background:#eef5ef;border-color:#cfe0d5;}
+  body.ts-world-public.ts-world-detail .related-section {margin-top:64px;}
+  body.ts-world-public.ts-world-detail .related-title h2 {color:var(--world-ink,#122b39);font-size:29px;letter-spacing:-.7px;}
+  body.ts-world-public.ts-world-detail .related-card {border-color:var(--world-line,#e4e9e8);border-radius:16px;box-shadow:none;background:#fff;}
+  body.ts-world-public.ts-world-detail .related-body {padding:21px;}
+  body.ts-world-public.ts-world-detail .related-body h3 {font-size:19px;color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail .related-meta {font-size:12px;color:var(--world-muted,#62747d);}
+  body.ts-world-public.ts-world-detail .related-price {font-size:23px;color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail .related-link {min-height:44px;color:var(--world-teal,#087f83);font-size:13px;}
+}
+
+@media screen and (max-width:1110px) {
+  body.ts-world-public.ts-world-packages .package-layout {gap:22px;}
+  body.ts-world-public.ts-world-packages .packages-grid {gap:20px;}
+  body.ts-world-public.ts-world-packages .packages-grid .package-body {padding:20px;}
+  body.ts-world-public.ts-world-detail .layout {gap:26px;}
+  body.ts-world-public.ts-world-detail .quick-item {flex-direction:column;align-items:flex-start;gap:8px;}
+}
+@media screen and (max-width:1000px) {
+  body.ts-world-public.ts-world-destinations .destination-grid {gap:22px;}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero {padding-left:24px;padding-right:24px;}
+}
+@media screen and (max-width:920px) {
+  body.ts-world-public.ts-world-packages .package-layout {gap:30px;}
+  body.ts-world-public.ts-world-packages .filters {position:static;}
+  body.ts-world-public.ts-world-packages .filter-body {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;}
+  body.ts-world-public.ts-world-packages .filter-group {margin-bottom:0;}
+  body.ts-world-public.ts-world-detail .quick-item {flex-direction:row;align-items:center;}
+}
+@media screen and (max-width:767px) {
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero {
+    min-height:335px;padding:47px 22px 77px;
+  }
+  body.ts-world-public.ts-world-destinations .hero {min-height:415px;}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero h1 {
+    font-size:42px;letter-spacing:-1.25px;line-height:1.12;
+  }
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero p {font-size:15px;line-height:1.75;}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .search-card {padding:19px;gap:15px;}
+  body.ts-world-public.ts-world-destinations .destination-image {height:225px;}
+  body.ts-world-public.ts-world-destinations .destination-body {padding:20px;}
+  body.ts-world-public.ts-world-detail .gallery-wrap {padding:22px 20px 0;}
+  body.ts-world-public.ts-world-detail main.container {padding:31px 20px 65px;}
+  body.ts-world-public.ts-world-detail .content-card {padding:24px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-card {padding:17px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-heading h3 {font-size:19px;}
+}
+@media screen and (max-width:700px) {
+  body.ts-world-public.ts-world-detail .gallery-wrap {padding:17px 16px 0;}
+  body.ts-world-public.ts-world-detail .gallery {height:320px;}
+  body.ts-world-public.ts-world-detail main.container {padding:28px 16px 58px;}
+  body.ts-world-public.ts-world-detail .title-row {flex-wrap:wrap;gap:15px;}
+  body.ts-world-public.ts-world-detail .title-row > div:first-child {min-width:0;flex:1 1 230px;}
+  body.ts-world-public.ts-world-detail .package-title {font-size:31px;line-height:1.23;letter-spacing:-.8px;}
+  body.ts-world-public.ts-world-detail .package-actions {margin-left:auto;}
+  body.ts-world-public.ts-world-detail .quick-info {gap:10px;margin-top:24px;}
+  body.ts-world-public.ts-world-detail .quick-item {padding:12px 10px;gap:9px;align-items:flex-start;}
+  body.ts-world-public.ts-world-detail .quick-item strong {font-size:12px;}
+  body.ts-world-public.ts-world-detail .content-card {margin-top:22px;padding:20px;}
+  body.ts-world-public.ts-world-detail .content-card h2 {font-size:23px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day {gap:9px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-card {padding:15px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-body p {font-size:14px;line-height:1.8;}
+  body.ts-world-public.ts-world-detail .mobile-book-bar {
+    height:auto;min-height:78px;padding:11px 14px;gap:9px;flex-wrap:wrap;
+    background:#fff;border-color:var(--world-line,#e4e9e8);
+    box-shadow:0 -6px 24px rgba(18,43,57,.07);
+  }
+  body.ts-world-public.ts-world-detail .mobile-price {min-width:0;}
+  body.ts-world-public.ts-world-detail .mobile-price small {font-size:10px!important;color:var(--world-muted,#62747d)!important;}
+  body.ts-world-public.ts-world-detail .mobile-price strong {font-size:21px;color:var(--world-ink,#122b39);}
+  body.ts-world-public.ts-world-detail .mobile-book-button {
+    min-height:46px;min-width:0;flex:1 1 115px;padding:9px 12px;
+    background:var(--world-teal,#087f83);color:#fff;font-size:12px;line-height:1.4;
+  }
+  body.ts-world-public.ts-world-detail .mobile-enquire-button {
+    min-height:46px;min-width:0;padding:9px 11px;background:#f0f6ed;
+    border-color:#d5e4d4;color:#21675f;font-size:12px;line-height:1.4;
+  }
+  body.ts-world-public.ts-world-detail .related-section {margin-top:45px;}
+  body.ts-world-public.ts-world-detail .related-title h2 {font-size:25px;}
+}
+@media screen and (max-width:670px) {
+  body.ts-world-public.ts-world-packages .packages-grid {gap:22px;}
+  body.ts-world-public.ts-world-packages .packages-grid .package-body {padding:22px;}
+  body.ts-world-public.ts-world-packages .packages-grid .package-body h3 {font-size:22px!important;}
+  body.ts-world-public.ts-world-packages .packages-grid .current-price {font-size:27px!important;}
+}
+@media screen and (max-width:650px) {
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero {padding:43px 20px 78px;align-items:center;}
+  body.ts-world-public.ts-world-destinations .hero {min-height:430px;}
+  body.ts-world-public.ts-world-packages .hero {min-height:345px;}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero h1 {font-size:39px;}
+  body.ts-world-public.ts-world-destinations .hero-stat {min-width:0;max-width:47%;padding:0 14px;}
+  body.ts-world-public.ts-world-destinations .hero-stat strong {font-size:18px;}
+  body.ts-world-public.ts-world-destinations .hero-stat span {font-size:11px;}
+  body.ts-world-public.ts-world-destinations .hero-stats {gap:17px 0;}
+  body.ts-world-public.ts-world-destinations .hero-stat:nth-child(3) {max-width:100%;min-width:70%;padding-left:0;border-left:0;}
+  body.ts-world-public.ts-world-destinations .search-wrap,
+  body.ts-world-public.ts-world-packages .search-area {width:calc(100% - 32px);}
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .search-card {padding:20px;gap:18px;}
+  body.ts-world-public.ts-world-destinations main.container {width:calc(100% - 32px);padding:48px 0 56px;}
+  body.ts-world-public.ts-world-packages > .container {padding:47px 16px 58px;}
+  body.ts-world-public.ts-world-destinations .destination-grid {gap:24px;}
+  body.ts-world-public.ts-world-destinations .destination-image {height:245px;}
+  body.ts-world-public.ts-world-destinations .destination-body {padding:23px;}
+  body.ts-world-public.ts-world-destinations .section-head {gap:13px;margin-bottom:25px;}
+  body.ts-world-public.ts-world-packages .section-heading {align-items:flex-start;flex-direction:column;gap:13px;}
+  body.ts-world-public.ts-world-packages .destination-section {margin-bottom:38px;}
+  body.ts-world-public.ts-world-packages .filter-body {grid-template-columns:minmax(0,1fr);gap:18px;}
+  body.ts-world-public.ts-world-packages .filter-title {padding:0 21px;}
+  body.ts-world-public.ts-world-packages .results-top h2 {font-size:24px;}
+}
+@media screen and (max-width:370px) {
+  body.ts-world-public:is(.ts-world-destinations,.ts-world-packages) .hero h1 {font-size:35px;}
+  body.ts-world-public.ts-world-destinations .destination-body,
+  body.ts-world-public.ts-world-packages .packages-grid .package-body {padding:19px;}
+  body.ts-world-public.ts-world-packages .packages-grid .ts-package-card-ctas {gap:6px;}
+  body.ts-world-public.ts-world-packages .packages-grid .ts-package-card-ctas a {font-size:11px!important;padding:9px 6px;}
+  body.ts-world-public.ts-world-detail .content-card {padding:17px;}
+  body.ts-world-public.ts-world-detail .quick-item {flex-direction:column;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day {grid-template-columns:35px minmax(0,1fr);gap:6px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-number {width:35px;height:35px;font-size:9px;border-width:3px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day:not(:last-child)::before {left:17px;}
+  body.ts-world-public.ts-world-detail .itinerary-timeline .itinerary-day-card {padding:13px;}
+  body.ts-world-public.ts-world-detail .mobile-price strong {font-size:18px;}
+  body.ts-world-public.ts-world-detail .mobile-book-button,
+  body.ts-world-public.ts-world-detail .mobile-enquire-button {font-size:11px;padding:9px 8px;}
+}
+@media screen and (prefers-reduced-motion:reduce) {
+  body.ts-world-public.ts-world-destinations .destination-card,
+  body.ts-world-public.ts-world-packages .packages-grid > .package-card {transition:none;}
+  body.ts-world-public.ts-world-destinations .destination-card:hover,
+  body.ts-world-public.ts-world-packages .packages-grid > .package-card:hover {transform:none;}
+}
